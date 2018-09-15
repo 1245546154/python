@@ -1,0 +1,72 @@
+带b的都是二进制文件
+rb
+ab
+wb
+rb+
+ab+
+wb+
+
+--------------------------------------------------------------------------------------
+#查找出/etc/password 里面的用户名
+# -*- coding:UTF-8 -*-
+f6 = open('/etc/passwd','r')
+for lines in f6:
+    print(lines.split(":")[0])
+
+--------------------------------------------------------------------------------------
+
+# -*- coding:UTF-8 -*-
+f6 = open('/proc/meminfo','r')
+for lines in f6:
+    if lines.startswith("Mem"):
+        print(lines)
+
+
+# -*- coding:UTF-8 -*-
+f6 = open('/proc/cpuinfo','r')
+for i in f6:
+    if i("cpu cores	:"):
+        print(i)
+
+--------------------------------------------------------------------------------------
+
+# -*- coding:UTF-8 -*-
+f6 = open('/proc/meminfo','r')
+for lines in f6:
+    if lines.startswith("MemTotal:"):
+        memtotal = int(lines.split()[1])
+    if lines.startswith("MemFree:"):
+        memfree = int(lines.split()[1])
+        break
+        
+print("%s - %s = %s" %(memtotal,memfree,memtotal - memfree))
+
+
+--------------------------------------------------------------------------------------
+
+a = "/usr/bin/ls"
+b = "/abc/lss"
+so = open (a,‘rb’)                   
+sd = open (b,'wb')
+buffer_size = 4096
+while True:
+	data = so.readline(buffer_size)
+	if not data:
+		break
+	sd.writelines(data)
+so.close
+sd.close
+
+--------------------------------------------------------------------------------------
+#调用内存模块
+import psutil
+psutil.virtul_memory()
+
+
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+
+
+
+

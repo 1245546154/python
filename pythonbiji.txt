@@ -1,0 +1,8909 @@
+﻿				python
+python是一门“简单、优雅、明确”的语言。
+centos7默认使用的是2.7版本，现在最新的版本为3.0以上。
+www.python.org
+
+准备工具：ipython、PyCharm
+
+一、准备PyCharm
+	网址：https://www.jetbrains.com    
+
+二、准备ipython
+1、检查系统有没有安装python
+	#python
+	
+2、没有安装的话，可以使用yum进行安装操作
+	＃yum -y install python
+	
+3、安装python解释器环境或工发工具(需要使用到epel扩展源)
+	＃yum install python-pip
+	#pip install ipthon 在联网的状态下安装此工具(https://pypi.python.org/pypi/ipython)
+	#pip list (验证是否安装ipython模块)
+	
+4、使用ipython工具
+	＃ipython
+5、测试ipython
+	>>>print “hello world”
+	>>>
+	hello world
+	>>>exit
+
+						python文件类型
+6、创建一个python脚本文件
+	#vim a.py
+		#!/usr/bin/python    (#!/usr/bin/env python)
+		print "hello world"
+	#python a.py (使用python直接执行)或添加x权限直接执行,不需要编译，直接使用解释器执行。
+7、字节代码
+
+	python源码文件经编译后生成的扩展名为pyc文件
+编译方法：
+	#vim b.py
+		#!/usr/bin/python		
+		import py_compile
+		py_cpmpile.compile('a.py')
+	#python b.py
+	#ls (查看当前目录下是否有一个a.pyc名称的文件，即为编译过的字节码文件)
+	＃python a.pyc (直接执行此文件，结果与执行源码效果一样)
+8、优化代码
+	经过优化的源码文件，扩展名为“pyo”
+	#python -O -m py_compile a.py  (-O优化，-m模块)
+	＃ls查看当前目录下是否有一个a.pyo文件
+	＃python a.pyo
+
+
+						python变量
+变量是计算机内存中的一块区域，变量可以存储规定范围内的值，而且值可以改变。
+python下变量是对一个数据的引用。
+变量的命名：
+	1、变量名由字母、数字、下划线组成
+	2、变量名不能以数字开头
+	3、不可以使用关键字
+	例如：
+	a  a1 _a
+变量的赋值
+	是变量的声明和定义的过程
+	a = 1 （赋值表达式）
+	id(a) (查看变量a在内存中的地址位置)
+
+						运算符和表达式
+python运算符包括
+	赋值运算符
+	算术运算符
+	关系运算符
+	逻辑运算符
+表达式是将不同的数据（包括变量、函数）用运算符号按一定的规则连接起来的一种式子。
+
+赋值运算符：
+	＝：x=3,y='abc'
+	+=: x+=2
+	-=: x-=2
+	*=: x*=2
+	/=: x/=2
+	%=: x%=2
+以上赋值过程中，不需要事先声明数据类型，赋值后可以使用type()查看其类型。
+
+算术运算术：
+	+
+	-
+	*
+	/
+	//
+	%
+	**
+	例如：
+	 1 ＋ 2
+	‘a' + 'b'
+	 6 /3
+	 4 // 3 地板除，取整数。
+关系运算符：
+	>:    1>2
+	<:    2<3
+	>=:  1>=1
+	<=:  2<=2
+	==:  2==2
+	!=:   1!=2
+以上返回的值为布尔值（True False）
+逻辑运算符：
+	and逻辑与:True and False
+	or逻辑或:False or True
+	not逻辑非:not True
+	例如：
+	1 ＝＝ 2 and 2> 1  返回值为：False ,此为逻辑与
+	1 ＝＝ 1 and 2>1   返回值为：True
+
+	1 ＝＝ 2 or 2> 1  返回值为：True,此为逻辑或,只要有一个是True，返回值就为True
+
+	not 1 == 2 返回值为：True
+
+运算优先级：
+	lambda
+	逻辑运算：or
+	逻辑运算：and
+	逻辑运算：not
+	成员测试：in,not in
+	同一性测试：is,is not
+	比较：<,<=,>,>=,!=,==
+	按位或：|
+	按位异或：^
+	按位与：&
+	移位：<<,>>
+	加法与减法：+,-
+	乘法、除法与取余：*,/,%
+	正负号：+x,-x
+	按位翻转：~x
+	指数：**
+
+
+	练习：
+		写一个四则运算器：要求从键盘读取数字。
+		可以使用input或raw_input
+	注意：input与raw_input区别：
+		input:
+
+		In [x]: input("plz input:")
+		plz input a num:123
+		Out[x]: 123
+
+		In [x]: input("plz input:")
+            plz input a num:abc
+                --------------------------------------------------------------------------
+            NameError                                 Traceback (most recent call last)
+            <ipython-input-33-3fee1fb26196> in <module>()
+            ----> 1 input("plz input a num:")
+
+            <string> in <module>()
+
+            NameError: name 'abc' is not defined
+
+		raw_input:
+		
+		In [x]: raw_input("plz input:")
+		plz input:123
+		Out[x]: '123'
+
+
+		In [x]: raw_input("plz input:")
+		plz input:abc
+		Out[x]: 'abc'
+
+
+		#vim c.py
+			#!/usr/bin/python
+			num1 = input("plz input 1st number:")
+			num2 = input("plz input 2nd number:")
+			
+			print num1 + num2
+			print num1 - num2
+			print num1 * num2
+			print num1 / num2
+
+		print部分还可以根据需要写成以下方式，请注意观察效果：
+			print "%s + %s = %s" %(num1,num2,num1+num2)
+			print "%s - %s = %s" %(num1,num2,num1-num2)
+			print "%s * %s = %s" %(num1,num2,num1*num2)
+			print "%s / %s = %s" %(num1,num2,num1/num2)
+
+		#vim d.py
+			#!/usr/bin/python
+			#
+
+			username = raw_input("username:")
+			print "welcome",username
+
+
+
+
+
+						python数据类型
+python中当一个变量被赋于某种类型的数据时，则此变量即为某种数据类型。
+例如：123和‘123’一样吗？
+	In [x]: a = 123     
+	In [x]: type(a)
+	Out[x]: int
+
+	In [x]: a = '123'
+	In [x]: type(a)
+	Out[x]: str
+
+常见的数据类型
+数值：
+	整型
+	长整型
+		:long的范围很大，几乎可以说任意大的整数均可以存储，为了区分普通整型，需要在整数后加L或l。
+	浮点型
+		：带有小数点或科学计数法。
+	复数型
+		:complex,python对复数提供内嵌支持，这是其他大部分软件所没有的。
+
+	整型
+		例如：
+		In [x]: a = 12345
+		In [x]: type(a)
+		Out[x]: int       取值范围：－2147483648－＋2147483647，总共2＊＊32个=4294967296
+	长整型
+		例如：
+		In [x]: a = 12999999999999999999999
+		In [x]: a
+		Out[x]: 12999999999999999999999L
+		In [x]: type(a)
+		Out[x]: long
+
+		In [x]: a = 100l
+		In [x]: type(a)
+		Out[x]: long
+
+		In [x]: 0x568bl
+		Out[x]: 22155L
+	
+	浮点型
+		例如：0.0，12.0 －18.8， 3e+7
+		In [x]: a = 0.0
+		In [x]: type(a)
+		Out[x]: float
+
+		In [x]: a = -18.8
+		In [x]: type(a)
+		Out[x]: float
+		
+		
+		In [x]: a = 3e+7
+		In [x]: type(a)
+		Out[x]: float
+
+		In [x]: a = 3.0/2
+		In [x]: a
+		Out[x]: 1.5
+		In [x]: type(a)
+		Out[x]: float
+	复数型
+		例如：－3.14j,8.32e-36j
+
+		In [x]: a = -3.14j
+		In [x]: a
+		Out[x]: -3.14j
+		In [x]: print a
+			  -3.14j
+		In [x]: type(a)
+		Out[x]: complex
+
+		
+
+字符串:序列的一种，具备索引和切片功能。
+	字符串：string
+	有三种方法定义字符串类型
+		单引号：
+		In [x]: str = 'this is a string'
+		In [x]: print str
+			  this is a string
+		In [x]: type(str)
+		Out[x]: str
+
+		双引号：
+		In [x]: str =  "this is a string"
+		In [x]: print str
+			  this is a string
+		In [x]: type(str)
+		Out[x]: str
+
+		三重单引号：
+		In [x]: str = '''this is a string'''
+		In [x]: print str
+			  this is a string
+		In [x]: type(str)
+		Out[x]: str
+
+		三重双引号：
+		In [x]: str = """this is a string"""
+		In [x]: print str
+		         this is a string
+		In [x]: type(str)
+		Out[x]: str
+
+		引号混用：
+		In [x]: str = "he say:tom's home in Shanghai"
+		In [x]: print str
+			   he say:tom's home in Shanghai
+		In [x]: type(str)
+		Out[x]: str
+
+
+		
+		In [x]: str = 'hello\nworld'
+		In [x]: str
+		Out[x]: 'hello\nworld'
+		In [x]: print str
+			   hello
+			   world
+
+		In [x]: str = "hello\nworld"
+		In [x]: str
+		Out[x]: 'hello\nworld'
+		In [x]: print str
+			  hello
+			  world
+
+		In [x]: str = '''hello
+              ....: world'''
+		In [x]: str
+		Out[x]: 'hello\nworld'
+		In [x]: print str
+			   hello
+			   world
+		
+		
+
+
+
+	三重引号：docstring，除了能定义字符串还可以用做注释。
+
+		例如：
+		#vim e.py
+			#!/usr/bin/python
+			""" my demo
+
+			my demo with a function
+			"""
+
+			def pstar():
+				"use to print 20 stars"
+				print '*' * 20
+
+		#ipython
+			In [x]: import e	    导入时，请把文件名.py去掉。
+
+			In [x]: help(e)        请仔细对比帮助信息内容。
+
+
+
+
+
+										字符串
+
+
+	字符串是序列的一种，在引用某一变量值中的一部分时可以使用切片进行操作，赋值完成后不可以改变变量值：
+		例如：
+		In [x]: str = 'abcde'
+
+		In [x]: str
+		Out[x]: 'abcde'
+
+		In [x]: print str
+			   abcde
+
+		In [x]: str[0]
+		Out[x]: 'a'
+
+		In [x]: str[1]
+		Out[x]: 'b'
+
+		In [x]: str[4]
+		Out[x]: 'e'
+
+		In [x]: str[-1]
+		Out[x]: 'e'
+
+		In [x]: str[-5]
+		Out[x]: 'a'
+
+		In [x]: str[0]+str[1]
+		Out[x]: 'ab'
+
+		In [x]: str[0:2]
+		Out[x]: 'ab'       最后一个不包括在内
+
+		In [x]: str[:2]
+		Out[x]: 'ab'
+
+		In [x]: str[:]
+		Out[x]: 'abcde'
+		
+		In [x]: str[::1]    步进或步长值为1
+		Out[x]: 'abcde'
+		In [x]: str[::2]    步进或步长值为2
+		Out[x]: 'ace'
+
+		In [x]: str[::1]
+		Out[x]: 'abcde'
+		In [x]: str[-4:-2]	最后一个不包括在内
+		Out[x]: 'bc'
+
+		In [x]: str[::1]
+		Out[x]: 'abcde'
+		In [x]: str[-2:-4:-1]   切片方向默认为从左向右，－1指明方向，从右向左，先取右边再取左边。
+		Out[x]: 'dc'
+
+
+
+		In [x]: a,b = 1,2
+
+		In [x]: a
+		Out[x]: 1
+
+		In [x]: b
+		Out[x]: 2
+
+		In [x]: a,b = b,a
+
+		In [x]: a
+		Out[x]: 2
+
+		In [x]: b
+		Out[x]: 1
+
+
+
+
+
+		验证字符串不可变：
+		例如：
+			In [x]: str
+			Out[x]: 'abcde'
+
+			In [x]: str[-1]
+			Out[x]: 'e'
+
+			In [x]: str[-1] = 'f'
+			---------------------------------------------------------------------------
+			TypeError                                 Traceback (most recent call last)
+			<ipython-input-117-6de5735d2de3> in <module>()
+				----> 1 str[-1] = 'f'
+
+			TypeError: 'str' object does not support item assignment
+
+
+
+
+
+						
+
+
+
+						序列的基本操作
+	1、len():求序列的长度
+				例如：
+					In [x]: str
+					Out[x]: 'abcde'
+					In [x]: len(str)
+					Out[x]: 5
+
+	2、+:连接2个序列
+
+				例如：
+					In [x]: str + 'f'   不能把字符串和数字连接
+					Out[x]: 'abcdef'
+
+	3、*:重复序列元素
+
+				例如：
+					In [x]: str * 10
+					Out[x]: 'abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde'
+
+					In [x]: '#' * 50
+					Out[x]: '##################################################'
+					
+	4、in,not in：判断元素是否在序列中
+				例如：
+					In [x]: str
+					Out[x]: 'abcde'
+
+					In [x]: 'a' in str
+					Out[x]: True
+
+					In [x]: 'm' in str
+					Out[x]: False
+
+					In [x]: 'm' not in str
+					Out[x]: True
+
+					In [x]: 'm' not in str + 'm'
+					Out[x]: False
+
+					
+					
+
+      5、max():返回最大值
+				例如：
+					In [x]: str
+					Out[x]: 'abcde'
+					In [x]: max(str)
+					Out[x]: 'e'
+
+
+	6、min():返回最小值
+				例如：
+					In [x]: str
+					Out[x]: 'abcde'
+					In [x]: min(str)
+					Out[x]: 'a'
+
+
+	7、cmp(x,y):比较两个序列是否相等
+				例如：
+					In [x]: help(cmp)
+					cmp(...)
+   						 cmp(x, y) -> integer
+    
+   						 Return negative if x<y, zero if x==y, positive if x>y.
+
+					In [x]: cmp(str,'abcdef')  str = abcde
+					Out[x]: -1		
+
+				
+					In [x]: cmp(str,'abcde')    str = abcde
+					Out[x]: 0
+
+					In [x]: cmp(str,'abcd')	   str = abcde
+					Out[x]: 1
+
+	8、比较字符串以什么开头的，使用startswitch()函数：
+
+					In [x]: st1 = 'abc'
+
+					In [x]: st1.
+					st1.capitalize  st1.isalnum     st1.lstrip      st1.splitlines
+					st1.center      st1.isalpha     st1.partition   st1.startswith
+					st1.count       st1.isdigit     st1.replace     st1.strip
+					st1.decode      st1.islower     st1.rfind       st1.swapcase
+					st1.encode      st1.isspace     st1.rindex      st1.title
+					st1.endswith    st1.istitle     st1.rjust       st1.translate
+					st1.expandtabs  st1.isupper     st1.rpartition  st1.upper
+					st1.find        st1.join        st1.rsplit      st1.zfill
+					st1.format      st1.ljust       st1.rstrip      
+					st1.index       st1.lower       st1.split       
+
+					In [x]: st1.startswith('a')
+					Out[x]: True
+
+					In [x]: st1.startswith('b')
+					Out[x]: False
+
+	9、字符串切割
+					In [17]: st1 = 'abc cdd 123'
+
+					In [18]: st1
+					Out[18]: 'abc cdd 123'
+
+					In [19]: st1.
+					st1.capitalize  st1.isalnum     st1.lstrip      st1.splitlines
+					st1.center      st1.isalpha     st1.partition   st1.startswith
+					st1.count       st1.isdigit     st1.replace     st1.strip
+					st1.decode      st1.islower     st1.rfind       st1.swapcase
+					st1.encode      st1.isspace     st1.rindex      st1.title
+					st1.endswith    st1.istitle     st1.rjust       st1.translate
+					st1.expandtabs  st1.isupper     st1.rpartition  st1.upper
+					st1.find        st1.join        st1.rsplit      st1.zfill
+					st1.format      st1.ljust       st1.rstrip      
+					st1.index       st1.lower       st1.split       
+
+					In [19]: st1.split()
+					Out[19]: ['abc', 'cdd', '123']
+
+					In [20]: st1.split()[0] 索引
+					Out[20]: 'abc'
+
+					In [21]: st1.split()[1]
+					Out[21]: 'cdd'
+
+					In [22]: st1.split()[2]
+					Out[22]: '123'
+
+
+
+
+											元组
+
+
+
+元组：序列的一种，具备索引操作符和切片操作符，索引操作符可以从序列中抓取一个特定项目；切片操作符可以从序列中获取一个切片，即一部分序列。
+	元组和列表十分相似，元组和字符串一样是不可变的，元组可以存储一系列的值，元组通常用在用户定义的函数能够安全地采用一组值的时候，即被使用的元组的值不会改变。
+
+	定义元组(tuple)：
+		例如：
+			In [x]: t1 = ('a','b','c')
+			In [x]: type(t1)
+			Out[x]: tuple
+
+			In [x]: t2 = (1,2,3)
+			In [x]: type(t2)
+			Out[x]: tuple
+
+			In [x]: t3 = (1)  this is x (wrong)
+			In [x]: type(t3)
+			Out[x]: int
+
+			In [x]: t4 = (1,)  this is right
+			In [x]: type(t4)
+			Out[x]: tuple
+
+			In [x]: t5 = ('a',1,'b')		支持异构
+			In [x]: type(t5)
+			Out[x]: tuple
+
+			In [x]: t6= ('a',2,(1,))		支持异构	
+			In [x]: type(t6)
+			Out[x]: tuple
+
+			In [x]: t7 = ('a',1,['a','b'])  支持异构,并可以修改元组值。
+			In [x]: type(t7)
+			Out[x]: tuple
+
+			In [x]: t8 = ('a',1,{'x':123,'y':456})   支持异构
+			In [x]: type(t8)
+			Out[x]: tuple
+
+			In [x]:str = abcde
+			In [x]: t9 = (str,'b','c',1)
+			In [x]: t9
+			Out[x]: ('abcde', 'b', 'c', 1)
+			In [x]: type(t9)
+			Out[x]: tuple
+
+
+
+		验证元组不可变：
+			In [x]: t1
+			Out[x]: ('a', 'b', 'c')
+
+			In [x]: t1[0] = 1
+			---------------------------------------------------------------------------
+			TypeError                                 Traceback (most recent call last)
+			<ipython-input-135-9e1f4de27f17> in <module>()
+			----> 1 t1[0] = 1
+
+			TypeError: 'tuple' object does not support item assignment
+
+			如果元组中包含列表，则元组中列表的元素可以修改（包括append、pop等等）。
+			In [x]: tuple1 = (1,2,['abc','name'],'error')
+
+			In [x]: id(tuple1)
+			Out[x]: 18375352
+
+			In [x]: tuple1[3]
+			Out[x]: 'error'
+
+			In [x]: tuple1[2]
+			Out[x]: ['abc', 'name']
+
+			In [x]: tuple1[2][0]
+			Out[x]: 'abc'
+
+			In [x]: tuple1[2][0] = 'tom'
+
+			In [x]: tuple1
+			Out[x]: (1, 2, ['tom', 'name'], 'error')
+
+			In [x]: id(tuple1)
+			Out[x]: 18375352
+
+			In [x]: tuple1[2].append(666) 往元组中的列表元素中添加一个新的元素。
+
+			In [x]: tuple1
+			Out[x]: (1, 2, ['tom', 'name', 666], 'error')
+
+			In [x]: id(tuple1)
+			Out[x]: 18375352
+	
+			In [x]: tuple1[2].pop()
+			Out[x]: 666
+
+			
+
+
+
+
+
+
+		元组拆分：
+			例如：
+			In [x]:str = abcde
+			In [x]: t9 = (str,'b','c',1)
+			In [x]: t9
+			Out[x]: ('abcde', 'b', 'c', 1)
+			In [x]: type(t9)
+			Out[x]: tuple
+			In [x]: first,second,third,four = t9
+			In [x]: first
+			Out[x]: 'abcde'
+			In [x]: second
+			Out[x]: 'b'
+			In [x]: third
+			Out[x]: 'c'
+			In [x]: four
+			Out[x]: 1
+
+		元组使用帮助：
+			In [x]: t1 = ('a','b','c')
+			In [x]: t1.                按tab键
+			t1.count  t1.index  
+
+			In [x]: t1.count('a') 判断字符a在不在t1元组里，如果在返回值是1，不在返回值为0
+			Out[x]: 1
+
+			In [x]: help(t1.count) 查看其帮助说明
+
+
+
+			In [x]:str = abcde
+			In [x]: t9 = (str,'b','c',1)
+			In [x]: t9
+			Out[x]: ('abcde', 'b', 'c', 1)
+			In [x]: t9.count(str) 
+			Out[x]: 1
+
+			
+			In [x]: t9.count()       this is x
+                        ---------------------------------------------------------------------------
+                  TypeError                              Traceback (most recent call last)
+                   <ipython-input-155-da1c5a176788> in <module>()
+                  ----> 1 t9.count()
+
+                  TypeError: count() takes exactly one argument (0 given)
+
+
+
+			In [x]: t9
+			Out[x]: ('abcde', 'b', 'c', 1)
+			In [x]: t9.index('b')
+			Out[x]: 1
+			In [x]: t9.index('c')
+			Out[x]: 2
+			In [x]: t9.index(1)
+			Out[x]: 3
+
+	以上所提到的t1至t9都叫在对象，count及index叫在方法，在bash编程中叫做函数。
+
+
+		
+
+									列表
+
+
+
+列表（list）：是序列的一种，是处理一组有序项目的数据结构，即可以在列表中存储一个序列的项目。是属于可变类型的数据。
+	1、创建列表的方法
+		In [x]: list = [] 定义空列表
+
+		In [x]: list
+		Out[x]: []
+
+		In [x]: print list
+			[ ]
+
+		In [x]: type(list)
+		Out[x]: list
+		
+
+
+		In [x]: list = [1,2,3] 定义列表
+
+		In [x]: list
+		Out[x]: [1, 2, 3]
+
+		In [x]: print list
+			[1, 2, 3]
+
+		In [x]: type(list)
+		Out[x]: list
+
+	
+		
+		In [x]: list = ['a',1,'b'] 定义列表，支持异构
+
+		In [x]: list
+		Out[x]: ['a', 1, 'b']
+
+		In [x]: print list
+		['a', 1, 'b']
+
+		In [x]: type(list)
+		Out[x]: list
+
+
+		In [x]: list = ['a',1,(1,),['hello','python']]  定义列表，支持异构
+
+		In [x]: list
+		Out[x]: ['a', 1, (1,), ['hello', 'python']]
+
+		In [x]: print list
+		['a', 1, (1,), ['hello', 'python']]
+
+		In [x]: type(list)
+		Out[x]: list
+
+		In [x]: len(list)  查看列表的元素个数
+		Out[x]: 4
+
+		In [x]: list = ['a','b','c']	定义一个列表，并把其元素赋值给另一列表（list1）
+
+		In [x]: id(list)
+		Out[x]: 47105448
+
+		In [x]: list1 = list
+
+		In [x]: list1
+		Out[x]: ['a', 'b', 'c']
+
+		In [x]: id(list1)
+		Out[x]: 47105448
+
+
+		
+		In [x]: list = ['a','b','c']
+
+		In [x]: list
+		Out[x]: ['a', 'b', 'c']
+
+		In [x]: id(list)
+		Out[x]: 18483464
+
+		In [x]: list1 = list[:] 把list列表的切表赋值给list1。
+
+		In [x]: list1
+		Out[x]: ['a', 'b', 'c']
+
+		In [x]: id(list1)
+		Out[x]: 18455728
+
+		In [x]: list.append('age') 原列表内容发生改变
+
+		In [x]: list
+		Out[x]: ['a', 'b', 'c', 'age']
+
+		In [x]: id(list)
+		Out[x]: 18483464
+
+		In [x]: list1	被赋值列表内容不会发生改变
+		Out[x]: ['a', 'b', 'c']
+
+
+
+
+	2、列表元素可改变
+
+		In [x]: list = ['a','b','c']
+
+		In [x]: list
+		Out[x]: ['a', 'b', 'c']
+		
+		In [x]: id(list)
+		Out[x]: 47173576   内存中存放的位置
+
+
+		In [x]: list[0] = 'abc'
+
+		In [x]: list
+		Out[x]: ['abc', 'b', 'c']
+
+		In [x]: id(list)
+		Out[x]: 47173576	内存中存放的位置
+
+
+
+		In [x]: list = ['a','b','c'] 原列表元素改变，引用此列表的其他列表也将改变。
+
+		In [x]: list[0] = 'abc'
+
+		In [x]: list
+		Out[x]: ['abc', 'b', 'c']
+
+		In [x]: id(list)
+		Out[x]: 47105448
+
+		In [x]: list1
+		Out[x]: ['abc', 'b', 'c']
+
+		In [x]: id(list1)
+		Out[x]: 47105448
+
+		
+
+	3、列表操作
+		In [x]: list1 = []
+
+		In [x]: list1
+		Out[x]: []
+
+		In [x]: list1.   按tab键可以看到关于list1的使用方法
+		list1.append   list1.extend   list1.insert   list1.remove   list1.sort
+		list1.count    list1.index    list1.pop      list1.reverse 
+	
+	list1.append 
+
+		In [x]: list1.append('abc')  在list1列表中添加一个元素abc
+
+		In [x]: list1
+		Out[x]: ['abc']
+
+		In [x]: list1.append(1) 在list1列表中添加一个元素1,每次只能添加一个元素。
+
+		In [x]: list1
+		Out[x]: ['abc', 1]
+
+
+		In [x]: list1 = ['a',[],'abc',1]
+
+		In [x]: list1
+		Out[x]: ['a', [], 'abc', 1]
+
+		In [x]: list1[1].append('ccd')  向列表中空列表中添加元素
+
+		In [x]: list1
+		Out[x]: ['a', ['ccd'], 'abc', 1]
+
+		In [x]: list1[1].append('123')
+
+		In [x]: list1
+		Out[x]: ['a', ['ccd', '123'], 'abc', 1] 向列表中列表元素添加元素
+
+
+
+	list1.insert
+		
+		In [x]: list1 = ['abc',1]
+
+		In [x]: list1
+		Out[x]: ['abc', 1]
+
+		In [x]: list1.insert(1,'d')	在指定索引前加一个元素。1为索引号。
+
+		In [x]: list1
+		Out[x]: ['abc', 'd', 1]
+
+
+	
+	list1.pop
+		In [x]: list1.append('ccd')
+
+		In [x]: list1
+		Out[x]: ['abc', 1, 'ccd']
+
+		In [x]: list1.pop()	弹出最后一个元素
+		Out[x]: 'ccd'
+
+		In [x]: list1
+		Out[x]: ['abc', 1]
+
+		In [x]: list1.pop(0)	弹出指定索引元素
+		Out[x]: 'abc'
+	
+		In [x]: list1
+		Out[x]: [1]
+
+	list.count与 list.index 一致
+
+		In [x]: list = ['a','b','c']  检验count用法
+
+		In [x]: list.
+		list.append   list.extend   list.insert   list.remove   list.sort
+		list.count    list.index    list.pop      list.reverse  
+
+		In [x]: list.count('a')
+		Out[x]: 1
+
+		In [x]: list.append('a')
+
+		In [x]: list
+		Out[x]: ['a', 'b', 'c', 'a']
+
+		In [x]: list.count('a')
+		Out[x]: 2
+
+	list.sort 给列表元素排序
+		In [x]: list1
+		Out[x]: ['a', ['ccd', '123'], 'abc', 1]
+
+		In [x]: list1.sort()
+
+		In [x]: list1
+		Out[x]: [1, ['ccd', '123'], 'a', 'abc']
+
+	list.reverse 列表里的元素进行反转
+		In [x]: list1
+		Out[x]: [1, ['ccd', '123'], 'a', 'abc']
+
+		In [x]: list1.re
+		list1.remove   list1.reverse  
+
+		In [x]: list1.reverse()
+
+		In [x]: list1
+		Out[x]: ['abc', 'a', ['ccd', '123'], 1]
+
+	list1.extend 把可迭代的对象添加到列表里，凡是可迭代的都可以通过for循环访问。
+		In [x]: range(5) 此处为range()函数
+		Out[x]: [0, 1, 2, 3, 4]
+
+		In [x]: range(1,10)
+		Out[x]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+		In [x]: range(5,11)
+		Out[x]: [5, 6, 7, 8, 9, 10]
+
+
+		In [x]: range(0,10)
+		Out[x]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+		In [x]: range(0,10,2)  此处2为步长值
+		Out[x]: [0, 2, 4, 6, 8]
+
+		In [x]: range(0,10,3) 此处3为步长值
+		Out[x]: [0, 3, 6, 9]
+
+
+
+		In [x]: list1
+		Out[x]: [1, 2, 3]
+
+		In [x]: list1.extend(range(5,11))
+
+		In [x]: list1
+		Out[x]: [1, 2, 3, 5, 6, 7, 8, 9, 10]
+
+
+	
+		In [x]: list1
+		Out[x]: [1, 2, 3, 5, 6, 7, 8, 9, 10]
+
+		In [x]: list1.extend('abc') 添加字符串
+
+		In [x]: list1
+		Out[x]: [1, 2, 3, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c']
+
+		In [x]: list1.extend(('t1','t2')) 添加元组
+
+		In [x]: list1
+		Out[x]: [1, 2, 3, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c', 't1', 't2']
+
+
+		In [x]: list2 = ['x','y','z']
+
+		In [x]: list1.extend(list2) 添加列表
+
+		In [x]: list1
+		Out[x]: [1, 2, 3, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c', 't1', 't2', 'x', 'y', 'z']
+
+
+
+
+		In [x]: list1 = ['a','b']	列表运算操作
+
+		In [x]: list2 = ['c,','d']
+
+		In [x]: list1 + list2   两列表相加，得到一个更多元素列表。
+		Out[x]: ['a', 'b', 'c,', 'd']
+
+
+		In [x]: list3 = list1 +list2  运算后赋值给列表list3
+
+		In [x]: list3
+		Out[x]: ['a', 'b', 'c,', 'd']
+
+
+		In [x]: list1 = [1,2]	列表乘法运算
+
+		In [x]: list1 * 2
+		Out[x]: [1, 2, 1, 2]
+
+		In [x]: list1 = ['a','b']   列表乘法运算
+
+		In [x]: list1 * 2
+		Out[x]: ['a', 'b', 'a', 'b']
+
+
+
+		In [x]: list1 = ['a','b','c']
+
+		In [x]: list2 = [1,'a',(1,2,),['hello']]
+
+		In [x]: (list1 + list2 ) * 2	 使用（）确定运算优先级
+		Out[x]: 
+		['a',
+ 		'b',
+		 'c',
+ 		1,
+		 'a',
+		 (1, 2),
+ 		['hello'],
+ 		'a',
+ 		'b',
+ 		'c',
+ 		1,
+		 'a',
+		 (1, 2),
+		 ['hello']]
+
+	取值：切片和索引
+
+
+	添加：list.append（）
+
+	删除：  del list[]
+		list.remove(list[])
+		
+		In [x]: list = ['a','b']
+
+		In [x]: list
+		Out[x]: ['a', 'b']
+
+		In [x]: del list[0] 删除列表中的指定索引元素
+
+		In [x]: list
+		Out[x]: ['b']
+
+		In [x]: del list[:] 删除列表中的全部元素
+
+		In [x]: list
+		Out[x]: []
+	
+		In [x]: list1
+		Out[x]: ['b', 'c']  
+
+		In [x]: del list1  删除列表
+
+		In [x]: list1
+		---------------------------------------------------------------------------
+		NameError                                 Traceback (most recent call last)
+		<ipython-input-29-8304c57391a2> in <module>()
+			----> 1 list1
+
+		NameError: name 'list1' is not defined
+		
+
+
+		使用list1.remove方法删除
+
+		In [x]:help（list1.remove）	
+
+		In [x]: list1 =  ['a','b','c']
+
+		In [x]: list1
+		Out[x]: ['a', 'b', 'c']
+
+		In [x]: list1.remove(list1[0]) 删除列表中的指定索引元素
+
+		In [x]: list1
+		Out[x]: ['b', 'c']
+
+
+		In [x]: list1 = ['a',1,('a',),1]
+
+		In [x]: list1
+		Out[x]: ['a', 1, ('a',), 1]
+
+		In [x]: list1.remove(1)	删除列表中的指定元素,如有多个，则直接删除第一个出现的元素。
+
+		In [x]: list1
+		Out[x]: ['a', ('a',), 1]
+
+
+
+
+	修改：
+		list[]=x
+
+		In [x]: list1
+		Out[x]: ['a', ('a',), 1]
+
+		In [x]: list1[2] = 36
+
+		In [x]: list1
+		Out[x]: ['a', ('a',), 36]
+
+
+	查找：
+		var in list
+		
+		In [x]: list1
+		Out[x]: ['a', ('a',), 36]
+
+		In [x]: 'a' in list1
+		Out[x]: True
+
+		In [x]: 'b' not in list1
+		Out[x]: True
+
+		In [x]: 'a' not in list1
+		Out[x]: False
+
+		In [x]: 'b' in list1
+		Out[x]: False
+
+		
+
+		
+
+											字典
+
+
+
+字典：是python中的唯一的映射类型（哈希表），字典对象是可变的，但是字典的键必须使用不可变对象，一个字典中可以使用不同类型的键值。字典是无序的，各元素之间位置可不按创建顺序。
+
+	如果不使用字典，可以使用字符串或元组或列表来存储数据，但有其不便性：
+	例如：
+		1、使用字符串存储信息(不方便读取)：
+		In [x]: memberinfo = 'tom 180 22'
+
+		In [x]: memberinfo[0:3]
+		Out[x]: 'tom'
+
+		In [x]: memberinfo[4:7]
+		Out[x]: '180'
+
+		In [x]: memberinfo[8:10]
+		Out[x]: '22'
+
+		2、使用元组存储信息（不方便应用）：
+		In [x]: list1 = ('name','age')
+
+		In [x]: list2 = ('tom','20')
+
+		In [x]: list3 = ('jack','22')
+
+		In [x]: list4 = zip(list1,list2)
+
+		In [x]: list4
+		Out[x]: [('name', 'tom'), ('age', '20')]
+
+		In [x]: list5 = zip(list1,list3)
+
+		In [x]: list5
+		Out[x]: [('name', 'jack'), ('age', '22')]
+
+	字典的方法：
+		keys()
+		values()
+		items()
+
+	创建字典的方法：特别提醒：字典中的key必须唯一。
+		1、创建一个空字典
+			In [x]: dict1 = {}
+
+			In [x]: type(dict1)
+			Out[x]: dict
+
+			
+			In [114]: dict1 = dict()   dict()为工厂函数
+
+			In [115]: dict1
+			Out[115]: {}
+
+			
+
+		2、创建一个非空字典
+			In [x]: dict1 = {'a':1,1:123}
+
+			In [x]: dict1
+			Out[x]: {1: 123, 'a': 1}
+
+			In [x]: type(dict1)
+			Out[x]: dict
+
+
+			
+
+		3、创建一个非空字典(使用元组做为字典中的一个元素键名，不能使用列表做为字典中元素键名，但可以使用列表做为字典中元素的键值)
+			In [x]: dict1 = {'name':'tom',('a','b'):'hello'}
+
+			In [x]: dict1
+			Out[x]: {'name': 'tom', ('a', 'b'): 'hello'}
+
+			In [x]: type(dict1)
+			Out[x]: dict
+
+
+			In [x]: dict1 = {'name':'tom',('a','b'):('c','d','e')}
+
+			In [x]: dict1
+			Out[x]: {'name': 'tom', ('a', 'b'): ('c', 'd', 'e')}
+
+			In [x]: type(dict1)
+			Out[x]: dict
+
+			In [x]: id(dict1)
+			Out[x]: 37927888
+
+			In [x]: len(dict1)
+			Out[x]: 2
+
+
+
+			In [x]: dict2 = {'name':'tom','age':'20',['a','b']:'hello'}
+			---------------------------------------------------------------------------
+			TypeError                                 Traceback (most recent call last)
+			<ipython-input-25-28e0a6a49291> in <module>()
+			----> 1 dict2 = {'name':'tom','age':'20',['a','b']:'hello'}
+
+			TypeError: unhashable type: 'list'
+
+
+
+			In [x]: dict2 = {'name':'tom','age':'20','option':['a','b']}
+
+			In [x]: dict2
+			Out[x]: {'age': '20', 'name': 'tom', 'option': ['a', 'b']}
+
+			In [x]: type(dict2)
+			Out[x]: dict
+
+			In [x]: id(dict2)
+			Out[x]: 37859312
+
+			In [x]: len(dict2)
+			Out[x]: 3
+
+
+			In [x]: list1 = ('name','age') 
+
+			In [x]: list2 = ('tom','20')
+
+			In [x]: dict1 = dict(zip(list1,list2))  使用合并列表的形式创建新字典
+
+			In [x]: dict1
+			Out[x]: {'age': '20', 'name': 'tom'}
+
+
+			
+			In [x]: list1 = ('name','age')
+
+			In [x]: list2 = ('tom','20')
+
+			In [x]: zip(list1,list2)
+			Out[x]: [('name', 'tom'), ('age', '20')]  复制此位置元素
+
+			In [x]: dict1 = dict([('name', 'tom'), ('age', '20')]) 到此处小括号中
+
+			In [x]: dict1
+			Out[x]: {'age': '20', 'name': 'tom'}
+
+
+			
+			In [x]: dict1 = dict(a=10,b=20)
+
+			In [x]: dict1
+			Out[x]: {'a': 10, 'b': 20}
+
+			使用dict.fromkeys方法创建字典：
+			In [x]: dict1 = dict.fromkeys('abc')
+
+			In [x]: dict1
+			Out[x]: {'a': None, 'b': None, 'c': None}
+
+			In [x]: dict1 = dict.fromkeys('abc',100)
+
+			In [x]: dict1
+			Out[x]: {'a': 100, 'b': 100, 'c': 100}
+
+			使用range()函数：
+			In [x]: dict1 = dict.fromkeys(range(0,100),100)
+
+			In [x]: dict1
+			Out[x]: 
+			{0: 100,
+			 1: 100,
+			 2: 100,
+			 3: 100,
+			 4: 100,
+			 5: 100,
+			 ..........
+			 95: 100,
+			 96: 100,
+			 97: 100,
+			 98: 100,
+			 99: 100}
+
+		4、访问字典：
+			In [x]: dict1 = dict(a=10,b=20)
+
+			In [x]: dict1
+			Out[x]: {'a': 10, 'b': 20}
+
+			In [x]: dict1['a']
+			Out[x]: 10
+
+		
+		5、字典中的方法
+			In [x]: dict1
+			Out[x]: {'name': 'tom', ('a', 'b'): ('c', 'd', 'e')}
+
+			In [x]: dict1.  使用tab键查看字典的方法
+			dict1.clear       dict1.items       dict1.pop         dict1.viewitems
+			dict1.copy        dict1.iteritems   dict1.popitem     dict1.viewkeys
+			dict1.fromkeys    dict1.iterkeys    dict1.setdefault  dict1.viewvalues
+			dict1.get         dict1.itervalues  dict1.update      
+			dict1.has_key     dict1.keys        dict1.values      
+
+			In [x]: dict1.keys() 使用keys方法，显示字典里面的keys
+			Out[x]: [('a', 'b'), 'name']
+
+			In [x]: dict1.values() 使用values方法，显示字典里面的values
+			Out[x]: [('c', 'd', 'e'), 'tom']
+
+
+			In [x]: help(dict1.get) 获取字典get方法的帮助信息
+
+			In [x]: dict1.get('name') 使用get获取字典中某一key的值。
+			Out[x]: 'tom'
+
+			In [x]: dict1.get('abc') 使用get获取字典中abc key的值,此key不存在，默认返回值为空。
+			Out[x]: 
+
+			In [x]: dict1.get('abc'，‘python') 使用get获取字典中abc key的值,此key不存在,可以给予abc一个值，不会影响原字典元素。
+			Out[x]: python
+
+		6、修改字典中元素对应的值，即修改key的value的方法：
+			In [x]: dict1
+			Out[x]: {'name': 'tom', ('a', 'b'): ('c', 'd', 'e')}
+
+			In [x]: dict1['name'] = 'lilei'
+
+			In [x]: dict1
+			Out[x]: {'name': 'lilei', ('a', 'b'): ('c', 'd', 'e')}
+
+		7、向字典中添加元素的方法：
+
+			In [x]: dict1[0] = 'jack' 添加一个元素
+
+			In [x]: dict1
+			Out[x]: {0: 'jack', 'name': 'lilei', ('a', 'b'): ('c', 'd', 'e')}
+
+			In [x]: dict1[('c','g')] = 'cg is addr' 添加一个元组元素
+
+			In [x]: dict1
+			Out[x]: 
+			{0: 'jack','name': 'lilei',('a', 'b'): ('c', 'd', 'e'), ('c', 'g'): 'cg is addr'}
+
+			In [x]: dict1[list] = ['a','b'] 添加一个元素，但value为列表
+
+			In [x]: dict1
+			Out[x]: 
+			{0: 'jack','name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+		8、弹出(删除)一个元素：
+			In [x]: dict1.pop(0) 弹出
+			Out[x]: 'jack'
+
+			In [x]: dict1
+			Out[x]: 
+			{'name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+			In [x]: dict1
+			Out[x]: {'name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+			In [x]: del(dict1['name']) 删除
+
+			In [x]: dict1
+			Out[x]: {('a', 'b'): ('c', 'd', 'e'), ('c', 'g'): 'cg is addr', list: ['a', 'b']}
+
+
+		9、判断字典中有无指定元素的方法：
+			In [x]: dict1
+			Out[x]: 
+			{'name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+			In [x]: 'a' in dict1
+			Out[x]: False
+
+			In [x]: 'name' in dict1
+			Out[x]: True
+
+			In [x]: dict1.has_key('a')
+			Out[x]: False
+
+			In [x]: dict1.has_key('name')
+			Out[x]: True
+
+		10、dict1.items方法：通过此方法可以方便地将字典转换为列表，方便使用索引和切片进行访问，特别是在for循环中使用。
+			In [x]: dict1
+			Out[x]: 
+			{'name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+			In [x]: dict1.items()
+			Out[x]: [(list, ['a', 'b']),(('a', 'b'), ('c', 'd', 'e')),(('c', 'g'), 'cg is addr'),('name', 'lilei')]
+
+			for循环例子：
+				In [x]: dict1 = {1:'a',2:'b',3:'c'}
+
+				In [x]: for (key,value) in dict1.items():
+    							print 'dict1[%s]='%key,value
+  				 ....:     
+					dict1[1]= a
+					dict1[2]= b
+					dict1[3]= c
+
+
+
+				In [x]: dict1 = {'name': 'lilei',('a', 'b'): ('c', 'd', 'e'),('c', 'g'): 'cg is addr',list: ['a', 'b']}
+
+				In [x]: dict1
+				Out[x]: 
+				{'name': 'lilei',
+				 ('a', 'b'): ('c', 'd', 'e'),
+				 ('c', 'g'): 'cg is addr',
+				 list: ['a', 'b']}
+
+				In [x]: for k in dict1:
+				   .....:     print k,dict1[k]  第一种写法
+				   .....:     
+				<type 'list'> ['a', 'b']
+				('a', 'b') ('c', 'd', 'e')
+				('c', 'g') cg is addr
+				name lilei
+
+
+
+
+				In [134]: for k in dict1:
+   							 print "%s,%s" %(k,dict1[k]) 第二种写法
+				   .....:     
+				<type 'list'>,['a', 'b']
+				('a', 'b'),('c', 'd', 'e')
+				('c', 'g'),cg is addr
+				name,lilei
+				
+				In [135]: for k,v in dict1.items():print k,v  第三种写法
+				<type 'list'> ['a', 'b']
+				('a', 'b') ('c', 'd', 'e')
+				('c', 'g') cg is addr
+				name lilei
+
+
+
+
+
+		11、使用for循环遍历字典中的元素：
+
+			In [x]: dict1 = {1:'a',2:'b',3:'c'}
+
+			In [x]: dict1
+			Out[x]: {1: 'a', 2: 'b', 3: 'c'}
+
+			In [x]: for key in dict1:
+   					 print '[%d]=' %key,dict1[key]
+  			 ....:     
+				[1]= a
+				[2]= b
+				[3]= c
+
+		12、字典复制，使用dict.copy()方法：
+
+			In [x]: dict1
+			Out[x]: {1: 'a', 2: 'b', 3: 'c'}
+
+			In [x]: id(dict1)
+			Out[x]: 38101664 内存中位置
+
+
+			In [x]: dict2 = dict1.copy()
+
+			In [x]: dict2
+			Out[x]: {1: 'a', 2: 'b', 3: 'c'}
+
+			In [x]: id(dict2)
+			Out[x]: 37951296	内存中位置
+
+
+			In [x]: dict1['abc'] = 'xyz'
+
+			In [x]: dict1
+			Out[x]: {1: 'a', 2: 'b', 3: 'c', 'abc': 'xyz'}
+
+			In [x]: dict2
+			Out[x]: {1: 'a', 2: 'b', 3: 'c'}
+
+		13、弹出一个元素，使用dict.popitem()与dict.pop()用法一致:
+			In [x]: dict2
+			Out[x]: {1: 'a', 2: 'b', 3: 'c'}
+
+			In [x]: dict2.popitem()
+			Out[x]: (1, 'a')
+
+		14、用一个字典去更新更一个字典,使用dict.update()方法：
+			
+			In [x]: old = {'name':'tom'}
+
+			In [x]: new = {1:'a',2:'b'}
+
+			In [x]: old.update(new)
+
+			In [x]: old
+			Out[x]: {1: 'a', 2: 'b', 'name': 'tom'}
+
+		15、清除字典所有所有元素，使用dict.clear()方法：
+			In [x]: dict1
+			Out[x]: {1: 'a', 2: 'b', 3: 'c', 'abc': 'xyz'}
+
+			In [x]: dict1.clear()
+
+			In [x]: dict1
+			Out[x]: {}
+
+		16、练习：使用pycharm编辑python文件，要求通过用户输入完成字典创建：
+			  文件为：dict1.py
+			  内容：
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				print info                   
+			保存并执行验证。
+
+
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				print info.items()            完成以元组方式显示。
+			保存并执行验证。
+
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				for i in info.items():
+				    print i
+				print 'for is finish'
+			保存并执行验证。
+
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				for k,v in info.items():
+				    print k,v
+				print 'for is finish'
+			保存并执行验证。
+
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				for k,v in info.items():
+				    print k+':',v
+				print 'for is finish'
+			保存并执行验证。
+
+				#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				age = raw_input("please input age:")
+				gender = raw_input('please input (M/F):')
+				info['name'] = name
+				info['age'] = age
+				info['gender'] = gender
+				for k,v in info.items():
+				    print "%s: %s"%(k,v)
+				print 'for is finish'
+			保存并执行验证。
+
+
+			注：使用type()验证用户输入的字符类型。
+			#!/usr/bin/python
+				
+				info = {}
+
+				name = raw_input("please input name:")
+				print type('name')
+			保存并执行验证。
+
+			
+
+
+
+
+
+
+
+							python流程控制之条件判断－if
+
+
+if：条件判断，逻辑值（bool）包含了2个值：
+		True:表示非空的量（比如：string,tuple,list,set,dictonary）,所有非零数。
+		False:表示0，None,空的量等。
+
+	1、if语句：
+		if expression:
+			statement(s) 注：python使用缩进作为其语句分组的方法，建议使用4个空格。
+
+	例如：
+		在命令行中：
+		In [x]: if 1:                     1处只要为非零，均可成功打印。例如：True,"abc",100等。
+   		.....:     print "hello python"
+  		 .....:     
+		hello python
+
+		In [x]: if 1 < 2:  表达式成立
+		   .....:     print "hello python"
+		   .....:     
+		hello python
+
+		In [x]: if not 1 > 2: 表达式成立
+		   .....:     print "hello python"
+		   .....:     
+		hello python
+
+		In [x]: if not 1 > 2 and 1 == 1: 多条件成立，先判断逻辑非优先级高。
+		   .....:     print "hello python"
+		   .....:     
+		hello python
+
+
+
+		在命令行中：不输出的情况如下：
+		In [x]: if 0:                      0处位置为None或False或表达式不成立等。
+   		.....:     print "hello python"
+   		.....:     
+
+		In [x]: if False:
+  		 .....:     print "hello python"
+  		  .....:     
+
+		In [x]: if 1 > 2: 表达式不成立
+		   .....:     print "hello python"
+		   .....:     
+
+		In [158]: if "":       双引号位置表示为空。
+		   .....:     print "hello python"
+		   .....: else:
+		   .....:     print "False"
+		   .....:     
+		False
+
+
+
+
+
+
+
+		在python文件中（pycharm）：
+			#!/usr/bin/python
+			if 1:
+			    print "hello python"
+			    print "True"
+
+
+		if-else:
+			In [x]: if 1 < 2:
+			   .....:     print "hello python"
+			   .....: else:
+			   .....:     print "you are wrong"
+			   .....:     
+			hello python
+
+			In [x]: if 10 < 2:
+			   .....:     print "hello python"
+			   .....: else:
+			   .....:     print "you are wrong"
+			   .....:     
+			you are wrong
+
+
+
+		if-elif-else:
+			In [151]: if 10 < 2 :
+			   .....:     print "hello python"
+			   .....: elif 1:
+			   .....:     print "True"
+			   .....: else:
+			   .....:     print "this is wrong"
+			   .....:     
+			True
+
+		if练习（一）：
+			使用pycharm编写一个用来判断成绩优良的python脚本。
+ 			#!/usr/bin/python
+			score = int(raw_input("please a num:"))
+			if score >= 90:
+				print "A"
+				print "very good"
+			elif score >= 80:
+				print "B"
+				print "good"
+			elif score >= 70:
+				print "C"
+				print "pass"
+			else:
+				print "D"
+			print "END"
+
+		注：score = raw_input("please a num:")接收到的是一个字符串，需要把字符串转换为数字，才能与条件中的数字进行比较。
+			 	在命令行中：
+				In [x]: score = raw_input("please input a num: ")
+				please input a num: abc
+
+				In [x]: type(score)
+				Out[x]: str
+
+				In [x]: score = raw_input("please input a num: ")
+				please input a num: 123
+
+				In [x]: type(score)
+				Out[x]: str
+
+				In [x]: score = int(raw_input("please input a num: "))
+				please input a num: 123
+
+				In [x]: type(score)
+				Out[x]: int
+
+
+
+				或以下写法：
+				#!/usr/bin/python
+				# coding: utf8	此处添加中文识别
+
+				score = int(raw_input("please a num:"))
+				if score >= 90:
+					print "优秀"
+					print "very good"
+				elif score >= 80:
+					print "良"
+					print "good"
+				elif score >= 70:
+					print "及格"
+					print "pass"
+				else:
+					print "D"
+				print "END"
+
+
+
+
+			if练习（二）：
+			使用pycharm编写一个用来实现接收用户输入后提示用户信息的python脚本。
+
+			#!/usr/bin/python
+			yn = raw_input("please choice [Yes|No]:")
+			yn = yn.lower()                                请看：注
+			if yn == 'y' or yn == 'yes':
+			    print "programe is running..."
+			elif yn == 'n' or yn == 'no':
+			    print "programe is exit"
+			else:
+			    print "please choice [Yes|No]"
+
+
+			注：对于用户输入大小写不确定情况，可以使用以下方式处理：
+				In [x]: a = "ABC"
+
+				In [x]: a
+				Out[x]: 'ABC'
+
+				In [x]: a.lower()
+				Out[x]: 'abc'
+
+			if练习（三）：
+			使用pycharm编写一个用来实现接收用户输入后提示用户登录信息并判断登录成功与否的python脚本。
+			#!/usr/bin/python
+			username = raw_input("username:")
+			password = raw_input("password:")
+
+			if username == "tom" and password == "123":
+			    print "login successful!"
+			else:
+			    print "login incorrect."
+
+			if练习（四）：
+			使用pycharm编写一个用来实现接收用户输入后提示用户登录信息、判断登录成功与否并密码为隐性的python脚本。
+			#!/usr/bin/python
+
+			import getpass   此为导入模块
+
+			username = raw_input("username:")
+			password = getpass.getpass("password:") 此为调用模块
+
+			if username == "tom" and password == "123":
+			    print "login successful!"
+			else:
+			    print "login incorrect."
+
+
+			if练习（五）：
+			使用pycharm编写一个实现石头、剪刀、布的小游戏：
+
+			#!/usr/bin/env python
+			# coding: utf8
+
+			#导入random模块
+			import random  请看注1
+
+			#定义2个列表
+			#all_choice用来指定computer随机选择，与random()函数一起使用
+			#win_list用来指定赢的情况
+
+			all_choice = ["石头","剪刀","布"]
+			win_list = ["石头","剪刀"],["剪刀","布"],["布","石头"]
+
+			#用来进行用户提示
+
+			prompt ="""(0)石头
+			(1)剪刀
+			(2)布
+			请选择（0/1/2）:"""
+
+			#设定用户输入后接收的变量，此变量为all_choice的索引号
+			indexinput = int(raw_input(prompt))
+
+			#定义变量player，其值为all_choice中用户选择的元素
+			player = all_choice[indexinput]
+
+			#定义变量computer，其值为random.choice从all_choice中随机选取的
+			computer = random.choice(all_choice)
+
+			#打印player的选择和computer的选择
+			print "You choice:%s,computer choice:%s" % (player,computer)
+
+			# \033[32;43;1m表示设置前景色与背景色，32为前景色，43为背景色，1m为开始，0m为结束,请看注2
+			if player == computer:
+			    print "\033[32;43;1m平局\033[0m"
+			elif [player,computer] in win_list:
+			    print "\033[31;43;1m你赢了\033[0m"
+			else:
+			    print "\033[31;43;1m你输了\033[0m"
+			
+
+			注1：random.choice()用法：
+			In [x]: import random
+
+			In [x]: l1 = ['a','b','c']
+
+			In [x]: random.         此处按tab键
+			random.BPF              random.division         random.random
+			random.LOG4             random.expovariate      random.randrange
+			random.NV_MAGICCONST    random.gammavariate     random.sample
+			random.RECIP_BPF        random.gauss            random.seed
+			random.Random           random.getrandbits      random.setstate
+			random.SG_MAGICCONST    random.getstate         random.shuffle
+			random.SystemRandom     random.jumpahead        random.triangular
+			random.TWOPI            random.lognormvariate   random.uniform
+			random.WichmannHill     random.normalvariate    random.vonmisesvariate
+			random.betavariate      random.paretovariate    random.weibullvariate
+			random.choice           random.randint          
+
+			In [x]: random.choice(l1)
+			Out[x]: 'c'
+
+			In [x]: random.choice(l1)
+			Out[x]: 'a'
+
+			In [x]: random.choice(l1)
+			Out[x]: 'b'
+
+			In [6]: random.choice(l1[0])
+			Out[6]: 'a'
+
+			In [7]: random.choice(l1[1])
+			Out[7]: 'b'
+
+			In [9]: random.choice(l1[2])
+			Out[9]: 'c'
+
+			注2： echo -e "\e[31;43;1mOK\e[0m"
+
+
+
+	学习完while之后的补充内容：三局两胜
+
+			#!/usr/bin/env python
+			# coding: utf8
+
+			#导入random模块
+			import random
+
+			#定义2个列表
+			#all_choice用来指定computer随机选择，与random()函数一起使用
+			#win_list用来指定赢的情况
+
+			all_choice = ["石头","剪刀","布"]
+			win_list = ["石头","剪刀"],["剪刀","布"],["布","石头"]
+
+			#用来进行用户提示
+
+			prompt ="""(0)石头
+			(1)剪刀
+			(2)布
+			请选择（0/1/2）:"""
+			cwin = 0
+			pwin = 0
+
+			while cwin < 2 and pwin < 2:
+
+			#设定用户输入后接收的变量，此变量为all_choice的索引号
+			    indexinput = int(raw_input(prompt))
+
+			#定义变量player，其值为all_choice中用户选择的元素
+			    player = all_choice[indexinput]
+
+			#定义变量computer，其值为random.choice从all_choice中随机选取的
+			    computer = random.choice(all_choice)
+
+			#打印player的选择和computer的选择
+			    print "You choice:%s,computer choice:%s" % (player,computer)
+
+			# \033[32;43;1m表示设置前景色与背景色，32为前景色，43为背景色，1m为开始，0m为结束
+			    if player == computer:
+				print "\033[32;43;1m平局\033[0m"
+			    elif [player,computer] in win_list:
+				pwin += 1
+				print "\033[31;43;1m你赢了\033[0m"
+			    else:
+				cwin += 1
+				print "\033[31;43;1m你输了\033[0m"
+			if pwin == 2:
+			    print "Finally,You WIN!!!"
+			else:
+			    print "Finally,You LOSE!!!"
+
+
+
+
+
+
+
+								python流程控制之循环－for
+
+
+for循环：
+	循环是一个结构,导致程序要重复一定的次数。条件循环也是如此，当条件变为假，循环结束。
+	在序列里，使用for循环遍历。
+	for循环用在有次数的循环上。
+
+	迭代（重复执行一个指令）遍历的方法：
+	1、直接从序列取值
+	2、通过索引来取值
+
+	语法：
+	for iterating_var in sequence:
+		statement(s)
+	
+	例如：遍历字符串内容
+
+	写法一：	
+	In [x]: a = 'ABCD'
+
+	In [x]: a
+	Out[x]: 'ABCD'
+
+	In [x]: for i in a:
+	   ....:     print i
+	   ....:     
+	A
+	B
+	C
+	D
+	写法二：
+	In [x]: a
+	Out[x]: 'ABCD'
+
+	In [x]: for i in a:
+	   ....:     print i,  此处加了一个逗号，循环结果显示没有换行符，逗号起到抑制换行符输出。
+	   ....:     
+	A B C D
+
+
+	In [x]: for i in range(0,10):
+	   ....:     print i
+	   ....:     
+	0
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+
+	In [x]: for i in range(0,10,2):
+	    print i,
+	   ....:     
+	0 2 4 6 8
+
+
+
+	例如：遍历元组中的元素
+	In [x]: tuple1 = (1,'a',('z',),['x','y'])
+
+	In [x]: tuple1
+	Out[x]: (1, 'a', ('z',), ['x', 'y'])
+
+	In [x]: for i in tuple1:
+	   ....:     print i
+	   ....:     
+	1
+	a
+	('z',)
+	['x', 'y']
+
+	例如：遍历列表中的元素
+	In [x]: list1 = ['a','x',(1,),['y','z']]
+
+	In [x]: list1
+	Out[x]: ['a', 'x', (1,), ['y', 'z']]
+
+	In [x]: for i in list1:
+	   ....:     print i
+	   ....:     
+	a
+	x
+	(1,)
+	['y', 'z']
+
+
+	遍历列表中的元素，请注意写法(列表重写)：
+
+	In [x]: [i for i in range(1,11)]
+	Out[x]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+	
+	In [x]: print [i for i in range(1,11)]
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+	In [x]: print [i * 2 for i in range(1,11)]
+	[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+	In [x]: print [i ** 2 for i in range(1,11)]
+	[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+
+	In [x]: print [i for i in range(1,11) if i % 2 == 0]
+	[2, 4, 6, 8, 10]
+
+
+	In [x]: for i in [i ** 2 for i in range(1,11)]:
+	   ....:     print i,
+	   ....:     
+	1 4 9 16 25 36 49 64 81 100
+
+
+	In [x]: for i in [i ** 2 for i in range(1,11) if i % 2 != 0]:
+	   ....:     print i,
+	   ....:     
+	1 9 25 49 81
+
+
+
+	In [x]: a = xrange(10) 此处使用的是xrange()函数，与range()函数功能一样，但xrange每次产生的对象为一个，不会占用太多的系统内存资源。
+
+	In [x]: print a
+	xrange(10)
+
+	In [x]: for i in a:
+	   ....:     print i
+	   ....:     
+	0
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+		注：xrange()类似range(),不过当你有一个很大的范围列表时，xrange更为适合，因为它不会在内存里创建列表的完整拷贝，它只用在for循环中，在for循环外使用它没有意义，它的性能远高出range(),因为它不生成整个列表。
+		例如：
+		for x in xrange(3):
+			print x
+			
+
+		
+
+
+	例如：遍历字典
+	遍历字典中的keys：
+	In [x]: dict1 = {'name':'tom','age':21,'phone':13838383838}
+
+	In [x]: dict1
+	Out[x]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [x]: for k in dict1:
+	   ....:     print k
+	   ....:     
+	phone
+	age
+	name
+
+	遍历字典中的key与其值
+	In [x]: dict1
+	Out[x]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [x]: for k in dict1:
+	   ....:     print k,dict1[k]
+	   ....:     
+	phone 13838383838
+	age 21
+	name tom
+
+	遍历字典中的key与其值并格式化输出
+
+	In [x]: dict1
+	Out[x]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [x]: for k in dict1:
+	   ....:     print "%s --> %s" % (k,dict1[k])
+	   ....:     
+	phone --> 13838383838
+	age --> 21
+	name --> tom
+
+	
+	In [x]: dict1
+	Out[x]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [x]: for k in dict1:
+	   ....:     print "%s --> %s" % (k,dict1[k]),
+	   ....:     
+	phone --> 13838383838 age --> 21 name --> tom
+
+
+
+	In [x]: dict1
+	Out[x]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [x]: for i in dict1.items(): 此处返回的值为元组。
+	   ....:     print i
+	   ....:     
+	('phone', 13838383838)
+	('age', 21)
+	('name', 'tom')
+
+
+	In [70]: dict1
+	Out[70]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [71]: for k,v in dict1.items(): 此处返回的值为列表。
+	   ....:     print k,v
+	   ....:     
+	phone 13838383838
+	age 21
+	name tom
+
+
+	
+	In [72]: dict1
+	Out[72]: {'age': 21, 'name': 'tom', 'phone': 13838383838}
+
+	In [73]: for k,v in dict1.iteritems():  此处返回值为对象。
+	   ....:     print k,v
+	   ....:     
+	phone 13838383838
+	age 21
+	name tom
+
+
+	
+
+
+
+	for循环中嵌套if条件判断语句：
+	例如：
+	In [x]: for i in range(1,11):
+	   ....:     if i % 2 == 0:
+	   ....:         print i
+	   ....:         
+	2
+	4
+	6
+	8
+	10
+
+
+
+	练习一：使用for循环完成1＋2＋3...+100的数字总和为？
+		写法一：
+		In [x]: sum = 0
+
+		In [x]: for i in range(1,101):
+		   ....:     sum = sum + i
+		   ....: print sum
+		   ....: 
+		5050
+
+		写法二：
+		
+		In [x]: sum = 0
+
+		In [x]: for i in range(1,101):
+		   ....:     sum += i
+		   ....: print sum
+		   ....: 
+		5050
+
+		写法三：
+
+		In [x]: sum = 0
+
+		In [x]: for i in xrange(1,101):
+		   ....:     sum += i
+		   ....: print sum
+		   ....: 
+		5050
+
+		写法四：
+		#!/usr/bin/python
+
+		sum100 = 0
+
+		for i in range(1,101):
+		    sum100 += i
+
+		print sum100
+
+
+
+	练习二：使用python实现九九乘法口决表？
+		#!/usr/bin/python
+
+		for i in xrange(1,10):
+		    for j in xrange(1,i+1):
+			print "%sx%s=%s" % (j,i,j*i), 此处逗号抑制输出换行符
+		    print                           print会默认打印换行符，此处为输出换行符
+
+
+
+	练习三：斐波那契数列
+		1、斐波那契数列就是某一个数，总是前两个数之和，比如：0，1，1，2，3，5，8
+		2、使用for循环和range函数编写一个程序，计算有10个数字的斐波那契数列
+		3、改进程序，要求用户输入一个数字，可以生成用户需要长度的斐波那契数列。
+
+		ipython命令行：
+
+		In [1]: fibs = [0,1]	定义一个基本列表
+
+		In [2]: for i in range(8):	循环8次
+		   ...:     fibs.append(fibs[-1] + fibs[-2])	fibs列表-1下标的值加上-2下标的值，即倒数第二个值与倒数第一个值相加即可。
+		   ...: print fibs
+		   ...: 
+		[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+
+
+		pycharm文件中：
+
+		#!/usr/bin/python
+
+		fibs = [0,1]
+		for i in range(8):
+		    fibs.append(fibs[-1] + fibs[-2])
+		print fibs
+
+		或使用以下方法实现：
+		讲解部分：
+		0 1
+		1 1	第一个1是上一行最后一个数，第二个1是上一行0与1之各，以下各行以此类推。
+		1 2
+		2 3
+		3 5
+		5 8
+
+		代码实现部分：
+		#!/usr/bin/python
+
+		a,b = 0,1
+
+		for i in range(10):
+		    print a,
+		    a,b = b, a + b
+
+		
+
+
+
+
+
+for循环退出
+	for-else:for循环如果正常结束，才会执行else语句。
+
+	例如：
+	In [1]: import time		导入time模块
+
+	In [3]: for i in xrange(10):
+	   ...:     print i
+	   ...:     time.sleep(1)	与shell中的sleep类似，用于做暂停
+	   ...: else:
+	   ...:     print 'main end'	循环完成后，执行else语句
+	   ...:     
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+main end
+
+	for循环退出控制-break
+	例如：
+	In [4]: for i in xrange(10):
+   ...:     print i
+   ...:     if i == 5:
+   ...:         break			当i为5时将跳出循环
+   ...: else:
+   ...:     print 'main end'
+   ...:     
+0
+1
+2
+3
+4
+5
+
+	for循环控制-continue
+	例如：
+	In [5]: for i in xrange(10):
+   ...:     if i == 3:
+   ...:         continue			i值为3时，继续循环
+   ...:     if i == 5:
+   ...:         break			i值为5时，跳出循环
+   ...:     print i
+   ...: else:
+   ...:     print 'main end'
+   ...:     
+0
+1
+2
+4
+
+	In [1]: import sys		导入sys模块
+
+	In [5]: for i in xrange(10):
+   ...:     if i == 3:
+   ...:         continue
+   ...:     elif i == 5:
+   ...:         continue
+   ...:     elif i == 6:
+   ...:         pass			此处pass为占位符，当此处不知道应该写何值时，可以临时点位使用。
+   ...:     elif i == 7:
+   ...:         sys.exit()		当i值为7时，直接退出。
+   ...:     print i
+   ...: else:
+   ...:     print 'main end'
+   ...: print "hahaha"
+
+
+
+
+								列表解析
+
+
+它是一个非常有用的、简单、而且灵活的工具，可以用来动态地创建列表。
+语法：
+	[expr for iter_var in iterable]
+这个语句的核心是for循环，它迭代iterable对象的所有条目，expr应用于序列的每个成员，最后的结果值是该表达式产生的列表。
+
+例如：
+	In [x]: [30 for i in range(3)]	把三个30放入到列表中
+	Out[x]: [30, 30, 30]
+
+
+	In [x]: list1 = [30 for i in range(3)]
+
+	In [x]: list1
+	Out[x]: [30, 30, 30]
+
+
+
+	In [x]: list2 = [i ** 2 for i in range(1,6)]
+
+	In [x]: list2
+	Out[x]: [1, 4, 9, 16, 25]
+
+
+
+	In [x]: list3 = [i ** 2 for i in range(1,6,2)]
+
+	In [x]: list3
+	Out[x]: [1, 9, 25]
+
+
+	In [x]: list4 = [i ** 2 for i in range(1,11) if i % 2]	当i % 2不为零，为真时，把所有的奇数进行平方。
+
+	In [x]: list4
+	Out[x]: [1, 9, 25, 49, 81]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								python流程控制之循环－while
+
+
+while循环：
+	当需要语句不断的重复执行时，可以使用while循环。while循环用在有条件的控制上。
+	语句：
+	while expression:
+		while_suite
+
+	语句while_suite会被连续不断的循环执行，直到表达式的值变成0或False,才退出while循环，表达式是一个逻辑表达式，必须返回一个True或False.
+
+
+	例如：   以下循环谨慎运行：
+	!/usr/bin/python
+	# coding: utf8
+
+	# 以下为死循环，会一直循环下去。执行后可以使用ctrl+c结束。
+
+	while 1:			此位置也可以写为：while True:
+
+	    print 'hello'
+
+	以上代码可以按以下方式进行修改：
+	
+	In [8]: n = 0			先定义n，当n=0时开始循环。
+
+	In [9]: while True:
+	   ...:     if n == 10:		当n＝10时，跳出循环
+	   ...:         break
+	   ...:     print n,'hello'	同时打印n与hello
+	   ...:     n += 1		一定让n也要循环，要不然，还是一个死循环。
+	   ...:     
+	0 hello
+	1 hello
+	2 hello
+	3 hello
+	4 hello
+	5 hello
+	6 hello
+	7 hello
+	8 hello
+	9 hello
+			注：以上代码写在pycharm中也是一样的写法。
+
+	以下为条件为真的写法：
+	#!/usr/bin/python
+
+	while True:									条件为真执行以下循环内容
+	    print "hello"
+	    x = raw_input("plz input something,q for quit:")	当x值为用户输入的q时，跳出整个循环，当x值不为q时，会一直循环。
+	    if x == "q":
+		break
+
+	以下为条件假的写法：
+	#!/usr/bin/python
+	
+	x = ''								给x定义一个空，必须先定义，不然下面执行会报错。
+	while x != 'q':							条件为假执行以下循环内容，x != 'q'，任何非q值均为真，q != q为假。
+	    print "hello"
+	    x = raw_input("please input something,q for quit:")
+
+	以下为条件假的写法(完善：当用户不输入任何字符时退出)：
+	#!/usr/bin/python
+	
+	x = ''								给x定义一个空，必须先定义，不然下面执行会报错。
+	while x != 'q':							条件为假执行以下循环内容，x != 'q'，任何非q值均为真，q != q为假。
+	    print "hello"
+	    x = raw_input("please input something,q for quit:")
+	    if x == '':
+		break
+
+	以下为条件假的写法(完善：当x为空，空即是False，使用逻辑非运算符not使用x取值为True，则退出循环)：
+	#!/usr/bin/python
+	
+	x = ''								给x定义一个空，必须先定义，不然下面执行会报错。
+	while x != 'q':							条件为假执行以下循环内容，x != 'q'，任何非q值均为真，q != q为假。
+	    print "hello"
+	    x = raw_input("please input something,q for quit:")
+	    if not x:							当x为空，空即是False，使用逻辑非运算符not使x不为空，则表达式为True，则退出循环
+		break
+
+
+	以下为条件假的写法(添加了else语句，当循环正常结束后，才会执行else语句)：
+	#!/usr/bin/python
+	
+	x = ''								
+	while x != 'q':							
+	    print "hello"
+	    x = raw_input("please input something,q for quit:")
+	    if not x:							
+		break
+	else:				当循环正常结束后，才会执行else语句,当if条件语句执行后，则不会执行下面的else语句。
+    		print "world"
+
+
+	以下为条件假的写法(添加了continue)：
+
+	#!/usr/bin/python
+
+	x = ''
+	while x != 'q':
+	    print "hello"
+	    x = raw_input("please input something,q for quit:")
+	    if not x:
+		break
+	    if x == "quit":							当x值为quit时，不执行打印continue的操作，为其他值时会打印continue字符串。
+		continue
+	    print "continue"
+	else:
+	    print "world"
+
+
+	练习一：使用while循环完成1至100之和。
+
+	例如：
+	In [x]: sum100 = 0				先定义sum100
+
+	In [x]: counter = 1				先定义counter
+
+	In [x]: while counter <= 100:
+	   ....:     sum100 += counter			把counter每次变化的值累加起来，并保存到sum100变量里面，这样就可以起来计算的作用。sum100 = sum100 + counter
+	   ....:     counter += 1			让counter每次循环都加1
+	   ....: print "result is %d" % sum100
+	   ....: 
+	result is 5050
+
+
+	例如：以下在pycharm中实现：
+	#!/usr/bin/python
+
+	sum100 = 0
+	counter = 1
+
+	while counter < 101:
+	    sum100 += counter
+	    counter += 1
+	print sum100
+
+	练习二：使用break语句完成循环控制：
+		break语句可以结束当前循环然后跳转到下条语句，写程序的时候，应该尽量避免重复的代码，在这种情况下可以使用while-break语句：
+		以下为示例代码：
+		#!/usr/bin/python
+
+		name = raw_input("username:")
+		while name != 'tom':
+		    name = raw_input('username:')
+		在python编程中尽量不要使用重复代码
+		以下为修改后代码：
+		#!/usr/bin/python
+
+		while True:
+		    name = raw_input('username:')
+		    if name == 'tom':
+			break					注意此处break的使用
+		print "HI",name
+
+	练习三：使用continue完成循环控制：
+		continue：当遇到continue语句时，程序会终止当前循环，并忽略剩余的语句，然后回到循环的顶端，如果仍然满足循环条件，循环体内语句继续执行，否则退出循环。
+		
+		一：
+		#!/usr/bin/python
+
+		sum100 = 0
+		counter = 0
+		while counter < 100:
+		    counter += 1
+		    if counter % 2:	   counter % 2取模运算，计算100以内所有偶数之和。或写成：if counter % 2 == 1:  非零即为真，当遇到奇数时跳过，使用偶数相加。 
+			continue
+		    sum100 += counter
+		print "result is %d" % sum100
+
+
+
+		二：
+		#!/usr/bin/python
+
+		sum100 = 0
+		counter = 0
+		while counter < 100:
+		    counter += 1
+		    if counter % 2 == 0:         counter % 2取模运算，计算100以内所有奇数之和。或写成： if not counter % 2:    此处counter % 2 为零即为False，使用逻辑非运算时，变为真，则此处值得到结果为非零，跳过偶数，直接读取下一个奇数。
+			continue
+		    else:
+			sum100 += counter
+		print "result is %d" % sum100
+
+
+
+									python文件访问
+文件对象：
+	文件打开方法：
+
+		open及file内建函数：作为打开文件之间的“钥匙”，内建函数open()及file()提供了初始化输入/输出（I／O）操作的通用接口，成功打开文件后会返回一个文件对象，否则引发一个错误。open()方法及file()方法可以完全相互替换。
+		语法：file_object = open(file_name,access_mode='r',buffering=-1)
+		帮助：help(open)
+
+			文件对象访问模式
+			r	以读方式打开（打开已存在文件，文件不存在则报错）
+			w	以写方式打开（文件存在则清空，不存在则创建）
+			a	以追加模式打开（必要时创建新文件）
+			r+	以读写模式打开
+			w+	以读写模式打开
+			a+	以读写模式打开
+			rb	以二进制读方式模式打开
+			wb	以二进制写方式模式打开
+			ab	以二进制追加模式打开
+			rb+	以二进制读写模式打开
+			wb+	以二进制读写模式打开
+			ab+	以二进制读写模式打开
+		
+		注：某些情况下，使用二进制方式进行打开，如果模式错误可能导致文件无法使用。类似于ftp传输文件时使用的二进制传输模式。
+
+
+		例如：
+		In [x]: f1 = open("abc.txt")   或写成：In [x]: f1 = file("abc.txt")
+		
+		In [x]: type(f1)
+		Out[x]: file
+
+
+		In [x]: f1.			此处使用tab键
+		f1.close       f1.flush       f1.next        f1.seek        f1.writelines
+		f1.closed      f1.isatty      f1.read        f1.softspace   f1.xreadlines
+		f1.encoding    f1.mode        f1.readinto    f1.tell        
+		f1.errors      f1.name        f1.readline    f1.truncate    
+		f1.fileno      f1.newlines    f1.readlines   f1.write  
+
+		In [x]: f1.close()	关闭文件
+
+		
+		例如：
+		#vim hello
+			hello world
+
+		In [x]: f1 = open("hello",‘w’)  文件名处可以使用相对路经也可以使用绝对路径。
+		
+		#cat hello
+				此时发现文件内容被清空。
+		
+		
+
+
+
+	文件输入：
+		
+		write()方法：把含有文件数据或二进制数据块的字符串添加到文件中，默认添加后不会自动保存在文件中，只有使用flush()方法或使用close（）方法才能写入文件。写入文件时，不会自动添加行结束标志，需要程序员手工输入。
+
+		例如：
+		In [x]: f2 = open('hello','w')    以写的模式打开，打开时，文件原内容将不存在，被清空或叫被截断。
+
+		In [x]: type(f2)			   查看打开的对象，当一个文件被打开时，是以对象存在的。
+		Out[x]: file			   文件类型
+
+		
+		In [x]: f2.write("abc")		   在hello文件中，写入字符串abc
+
+		In [x]: f2.flush()		   把abc字符串写入hello文件中或当文件的大小足够于写入文件时，将由内存直接写入文件。
+
+		
+		In [x]: f2.write(123)		    尝试把数字写入hello文件中，提示类型错误，只接受字符型
+		---------------------------------------------------------------------------
+		TypeError                                 Traceback (most recent call last)
+		<ipython-input-10-cd700fa44c23> in <module>()
+		----> 1 f2.write(123)
+
+		TypeError: expected a character buffer object
+
+		In [x]: f2.write('xyz\n')		添加xyz内容到hello文件中，此种添加方法，默认不带有换行符，\n为指定其换行符。
+
+		In [x]: f2.close()			关闭文件，同时刚写的内容xyz也将保存到文件中。
+
+		使用：cat hello进行查看验证
+
+		以下为追加模式打开文件，并进行内容的追加：
+
+		In [x]: f2 = open('hello','a')
+
+		In [x]: type(f2)
+		Out[x]: file
+
+
+		In [x]: f2.write('456\n')
+
+		In [x]: f2.flush()
+		
+	或
+		In [x]: f2.close()
+
+		使用：cat hello进行查看验证
+
+
+
+
+
+		read()方法：用来直接读取字节到字符串中，最多读取给定数目个字节，如果没有给定size参数（默认值为-1）或者size值为负，文件将被读到直至末尾。
+		例如：
+			In [x]: f1 = file("abc.txt") 默认以读模式打开
+
+			In [x]: data = f1.read()
+
+			In [x]: print data
+
+			In [x]: del data	
+
+		例如：
+		
+			In [x]: f3 = open('hello')	默认以读模式打开
+
+			In [x]: f3.read()		使用read()函数读取文件内容
+			Out[x]: 'abcxyz\n456\n'
+
+			In [x]: f3.read()		读取一次后，再次读取时，返回为空，此时说明文件指针已经从文件第一行移到文件最尾行，再次读取时，后面内容为空。
+			Out[x]: ''
+
+			In [x]: type(f3.read())		此时查看其函数类型，则为一个空字符串。
+			Out[x]: str
+
+			
+		重新读入文件：
+			In [x]: f3 = open('hello')
+
+			In [x]: f3.read(2)		2表示读入几个字符,当工作过程中，需要打开较大文件时可以使用。
+			Out[x]: 'ab'
+		
+			In [x]: f3.read()		再次读取时，不加任何字符限制，则指针从上次指定读取字符串后，一直读到文件尾部。
+			Out[x]: 'cxyz\n456\n'
+
+		每次读取一行内容readline()：
+
+			In [x]: f3 = open('hello')
+
+			In [x]: f3.readline()
+			Out[x]: 'abcxyz\n'
+
+			In [x]: f3.readline()
+			Out[x]: '456\n'
+
+
+			In [x]: type(f3.readline())
+			Out[x]: str
+
+
+
+		readlines()方法：读取所有（剩余的）行然后把它们作为一个字符串列表返回。
+		每次读取多行内容readlines()：
+			In [x]: f3 = open('hello')
+
+			In [x]: f3.readlines()
+			Out[x]: ['abcxyz\n', '456\n']
+
+			In [x]: type(f3.readlines())
+			Out[x]: list
+
+
+	文件迭代：
+		如果需要逐行处理文件，可以结合for循环迭代文件，迭代文件的方法与处理其他序列类型的数据类似
+		例如一：
+			In [x]: f1 = open('/etc/hosts')
+
+			In [x]: for line in f1:				line为变量名,对f1对象的内容进行遍历，比如使用readlines()节省资源。
+			   ...:     print line,				此处添加一个逗号，不让print打印\n进行换行。
+			   ...:     
+			127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+			::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+			
+			In [x]: f1.close()
+
+		例如二：
+			In [x]: f4 = open('hello')
+
+			In [x]: for line in f4.readlines():		line为变量名，如果文件比较大，采用此种方法不科学，因为其会产生一个列表，保存在内存中被遍历，占用太多资源。
+			   ....:     print line,
+			   ....:     
+			abcxyz
+			456
+			In [x]: f4.close()
+
+		例如三：
+			In [x]: f4 = open('hello')
+
+			In [x]: f4.next()				对文件做遍历其实类似于next()方法
+			Out[x]: 'abcxyz\n'
+
+			In [x]: f4.next()
+			Out[x]: '456\n'
+ 
+                       f1 = open('/etc/passwd')
+				for lines in f1:
+					print lines.split(':')[0]
+	
+
+
+	练习一：
+		使用while循环完成文件遍历
+
+		#!/usr/bin/python
+
+		f1 = open('/root/hello')
+		while True:
+		    line = f1.readline()
+		    if not line:
+			break
+		    print line,
+		f1.close()
+		
+
+	练习二：
+		
+		1、创建cp.py文件
+		2、将/bin/ls拷贝到/root目录下
+		3、要求读取/bin/ls后，每次读取4096字节，依次写入到新文件
+		4、不要修改原始文件
+
+		#!/usr/bin/python
+
+		s_fname = "/bin/ls"
+		d_fname = "/root/list"
+		s_fobj = open(s_fname)
+		d_fobj = open(d_fname,'w')
+		buf_size = 4096
+
+		while True:
+		    data = s_fobj.read(buf_size)
+		    if not data:
+			break
+		    d_fobj.write(data)
+		s_fobj.close()
+		d_fobj.close()
+
+	练习三：
+		with open
+
+		#!/usr/bin/python
+
+		with open('/root/hello') as f1: 		此处使用with open与前面使用的f1 = open('/root/hello')一样的功能，但程序结束后，可以不使用f1.close()
+		    while True:
+			line = f1.readline()
+			if not line:
+			    break
+			print line,	
+		
+		with什么时候结束呢？当下面出现与with同一级的缩进时，with会自己结束并关闭打开的对象文件。
+
+	练习四：
+		使用python程序完成系统内存查看
+		#cat /proc/meminfo 查看系统内存
+
+		例如：基本实现
+		#!/usr/bin/python
+
+		with open('/proc/meminfo') as f1:
+		    for line in f1:
+			if line.startswith('MemTotal'):	查看/proc/meminfo文件，根据指定以MemTotal开头字符串
+			    total = line.split()[1]		切割以MemTotal开头的行，并取列表中第二个元素
+			if line.startswith('MemFree'):		
+			    free = line.split()[1]
+		print total,free
+
+
+
+		例如：对效率有要求可以使用以下方法
+
+		#!/usr/bin/python
+
+		with open('/proc/meminfo') as f1:
+		    for line in f1:
+			if line.startswith('MemTotal'):	查看/proc/meminfo文件，根据指定以MemTotal开头字符串
+			    total = line.split()[1]		切割以MemTotal开头的行，并取列表中第二个元素
+				continue				匹配到后，直接continue，进入下一条件判断
+			if line.startswith('MemFree'):		
+			    free = line.split()[1]
+				break					匹配到后，直接break跳出最上层循环
+		print total,free
+
+
+		例如：空闲内存（默认为KB）计算成为多少M？
+		#!/usr/bin/python
+
+		with open('/proc/meminfo') as f1:
+		    for line in f1:
+			if line.startswith('MemTotal'):
+			    total = line.split()[1]
+			    continue
+			if line.startswith('MemFree'):
+			    free = line.split()[1]
+			    break
+		print "%.2f" % (int(free)/1024.0) + 'M'
+
+		%.2f 浮点数类型,字符串格式化，最终显示为字符串，有2位小数点，free默认为字符串，需要转为int类型，除完后，依旧为字符串显示。+ ‘M’连接字符串。
+
+		例如：计算空闲内存与总内存的%(作业)
+
+			提示：
+
+
+
+
+		
+		类型转换：
+			十六进制字符制转为十进制，使用int()函数
+			例如：
+			In [x]: help(int)	使用help查看 int()函数帮助
+
+
+			In [x]: int(10)		它认为10就是十进制的10
+			Out[x]: 10
+
+			In [x]: int(10.1)	即使是小数，int仅取整数
+			Out[x]: 10
+
+			In [x]: int(10.5)
+			Out[x]: 10
+
+			
+			In [x]: int(a)	直接对字符串进行转换是错误的
+			---------------------------------------------------------------------------
+			NameError                                 Traceback (most recent call last)
+			<ipython-input-30-c8db2292b237> in <module>()
+			----> 1 int(a)
+
+			NameError: name 'a' is not defined
+
+			In [x]: int('a',16)	把字符串后面加一个逗号，写16即被认为是十六进制数，变为十进制就是数字10	
+			Out[x]: 10
+
+			In [x]: int('0xa',16)	0x表示是十六进制数，可以省略不写
+			Out[x]: 10
+
+
+			十进制数转换为十六进制数：
+			使用hex()函数
+			
+			In [x]: hex(10)
+			Out[x]: '0xa'	转换过的值为字符串，还要注意的是字符串之间不能进行加法运算
+
+			十进制转为字符串
+			In [34]: str(10)
+			Out[34]: '10'
+
+
+			字符串转为十进制
+
+			In [35]: int('10') 只能为数值字符串才能转为数字
+			Out[35]: 10
+
+			练习：使用int hex str计算出本机MAC地址的下一个MAC？
+
+			演变1：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:E9'
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			print plus_one	打印验证
+
+
+			演变2：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:E9'
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			new_last_two = hex(plus_one)
+
+			print new_last_two		得到一个0xea
+
+			演变3：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:E9'
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			new_last_two = hex(plus_one)
+
+			print new_last_two[2:]	由于上面得到的值为0xea，0x不需要存在，因此去掉。
+
+			演变4：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:E9'
+
+			#第二轮：新定义一个mac前缀变量，取值为macaddr量的前14位
+			prefix_mac = macaddr[:-3]
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			new_last_two = hex(plus_one)[2:]
+
+			#第二轮：新MAC地址组成为以下格式
+			new_mac = prefix_mac + ':' + new_last_two
+
+			print new_mac	得到的值为：00:0C:29:D1:6F:ea
+
+			演变5：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:E9'
+
+			#第二轮：新定义一个mac前缀变量，取值为macaddr量的前14位
+			prefix_mac = macaddr[:-3]
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			new_last_two = hex(plus_one)[2:]
+
+			#第二轮：新MAC地址组成为以下格式
+			new_mac = prefix_mac + ':' + new_last_two
+
+			print new_mac.upper()    得到的值为：00:0C:29:D1:6F:EA
+
+
+
+			如果MAC地址为：00:0C:29:D1:6F:01，如何计算其下一个MAC地址:00:0C:29:D1:6F:02？
+
+			演变1：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:01'
+
+			#第二轮：新定义一个mac前缀变量，取值为macaddr量的前14位
+			prefix_mac = macaddr[:-3]
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			new_last_two = hex(plus_one)[2:]
+
+			#第二轮：新MAC地址组成为以下格式
+			new_mac = prefix_mac + ':' + new_last_two
+
+			print new_mac.upper()		得到的结果为：00:0C:29:D1:6F:2 少一个零，此零不能省略。
+
+			演变2：
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:01'
+
+			#第二轮：新定义一个mac前缀变量，取值为macaddr量的前14位
+			prefix_mac = macaddr[:-3]
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#由于以下的结果中省少一个零，因此需要对plus_one的值进行判断，如果此值在0－9之值的，则需要在其前面加一个0
+			if plus_one in range(10):
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			    new_last_two = hex(plus_one)[2:]
+			#在new_last_two前在加个0
+			    new_last_two = '0' + new_last_two
+
+			#第二轮：新MAC地址组成为以下格式
+			new_mac = prefix_mac + ':' + new_last_two
+
+			print new_mac.upper()
+
+
+			如果MAC地址为：00:0C:29:D1:6F:0A，如何计算其下一个MAC地址:00:0C:29:D1:6F:0B？
+
+			#!/usr/bin/python
+			# coding: utf8
+			# 定义一个macaddr变量，可以取自己的真实机mac地址
+			macaddr = '00:0C:29:D1:6F:0A'
+
+			#第二轮：新定义一个mac前缀变量，取值为macaddr量的前14位
+			prefix_mac = macaddr[:-3]
+
+			#定义一个last_two变量，取值为macaddr变量的最后两位，使用切片实现
+			last_two = macaddr[-2:]
+
+			#定义plus_one变量，其值为一个数值类型，并把last_two转换为10进制数进行加1操作
+			plus_one = int(last_two,16) + 1
+
+			#由于以下的结果中省少一个零，因此需要对plus_one的值进行判断，如果此值在0－9之值的，则需要在其前面加一个0
+			if plus_one in range(10):
+
+			#定义一个新的最后两位数，需要把上面得到的十进制数转换为十六进制数
+			    new_last_two = hex(plus_one)[2:]
+			#在new_last_two前在加个0
+			    new_last_two = '0' + new_last_two
+			#添加一个else，并判断nes_last_two长度，如果为1位十六进制数值的，则在其前面加零
+			else:
+			    new_last_two = hex(plus_one)[2:]
+			    if len(new_last_two) == 1:
+				new_last_two = '0' + new_last_two
+
+			#第二轮：新MAC地址组成为以下格式
+			new_mac = prefix_mac + ':' + new_last_two
+
+			print new_mac.upper()
+
+
+			字符串转换为列表：
+			
+			In [x]: str1 = 'abcd'
+
+			In [x]: str1
+			Out[x]: 'abcd'
+
+			In [x]: list(str1)
+			Out[x]: ['a', 'b', 'c', 'd']
+
+			In [x]: list1 = list(str1)
+
+			In [x]: list1
+			Out[x]: ['a', 'b', 'c', 'd']
+
+
+			列表转换为字符串：
+			
+			In [x]: list1
+			Out[x]: ['a', 'b', 'c', 'd']
+
+			In [x]: ''.join(list1)		单引号之间是用来定义字符之间的分隔符的
+			Out[x]: 'abcd'
+
+			In [x]: str2 = ''.join(list1)
+
+			In [x]: str2
+			Out[x]: 'abcd'
+
+			列表转换为字符串时，字符之间的分隔符定义方法：
+			
+			In [x]: str3 = '.'.join(list1)
+
+			In [x]: str3
+			Out[x]: 'a.b.c.d'
+
+
+			字符串转为元组
+			In [x]: str1 = 'abcd'
+
+			In [x]: tuple(str1)
+			Out[x]: ('a', 'b', 'c', 'd')
+
+			In [x]: t1 = tuple(str1)
+
+			In [x]: t1
+			Out[x]: ('a', 'b', 'c', 'd')
+
+
+
+			元组转为字符串
+
+
+			In [x]: t1
+			Out[x]: ('a', 'b', 'c', 'd')
+
+			In [x]: ''.join(t1)
+			Out[x]: 'abcd'
+
+			In [x]: ','.join(t1)
+			Out[x]: 'a,b,c,d'
+
+			In [x]: '.'.join(t1)
+			Out[x]: 'a.b.c.d'
+
+
+			列表转换为元组
+			In [x]: list1
+			Out[x]: ['a', 'b', 'c', 'd']
+
+			In [x]: t1 = tuple(list1)
+
+			In [x]: t1
+			Out[x]: ('a', 'b', 'c', 'd')
+
+
+			元组转换为列表
+			In [x]: t1
+			Out[x]: ('a', 'b', 'c', 'd')
+
+			In [x]: list1 = list(t1)
+
+			In [x]: list1
+			Out[x]: ['a', 'b', 'c', 'd']
+
+
+		 	
+			字典转换为列表
+			
+			In [x]: dict1 = {'a':1,'b':2}
+
+			In [x]: dict1
+			Out[x]: {'a': 1, 'b': 2}
+
+			In [x]: list1 = dict1.items()
+
+			In [x]: list1
+			Out[x]: [('a', 1), ('b', 2)]
+
+		
+
+			列表转换为字典
+
+			In [x]: list1
+			Out[x]: [('a', 1), ('b', 2)] 仅有此种类型的列表才可以转换为字典。
+
+			In [x]: dict2 = dict(list1)
+
+			In [x]: dict2
+			Out[x]: {'a': 1, 'b': 2}
+
+
+
+
+									函数
+函数：
+	函数就是完成特定功能的一个语句组，这组语句可以作为一个单位使用，并且给它取一个名字；可以通过函数名在程序的不同地方多次执行（通常叫函数调用）。
+	函数基本分两类：
+		预定义函数：可以直接使用
+		自定义函数：用户自己编写
+	为什么使用函数？
+		降低编程难度：通常将一个复杂的大问题分解成一系列的小问题，然后将小问题划分成更小的问题，当问题细化为足够简单时，我们就可以分而治之。各个小问题解决了，大问题就迎刃而解了。
+		代码重用：避免重复劳作，提高效率。
+	函数的定义和调用：
+		定义： def 函数名 （[参数列表]）：
+		调用：函数名（[参数列表]）
+
+		例如：
+		In [x]: def fun():			使用def定义函数，fun为函数名，函数名通常与变量命名相似，字母、数字、下划线，但是不能以数字开头，如果涉及多个单词，
+		   ...:     print "hello world"       建议第二个单词首字母大写，第三、第四类推。（）小括号里为参数，为可选项。
+		   ...:     
+
+		In [x]: fun()				此处为函数调用，直接写函数名即可。
+		hello world
+
+
+
+
+		例如：函数定义及调用实例。
+		第一部分演示内容：当一个变量值为数字时，其一定为int类型，使用type() 函数可以直接查看。
+		In [8]: a = 123
+
+		In [9]: a
+		Out[9]: 123
+
+		In [10]: int(a)
+		Out[10]: 123
+
+		In [11]: type(a)
+		Out[11]: int
+
+		In [12]: type(int(a))
+		Out[12]: int
+
+		第二部分演示内容：当一个变量值为数字加字母的字符串时，使用int()函数将会报出值错误，此为程序异常。
+		
+		In [15]: b = '1a'
+
+		In [16]: b
+		Out[16]: '1a'
+
+		In [17]: type(b)
+		Out[17]: str
+
+		In [18]: int(b)
+		---------------------------------------------------------------------------
+		ValueError                                Traceback (most recent call last)
+		<ipython-input-18-ea313f36a39c> in <module>()
+		----> 1 int(b)
+
+		ValueError: invalid literal for int() with base 10: '1a'
+
+		第三部分演示内容：使用try,except进行程序逻辑异常判断。
+		1、搞定通过键盘输入产生自定义变量：
+		In [19]: s = raw_input('plz input something -->:')
+		plz input something -->:123
+
+		In [20]: s
+		Out[20]: '123'
+
+		2、产生一个程序逻辑异常：
+		In [21]: s = raw_input('plz input something -->:')
+		plz input something -->:--------------------------------------------------------------------------- 此处按ctrl+D结束了，没有输入字符。
+		EOFError                                  Traceback (most recent call last)
+		<ipython-input-21-0498720e7594> in <module>()
+		----> 1 s = raw_input('plz input something -->:')
+
+		EOFError: 	出现一个结束异常错误
+
+		3、处理异常：try,except
+		格式：
+		try:
+			< .....>        #可能得到的异常语句
+		except < ...>:      #锁定哪种异常？
+			<......>       #出现异常的处理方法
+			例如一：
+				In [22]: import sys	导入sys模块
+
+				In [23]: try:		
+				   ....:     s = raw_input('plz input something-->:')	产生异常语句
+				   ....: except EOFError:					锁定异常类型
+				   ....:     print 'EOFError input !'			
+				   ....:     sys.exit()
+				   ....: print s
+				   ....: 
+				plz input something-->:123
+				123	                    此为正常
+
+
+
+				In [23]: try:		
+				   ....:     s = raw_input('plz input something-->:')	产生异常语句
+				   ....: except EOFError:					锁定异常类型
+				   ....:     print 'EOFError input !'			
+				   ....:     sys.exit()
+				   ....: print s
+				   ....: 
+				plz input something-->:EOFError input !			此处按ctrl+D结束了，没有输入字符，出现异常。
+				An exception has occurred, use %tb to see the full traceback.
+
+				SystemExit
+
+				To exit: use 'exit', 'quit', or Ctrl-D.
+
+
+
+
+
+
+
+			例如二：输入内容，通过在fun()函数代码块中，使用try,except进行异常判断，产生一定的效果
+				#!/usr/bin/env python
+				# coding: utf8
+
+				# 定义一个fun函数
+
+				def fun():
+
+				# 定义一个sth变量，用来接受用户输入
+
+				    sth = raw_input("plz input number:")
+
+				# 使用try,except对用户输入进行异常判断，如果try后面的语句异常，则执行except后面的语句。
+				    try:
+					if type(int(sth)) == type(1):              int(sth)是int类型的话，与后面的type(1)进行比较。
+					    print "%s is a number" %sth
+				    except ValueError:
+					    print "%s is not number" %sth
+
+
+				fun() 调用函数
+
+函数参数：共分为两种，一种是形式参数，一种是实际参数。
+	在定义函数时，函数名后面括号中的变量名称叫做“形式参数”或称为“形参”；在调用函数时，函数名后面括号中的变量名称叫做“实际参数”，或称为“实参”。
+	例如一：
+	In [27]: def fun(x,y):		x,y叫做形参，需要在调用时用户自己赋值
+	   ....:     print x + y
+	   ....:     
+
+	In [28]: fun(2,3)			2，3叫做实参，是用户输入的2个参数。
+	5
+
+	In [29]: fun()			如果在调用函数时，不给参数，将报发下错误。
+	---------------------------------------------------------------------------
+	TypeError                                 Traceback (most recent call last)
+	<ipython-input-29-69e6a439c52d> in <module>()
+	----> 1 fun()
+
+	TypeError: fun() takes exactly 2 arguments (0 given)
+
+	例如二：
+	也可以传入字符串，如下传入字符串后，可以2个字符串相加。
+	In [30]: fun('a','b')
+		ab
+
+	例如三：判断用户输入的2个参数的大小。
+	
+	In [31]: def fun(x,y):
+	   ....:     if x > y:
+	   ....:         print x
+	   ....:     else:
+	   ....:         print y
+	   ....:         
+
+	In [32]: fun(3,5)
+	5
+
+	In [33]: fun(10,3)
+	10
+
+位置参数的应用：当用户在程序后面的某一位置上输入数字或字符串时，可以使用函数接收并进行相应处理。
+		例如：
+		第一部分演示内容：sys.argv[]位置参数的应用
+
+		
+		#!/usr/bin/python
+
+		import sys	导入sys模块
+
+
+		print sys.argv    argv属性，注意此处
+
+
+		把程序在命令行执行：python xxx.py 123
+
+
+
+		#!/usr/bin/python
+
+		import sys	导入sys模块
+
+
+		print sys.argv[1] 注意此处，打印argv方法获取的第一个位置参数，第0个是程序名称
+
+		把程序在命令行执行：python xxx.py abc 
+
+
+
+		第二部分演示内容：
+		#!/usr/bin/python
+		# coding: utf8
+
+		# 导入sys模块
+
+		import sys
+
+
+		# 定义一个isNum函数，形参为s,s的值主要来自sys.argv[1],s本身就是一个字符串列表，可以使用for循环进行遍历。
+		def isNum(s):
+		    for i in s:
+		# 使用for遍历过程中，可以使用if对遍历的每一个值i与‘0123456789’进行比较，如果i在‘0123456789’中循环结束，则执行for同级else后面的语句，若i不在‘123456789’中，则直接执行
+		#    if同级的else并退出。
+			if i in '0123456789':
+		# pass为占位符，现在没有定义
+			    pass
+			else:
+			    print "%s is not a number" % s
+			    sys.exit()						表示退出
+		    else:
+			print "%s is a number" % s
+
+		# 调用函数
+		isNum(sys.argv[1])
+
+		
+
+		练习：编写一个可以打印固定长度星号的函数：
+		例如：
+
+		In [1]: def pstar():		定义
+		   ...:     print '*' * 20
+		   ...:     
+
+		
+		In [3]: pstar()		调用方法一
+		********************
+
+		In [9]: b = pstar()	调用方法二
+		********************
+
+		In [10]: print b	打印b，返回值为none，多数情况下，函数并不直接输出数据，而向调用者返回值，函数的返回值使用return关键字，没有return的话，返回None。
+		None
+
+
+		
+
+
+
+		In [4]: pstar	引用
+		Out[4]: <function __main__.pstar>
+
+		In [5]: a =  pstar 引用
+
+		In [6]: a
+		Out[6]: <function __main__.pstar>
+
+		In [7]: id(pstar)
+		Out[7]: 44432632
+
+		In [8]: id(a)
+		Out[8]: 44432632
+
+
+		练习二：编写一个可以打印非固定星号的函数（使用参数）：
+		例如：
+		
+		In [11]: def pstar(num):
+		   ....:     print '*' * num
+		   ....:     
+
+		In [12]: pstar(2)
+		**
+
+		In [13]: pstar(10)
+		**********
+
+
+		
+		In [15]: pstar() 不填写会报错
+		---------------------------------------------------------------------------
+		TypeError                                 Traceback (most recent call last)
+		<ipython-input-15-66c21a14b86c> in <module>()
+		----> 1 pstar()
+
+		TypeError: pstar() takes exactly 1 argument (0 given)
+
+
+		In [16]: def pstar(num=20): 设定参数默认值，当用户不输入的时候执行。
+		   ....:     print '*' * num
+		   ....:     
+
+		In [17]: pstar(5)
+		*****
+
+		In [18]: pstar()
+		********************
+
+		练习二之补充练习：
+		例如：
+		In [29]: def fun(x,y=100):	100为y的默认参数值，当用户不能 y进行赋值时，默认使用。因此也叫默认参数。
+		   ....:     print x + y
+		   ....:     
+
+		In [30]: fun(1,2)
+		3
+
+		In [31]: fun(1)
+		101
+
+		
+		In [32]: def fun(x,y=100):
+		    print x + y
+		   ....:     
+
+		In [33]: fun(x=20,y=30)	传参另一种写法
+		50
+
+		In [32]: def fun(x,y=100):
+		    print x+y
+		   ....:     
+
+		
+		In [34]: fun(5)	默认去赋值给第一个参数
+		105
+
+		In [36]: def fun(x=10,y):	不能用此种方法进行定义。
+		   ....:     print x + y
+		   ....:     
+		  File "<ipython-input-36-2e799ba50b51>", line 1
+		    def fun(x=10,y):
+		SyntaxError: non-default argument follows default argument
+
+
+
+
+
+
+
+		练习三：使用位置参数，实现用户计算斐波那契数列。
+		例如：
+		第一部分演示：
+		#!/usr/bin/python
+
+		def fibs(num):
+		    fib = [0,1]
+		    for i in range(num - 2): 原已有2个数据，所以要减去2.
+			fib.append(fib[-1] + fib[-2])
+		    return fib
+
+		print fibs(10)
+		print fibs(20)
+
+		第二部分演示：
+		#!/usr/bin/python
+
+		import sys
+
+		def fibs(num):
+		    fib = [0,1]
+		    for i in range(num - 2):
+			fib.append(fib[-1] + fib[-2])
+		    return fib					#此为返回值，以下面将介绍
+
+		num = int(sys.argv[1])
+
+		print fibs(num)
+
+
+		练习四：
+		例如：打印系统的所有PID，要求从/proc读取，建议使用os.listdir()函数。
+		第一部分演示：
+		In [25]: import os 导入模块
+
+		In [27]: help(os.listdir) 查看帮助
+
+
+		In [28]: os.listdir('/home') 使用os.listdir（）函数查看目录下子目录或文件。
+		Out[28]: ['tom']
+
+
+
+
+		第二部分演示：
+
+		#!/usr/bin/python
+		# coding: utf8
+
+		# 导入os模块
+
+		import os
+
+
+		# 定义一个isNum函数，形参为s,s的值主要来自sys.argv[1],s本身就是一个字符串列表，可以使用for循环进行遍历。
+		def isNum(s):
+		    for i in s:
+		# 使用for遍历过程中，可以使用if对遍历的每一个值i与‘0123456789’进行比较，如果i在‘0123456789’中循环结束，则执行for同级else后面的语句，若i不在‘123456789’中，则直接执行
+		#    if同级的else并退出。
+			if i in '0123456789':
+		# pass为占位符，现在没有定义
+			    pass
+			else:
+			   break
+
+		    else:
+			print  s
+
+		# i为实参
+		for i in os.listdir('/proc'):
+		    isNum(i)
+
+
+
+
+函数的变量：局部变量和全局变量
+	局部变量：python中的任何变量都有特定的作用域，在函数中定义的变量一般只能在该函数内部使用，这此只能在程序的特定部分使用的变量，我们称之为局部变量；
+	全局变量：在一个文件顶部定义的变量可以供文件中的任何函数调用，这些可以为整个程序所使用的变量，称之为全局变量。
+
+	局部变量：
+	例如：
+	#!/usr/bin/python
+
+	def fun():
+	    x = 100
+	    print x	此处x只能在函数内部有效
+	fun()
+
+
+	以下可以验证：
+	#!/usr/bin/python
+
+	def fun():
+	    x = 100
+	    print x
+	fun()
+	print x	在外部调用，可以发现会报错。执行程序即可。
+
+
+	全局变量：
+	例如：
+	#!/usr/bin/python
+
+	var = "this is 2 number's sum"	定义一个全局变量
+
+	def fun(x=10,y=20):
+	    print x + y		x,y为局部变量
+
+
+	fun()
+	print var 
+
+全局变量或局部变量如何转换？
+	例如：
+	演示一：
+	#!/usr/bin/python
+
+	x = 1    定义一个全局变量
+
+	def fun():
+	    print x	在函数中使用全局变量
+	fun()
+
+	演示二：
+	#!/usr/bin/python
+
+	x = 1
+
+	def fun():
+	    x += 1	在函数中直接使用全局变量进行运算是不可以的。
+	    print x
+	fun()
+	运行的结果：
+	/usr/bin/python2.7 /root/PycharmProjects/hello/fun15.py
+	Traceback (most recent call last):
+	  File "/root/PycharmProjects/hello/fun15.py", line 8, in <module>
+	    fun()
+	  File "/root/PycharmProjects/hello/fun15.py", line 6, in fun
+	    x += 1
+	UnboundLocalError: local variable 'x' referenced before assignment
+
+	演示三：
+	#!/usr/bin/python
+
+	x = 1
+
+	def fun():
+	    global x	把函数中的变量声明为一个全局变量，即告诉函数，其使用的X为全局变量的X。
+	    x += 1
+	    print x
+	fun()
+
+	演示四：
+	#!/usr/bin/python
+
+	x = 1
+
+	def fun():
+	    global x
+	    x += 1
+
+	    global y	把一个局部变量声明为全局变量
+	    y = 10
+
+	fun() 		必须进行函数调用，否则出错。
+	print x
+	print y 
+
+函数执行过程中变量的查看：
+	例如：
+	#!/usr/bin/python
+
+	x = 100
+
+	def fun():
+	    x = 1
+	    y = 1
+	    print locals()	以字典的方式打印局部变量
+	fun()
+	print locals()		统计函数执行过程中，变量的情况。
+
+函数返回值：
+	函数被调用后会返回一个指定的值；函数调用后默认返回None
+	return返回值：可以为任意类型
+	return执行后，函数终止
+	return与print比较：print是打印函数返回值，是属于调用函数返回值，而return是属于指定返回某些指定的值，如果不指定，默认返回None。
+	例如：
+	第一部分演示：
+	#!/usr/bin/python
+
+	def fun():
+	    print "hello world"
+						此处没有返回值，所以结果中有None出现
+	print fun()
+
+	执行结果：
+	hello world
+	None
+
+	第二部分演示：
+	#!/usr/bin/python
+
+	def fun():
+	    print "hello world"
+	    return 1		此处指定返回值为1，所以结果中有1出现
+
+	print fun()
+
+	执行结果：
+	hello world
+	1
+
+
+	第三部分演示：
+	
+	#!/usr/bin/python
+	# coding: utf8
+
+	# 导入os模块
+
+	import os
+
+
+	# 定义一个isNum函数，形参为s,s的值主要来自sys.argv[1],s本身就是一个字符串列表，可以使用for循环进行遍历。
+	def isNum(s):
+	    for i in s:
+	# 使用for遍历过程中，可以使用if对遍历的每一个值i与‘0123456789’进行比较，如果i在‘0123456789’中循环结束，则执行for同级else后面的语句，若i不在‘123456789’中，则直接执行
+	#    if同级的else并退出。
+		if i in '0123456789':
+	# pass为占位符，现在没有定义
+		    pass
+		else:
+		   break
+
+	    else:
+		print  s
+
+	# i为实参
+	for i in os.listdir('/proc'):
+	    isNum(i)
+
+
+	第四部分演示：把第三部分演示的代码进行修改，使用return语句
+	
+	#!/usr/bin/python
+	# coding: utf8
+
+	# 导入os模块
+
+	import os
+
+
+	# 定义一个isNum函数，形参为s,s本身就是一个字符串列表，可以使用for循环进行遍历。
+	def isNum(s):
+	    for i in s:
+	# 使用for遍历过程中，可以使用if对遍历的每一个值i与‘0123456789’进行比较，如果i不在‘0123456789’中则由return返回一个False，将执行for同级return返回True，
+
+		if i not in '0123456789':
+
+		   return False
+	    return True
+
+
+	# i为实参,当上面的for循环返回值为True，则下面的for循环执行。
+	for i in os.listdir('/proc'):
+	    if isNum(i):			此处使用if表达式调用了isNum()函数
+		print i
+
+
+	第五部分演示：修改上一种方法，使用字符串纯字符判断函数isdigit()方法：判断字符串是否全部为数字，当全部为数字时显示True，当不全为数字或全为字母时，返回False
+	例如一：
+	In [1]: a = 'abc'	 此处为纯字符
+
+	In [2]: a
+	Out[2]: 'abc'
+
+	In [3]: type(a)
+	Out[3]: str
+
+	In [4]: a.is
+	a.isalnum  a.isalpha  a.isdigit  a.islower  a.isspace  a.istitle  a.isupper
+
+	In [4]: a.isdigit()
+	Out[4]: False		返回值为False
+
+
+	In [12]: b = '123' 此处为纯数字
+
+	In [13]: b
+	Out[13]: '123'
+
+	In [14]: type(b)
+	Out[14]: str
+
+	In [15]: b.isdigit()
+	Out[15]: True		返回值为True
+
+	例如二：
+	#!/usr/bin/env python
+
+	a = '123456'        #only digit this string
+	print a.isdigit()
+
+	b = 'hello world !' #the string is word
+
+	print b.isdigit()
+
+	例如三：
+	#!/usr/bin/python
+	# coding: utf8
+
+	import os   #导入os模块
+
+	def isNum(s):   #定义函数
+	    if s.isdigit(): #判断s是否为纯数字，如果是返回True
+		return True
+	    return False    #如若不是纯数字，则返回 False
+	for i in os.listdir('/proc'):
+	    if isNum(i):    #此处调用函数进行判断
+		print i
+
+	例如四：
+		#!/usr/bin/python
+		# coding: utf8
+
+		import os   #导入os模块
+
+		def isNum(s):   #定义函数
+		    if s.isdigit(): #判断s是否为纯数字，如果是返回True
+			return True
+		    else:			此处添加一个else，与上例一样。
+		      return False    #如若不是纯数字，则返回 False
+		for i in os.listdir('/proc'):
+		    if isNum(i):    #此处调用函数进行判断
+			print i
+
+函数多类型传值和冗余参数：
+	所谓的冗余参数是指：向函数中使用元组或字典进行传参时，如何处理多余的实参
+	例如：
+	In [19]: def fun(x,y):	定义一个函数
+	   ....:     return x +  y	实现2个参数相加
+	   ....:     
+
+	In [20]: fun(2,3)	调用函数，并进行传参
+	5
+
+	In [21]: t = (1,2)	定义一个元组
+
+	In [22]: fun(t)		使用元组对函数进行传参，此种方法是错误的
+	---------------------------------------------------------------------------
+	TypeError                                 Traceback (most recent call last)
+	<ipython-input-22-cc8bac9e3135> in <module>()
+	----> 1 fun(t)
+
+	TypeError: fun() takes exactly 2 arguments (1 given)
+
+	In [23]: fun(*t)	可以使用此种方法进行传参
+	3
+
+	In [24]: def fun(x,y,z):	定义一个函数
+	   ....:     return x +  y + z	实现x+y+z
+	   ....:     
+
+	In [25]: t = (1,2,3)	定义一个元组
+
+	In [26]: fun(*t)	传参
+	6
+
+	In [27]: fun(*(4,5,6))	或直接把元组里面元素直接进行传参
+	15
+
+
+	In [28]: t = (1,2)	定义元组
+
+	In [29]: fun(1,*t)	进行传参，1传给x，*t元组中的元素传给y,z
+	4
+
+	In [30]: fun(*t,5)	不能使用此种方法进行传参，此表达式一定要根在命名参数的后面。
+	  File "<ipython-input-30-bdb7fb8f4d37>", line 1
+	    fun(*t,5)
+	SyntaxError: only named arguments may follow *expression
+
+
+
+	In [31]: fun(x=1,y=3,z=5) 直接进行赋值传参，但实参的名称一定要与形参名称一样。
+	9
+
+
+	In [32]: dic = {'x':1,'y':3,'z':8} 使用字典进行传参，字典的key一定要与形参名称一样。
+
+	In [33]: fun(**dic)	一定要记得是2个星号
+	12
+
+冗余参数处理：
+	
+	In [36]: def fun(x,*args,**keyargs):	定义形参，x为命名参数，*用于接收以元组方式传参，**用于接收以字典方式传参
+	   ....:     print x
+	   ....:     print args
+	   ....:     print keyargs
+	   ....:     
+
+	In [37]: fun(1)
+	1
+	()
+	{}
+
+	In [38]: fun(1,2)
+	1
+	(2,)
+	{}
+
+	In [39]: fun(1,2,'a')
+	1
+	(2, 'a')
+	{}
+
+	In [40]: fun(1,2,'a',y=5)
+	1
+	(2, 'a')
+	{'y': 5}
+
+	In [41]: fun(1,2,'a',y=5,name='tom')	多类型传参
+	1
+	(2, 'a')
+	{'y': 5, 'name': 'tom'}
+
+	
+	In [45]: fun(1,2,'a',y=5,name="jack",*t)	多类型传参
+	1
+	(2, 'a', 1, 2)
+	{'y': 5, 'name': 'jack'}
+	
+	In [48]: fun(1,2,'a',y=5,name="jack",*t,**{'z':18})多类型传参
+	1
+	(2, 'a', 1, 2)
+	{'y': 5, 'z': 18, 'name': 'jack'}
+
+
+
+函数递归：在函数自身内部对自身进行调用，必须有最后的默认结果：if n == 0;递归参数必须向默认结果收敛的：factorial(n-1);以前都是在函数外部进行调用。通常用来计算阶乘。
+	普通方法：使用循环：1*1*2*3*4*5=120
+	例如一：
+
+	#!/usr/bin/python
+
+	def factorial(n):	定义一个阶乘名称的函数
+	    sum = 1		定义sum初始值为1
+	    for i in range(1,n+1):	n取值不能为0，最大值为n+1
+		sum *= i			当i为1时，sum为1，相乘为1，并把结果保存在sum中，当i为2时，sum为1，相乘等于2，存在sum中，当i等于3时，sum为2，相乘等于6，以下同。
+	    return sum	返回值
+	print factorial(5)	调用函数计算5（含）以内的所有整数相乘。
+
+	普通方法：使用循环完成1..100之内的所有的数字之和：
+	例如：
+	#!/usr/bin/python
+
+	def sum100(n):
+	    sum = 0
+	    for i in range(1,n+1):
+		sum += i
+	    return sum
+	print sum100(100)
+
+
+	使用递归方法：实现5*4*3*2*1*1=120
+	例如：
+	#!/usr/bin/python
+	# coding: utf8
+
+	def factorial(n):
+	    if n == 0:
+	# 当n为0时，返回1
+		return 1
+	    else:
+		return n * factorial(n-1)
+	# 5*(5-1)*(4-1)*(3-1)*(2-1)*1，最后一个1是当n为0时，return返回值。
+	print factorial(5)
+
+	执行结果：
+	120
+
+	使用递归方法：实现1..100之和：
+	
+	#!/usr/bin/python
+	# coding: utf8
+
+	def factorial(n):
+	    if n == 0:
+	# 当n为0时，返回0
+		return 0
+	    else:
+		return n + factorial(n-1)
+	# 100+(100-1)+(99-1)...(1-1)，最后一个1-1是当n为0时，return返回值。
+	print factorial(100)
+
+	执行结果：
+	5050
+
+	使用递归方法：实现打印某一目录下所有文件，含每一子目录下文件：
+
+		第一部分演示：
+		了解os模块中的函数方法：
+		例如：
+		
+		In [49]: import os
+
+		In [50]: os.listdir('/home')
+		Out[50]: ['tom']
+
+		In [53]: os.pa
+		os.pardir          os.pathconf        os.pathsep         
+		os.path            os.pathconf_names  
+
+		In [53]: os.path.	此处按tab
+		os.path.abspath                     os.path.join
+		os.path.altsep                      os.path.lexists
+		os.path.basename                    os.path.normcase
+		os.path.commonprefix                os.path.normpath
+		os.path.curdir                      os.path.os
+		os.path.defpath                     os.path.pardir
+		os.path.devnull                     os.path.pathsep
+		os.path.dirname                     os.path.realpath
+		os.path.exists                      os.path.relpath
+		os.path.expanduser                  os.path.samefile
+		os.path.expandvars                  os.path.sameopenfile
+		os.path.extsep                      os.path.samestat
+		os.path.genericpath                 os.path.sep
+		os.path.getatime                    os.path.split
+		os.path.getctime                    os.path.splitdrive
+		os.path.getmtime                    os.path.splitext
+		os.path.getsize                     os.path.stat
+		os.path.isabs                       os.path.supports_unicode_filenames
+		os.path.isdir                       os.path.sys
+		os.path.isfile                      os.path.walk
+		os.path.islink                      os.path.warnings
+		os.path.ismount  
+
+				   
+		In [53]: os.path.isdir('/home')	用来判断指定的路经是一个目录,如果是一个目录，则返回值为True。
+		Out[53]: True
+
+		In [54]: os.path.isdir('a.py')		如果一个文件，则返回False，但不会判断文件存在不存在
+		Out[54]: False
+
+
+		In [55]: os.path.isfile('/etc/passwd')	用来判断指定的文件存不存在，存在返回值为True
+		Out[55]: True
+
+		In [56]: os.path.isfile('/etc/abc')	不存在返回值为False
+		Out[56]: False
+
+		In [57]: os.path.isfile('/etc')	如果是一个目录，返回值也为False
+		Out[57]: False
+
+
+		In [58]: os.path.join('/etc','passwd')	对文件与目录进行拼接
+		Out[58]: '/etc/passwd'
+
+		In [59]: os.path.join('/etc','passwd','abc')
+		Out[59]: '/etc/passwd/abc'
+
+
+		第二部分演示部分：
+		例如：
+		#!/usr/bin/python
+
+		import os
+		import sys
+
+		def print_files(path):
+		    isdir,isfile,join = os.path.isdir,os.path.isfile,os.path.join
+		    lsdir = os.listdir(path)
+		    dirs = [i for i in lsdir if isdir(join(path,i))]
+		    files = [ i for i in lsdir if isfile(join(path,i))]
+		    if dirs:
+			for d in dirs:
+			    print_files(join(path,d))
+		    if files:
+			for f in files:
+			    print join(path,f)
+		print_files(sys.argv[1])
+		使用方法：在命令行执行此文件即可，执行格式为：python filename.py /path(此为目录路经)，例如：python filename.py /home
+
+		例如：
+		[root@localhost ~]# mkdir -p a/b/c
+		[root@localhost ~]# touch a/a.txt
+		[root@localhost ~]# touch a/b/b.txt
+		[root@localhost ~]# touch a/b/c/c.txt
+
+
+		执行以下程序的结果如下：
+		[root@localhost hello]# python fun25_for_listdirfile.py /root/a
+		/root/a/b/c/c.txt
+		/root/a/b/b.txt
+		/root/a/a.txt
+
+		第三部分演示部分：把最终结果与第二部分演示结果进行对比
+		例如：
+		#!/usr/bin/python
+
+		import os
+		import sys
+
+		def print_files(path):
+		    isdir,isfile,join = os.path.isdir,os.path.isfile,os.path.join
+		    lsdir = os.listdir(path)
+		    dirs = [i for i in lsdir if isdir(join(path,i))]
+		    files = [ i for i in lsdir if isfile(join(path,i))]
+		    
+		    if files:
+			for f in files:
+			    print join(path,f)
+		    if dirs:
+			for d in dirs:
+			    print_files(join(path,d))
+		print_files(sys.argv[1])
+		使用方法：在命令行执行此文件即可，执行格式为：python filename.py /path(此为目录路经)，例如：python filename.py /home
+
+		例如：
+		[root@localhost ~]# mkdir -p a/b/c
+		[root@localhost ~]# touch a/a.txt
+		[root@localhost ~]# touch a/b/b.txt
+		[root@localhost ~]# touch a/b/c/c.txt
+
+
+		执行以下程序的结果如下：
+		[root@localhost hello]# python fun25_for_listdirfile.py /root/a
+		[root@localhost hello]# python fun26_for_listdirfile.py /root/a
+		/root/a/a.txt
+		/root/a/b/b.txt
+		/root/a/b/c/c.txt
+
+python函数之lambda
+	lambda:匿名函数，是一种快速定义单行的最小函数，可以用在任何需要函数的地方。
+	lambda优点：
+	1、使用python写一些脚本时，使用lambda可以省去定义函数的过程，让代码更加精简
+	2、对于一些抽象的，不会被别的地方再重复使用的函数，有时候函数起个名字也是个难题，使用lambda不需要考虑命名的问题
+	3、使用lambda在某些时候让代码更容易理解。
+	lambda基础：
+	lambda语句中，冒号前是参数，可以有多个，逗号隔开，冒号右边是返回值
+	lambda构建的其实是一个函数对象
+
+	第一部分演示：
+	
+	In [60]: def fun(x,y):
+	   ....:     return x * y
+	   ....: 
+
+	In [61]: fun(3,5)
+	Out[61]: 15
+	
+	第二部分演示：
+
+	In [62]: a = lambda x,y:x * y	定义一个匿名函数
+
+	In [63]: a(3,5)	调用一个匿名函数
+	Out[63]: 15
+
+	In [64]: a
+	Out[64]: <function __main__.<lambda>>	返回一个函数对象，因此要使用一个变量进行存储。
+
+	第三部分演示：reduce()用法
+
+
+
+	第四部分演示：
+	
+	In [65]: def add(x,y):
+	   ....:     return x + y
+	   ....: 
+
+	In [66]: reduce(add,range(1,5))
+	Out[66]: 10
+
+	
+
+	In [68]: reduce(add,range(1,101))
+	Out[68]: 5050
+
+	第五部分演示：
+	In [70]: reduce(lambda x,y:x + y,range(1,101))
+	Out[70]: 5050
+
+
+
+
+
+
+python内置函数：
+	函数的作用是把一些复杂问题简单化，把复杂问题分解为一个一个的小问题，然后进行解决，最终完成解决整个问题；把复杂问题简单化后，可以使问题更容易看清楚。
+	python中有一部分内置函数：
+	1、查看内置函数：
+	例如：
+
+		In [1]: __builtin__.	此处按tab键，注意：builtin前后均为2个下划线。
+		Display all 138 possibilities? (y or n)
+		__builtin__.ArithmeticError            __builtin__.complex
+		__builtin__.AssertionError             __builtin__.copyright
+		__builtin__.AttributeError             __builtin__.credits
+		__builtin__.BaseException              __builtin__.delattr
+		__builtin__.BufferError                __builtin__.dict
+		__builtin__.BytesWarning               __builtin__.dir
+		__builtin__.DeprecationWarning         __builtin__.divmod
+		__builtin__.EOFError                   __builtin__.dreload
+		__builtin__.Ellipsis                   __builtin__.enumerate
+		__builtin__.EnvironmentError           __builtin__.eval
+		__builtin__.Exception                  __builtin__.execfile
+		__builtin__.False                      __builtin__.file
+		__builtin__.FloatingPointError         __builtin__.filter
+		__builtin__.FutureWarning              __builtin__.float
+		__builtin__.GeneratorExit              __builtin__.format
+		__builtin__.IOError                    __builtin__.frozenset
+		__builtin__.ImportError                __builtin__.get_ipython
+		__builtin__.ImportWarning              __builtin__.getattr
+		__builtin__.IndentationError           __builtin__.globals
+		__builtin__.IndexError                 __builtin__.hasattr
+		__builtin__.KeyError                   __builtin__.hash
+		__builtin__.KeyboardInterrupt          __builtin__.help
+		__builtin__.LookupError                __builtin__.hex
+		__builtin__.MemoryError                __builtin__.id
+		__builtin__.NameError                  __builtin__.input
+		__builtin__.None                       __builtin__.int
+		__builtin__.NotImplemented             __builtin__.intern
+		__builtin__.NotImplementedError        __builtin__.isinstance
+		__builtin__.OSError                    __builtin__.issubclass
+		__builtin__.OverflowError              __builtin__.iter
+		__builtin__.PendingDeprecationWarning  __builtin__.len
+		__builtin__.ReferenceError             __builtin__.license
+		__builtin__.RuntimeError               __builtin__.list
+		__builtin__.RuntimeWarning             __builtin__.locals
+		__builtin__.StandardError              __builtin__.long
+		__builtin__.StopIteration              __builtin__.map
+		__builtin__.SyntaxError                __builtin__.max
+		__builtin__.SyntaxWarning              __builtin__.memoryview
+		__builtin__.SystemError                __builtin__.min
+		__builtin__.SystemExit                 __builtin__.next
+		__builtin__.TabError                   __builtin__.object
+		__builtin__.True                       __builtin__.oct
+		__builtin__.TypeError                  __builtin__.open
+		__builtin__.UnboundLocalError          __builtin__.ord
+		__builtin__.UnicodeDecodeError         __builtin__.pow
+		__builtin__.UnicodeEncodeError         __builtin__.print
+		__builtin__.UnicodeError               __builtin__.property
+		__builtin__.UnicodeTranslateError      __builtin__.range
+		__builtin__.UnicodeWarning             __builtin__.raw_input
+		__builtin__.UserWarning                __builtin__.reduce
+		__builtin__.ValueError                 __builtin__.reload
+		__builtin__.Warning                    __builtin__.repr
+		__builtin__.ZeroDivisionError          __builtin__.reversed
+		__builtin__.abs                        __builtin__.round
+		__builtin__.all                        __builtin__.set
+		__builtin__.any                        __builtin__.setattr
+		__builtin__.apply                      __builtin__.slice
+		__builtin__.basestring                 __builtin__.sorted
+		__builtin__.bin                        __builtin__.staticmethod
+		__builtin__.bool                       __builtin__.str
+		__builtin__.buffer                     __builtin__.sum
+		__builtin__.bytearray                  __builtin__.super
+		__builtin__.bytes                      __builtin__.tuple
+		__builtin__.callable                   __builtin__.type
+		__builtin__.chr                        __builtin__.unichr
+		__builtin__.classmethod                __builtin__.unicode
+		__builtin__.cmp                        __builtin__.vars
+		__builtin__.coerce                     __builtin__.xrange
+		__builtin__.compile                    __builtin__.zip
+
+		以上首字母大写的为Class(类)，首字母小写的为function（函数）
+
+	2、获取帮助的方法：
+	例如：
+	
+		In [1]: help(__builtin__.True)	查看类帮助
+
+		Help on bool object:
+
+		class bool(int)
+		 |  bool(x) -> bool
+		 |  
+		 |  Returns True when the argument x is true, False otherwise.
+		 |  The builtins True and False are the only two instances of the class bool.
+		 |  The class bool is a subclass of the class int, and cannot be subclassed.
+		 |  
+		 |  Method resolution order:
+		 |      bool
+		 |      int
+		 |      object
+		 |  
+		 |  Methods defined here:
+		 |  
+		 |  __and__(...)
+		 |      x.__and__(y) <==> x&y
+		 |  
+		 |  __or__(...)	未完待续
+
+	例如：
+	In [3]: help( __builtin__.sum)	查看内置函数帮助
+
+
+			Help on built-in function sum in module __builtin__:
+
+			sum(...)
+		    sum(sequence[, start]) -> value
+		    
+		    Returns the sum of a sequence of numbers (NOT strings) plus the value
+		    of parameter 'start' (which defaults to 0).  When the sequence is
+		    empty, returns start.
+		(END)
+
+	例如：
+		访问：http://docs.python.org/2/library	在这个网站上也可以获取内置函数的帮助
+
+
+	3、使用python内置函数：
+	例如：
+		
+	第一部分演示内容：使用自定义函数，返回一个整数的绝对值
+		
+		In [6]: def fun(x):
+	   ...:     if x < 0:
+	   ...:         return -x
+	   ...:     return x
+	   ...: 
+
+	In [7]: fun(10)
+	Out[7]: 10
+
+	In [8]: fun(-10)
+	Out[8]: 10
+
+	第二部分演示内容：使用python内置函数，返回一个整数的绝对值
+	In [11]: abs(10)
+	Out[11]: 10
+
+	In [12]: abs(-10)
+	Out[12]: 10
+
+	In [13]: help(abs)	可以使用帮助获取内置函数abs信息
+
+
+	第三部分演示内容：使用内置函数max()、min()查看序列（字符串，列表、元组）中最大值或最小值：
+	
+	In [14]: max('12345')
+	Out[14]: '5'
+
+	In [15]: max('12345a')
+	Out[15]: 'a'
+
+	In [16]: max([1,2,3,4,5])
+	Out[16]: 5
+
+	In [17]: min([1,2,3,4,5])	一个列表
+	Out[17]: 1
+
+	In [18]: max('123456','123')	多个字符串或列表均可
+	Out[18]: '123456'
+
+	In [19]: max('123a','123','12')
+	Out[19]: '123a'
+
+	In [20]: max(51,21)	直接比较2个数字
+	Out[20]: 51
+
+
+	In [18]: help(max)	查看max函数的帮助
+
+
+	第四部分演示内容：使用len()函数统计它（字符串、列表、元组、字典）的长度
+	
+	In [21]: s = 'abc'
+
+	In [22]: s
+	Out[22]: 'abc'
+
+	In [23]: len(s)
+	Out[23]: 3
+
+	In [24]: len('abc')
+	Out[24]: 3
+
+	In [25]: len([1,2,'a','b'])
+	Out[25]: 4
+
+	In [26]: len(('a','b',1))
+	Out[26]: 3
+
+	In [27]: len({'name':'tom','age':21})
+	Out[27]: 2
+
+
+	第五部分演示内容：使用divmod函数实现数字除法运算
+	
+	In [28]: divmod(5,2)	5除以2
+	Out[28]: (2, 1)		商2余1，返回的是元组。
+
+	第六部分演示内容：使用pow函数实现数字平方运算及前面2个数平方与第三个数相除取余数（模）
+
+	In [29]: pow(2,3)	2的3次方
+	Out[29]: 8
+
+	In [30]: pow(2,3,2)	2的3次方除2余0
+	Out[30]: 0
+
+	In [31]: pow(2,3,3)	2的3次方除2余2
+	Out[31]: 2
+
+	第七部分演示内容：使用round函数完成对数字小数位的定义
+	
+	In [32]: round(12)	自动在整数后面保留一个小数位
+	Out[32]: 12.0
+
+	In [33]: round(12.123)	即使是三位小数也只保留一个小数位，需要使用到其他值进行辅助
+	Out[33]: 12.0
+
+	In [34]: round(12.123,2)	2表示指定保留几位小数
+	Out[34]: 12.12
+
+	In [35]: round(12.126,2)	2表示指定保留几位小数，如果指定的小数位后面的数字大于或等于5，则会进行四舍五入。
+	Out[35]: 12.13
+
+	实际上，当把一个带有小数的数进行round时，是先把带有小数的数进行转换，然后再按要求进行取舍。(需要找一些例子)
+
+	第八部分演示内容：使用callable函数进行判断哪些对象可调用,返回的是布尔值
+	
+	In [44]: a = '123'
+
+	In [45]: callable(a)
+	Out[45]: False	表明变量a不可以被调用
+
+	In [46]: def a():	定义一个函数a
+	   ....:     pass
+	   ....: 
+
+	In [47]: callable(a)
+	Out[47]: True	表明函数是可调用的对象之一，类也是可被调用的
+
+	In [48]: class A(object):	定义一个类
+	   ....:     pass
+	   ....: 
+
+	In [49]: callable(A)
+	Out[49]: True	表明类也可以被调用
+
+	第九部分演示内容：使用type函数查看对象的类型
+	
+	In [50]: a = 'abc'
+
+	In [51]: type(a)
+	Out[51]: str
+
+
+	In [52]: a = 123
+
+	In [53]: type(a)
+	Out[53]: int
+
+
+	In [54]: def a():
+	   ....:     pass
+	   ....: 
+
+	In [55]: type(a)
+	Out[55]: function
+
+
+	In [56]: a = (1,'a')
+
+	In [57]: type(a)
+	Out[57]: tuple
+
+
+	In [61]: a = {'name':'tom','age':21}
+
+	In [62]: type(a)
+	Out[62]: dict
+
+
+	In [63]: a = [1,2,'a','b']
+
+	In [64]: type(a)
+	Out[64]: list
+
+
+
+	In [65]: a = [1,2,3]
+
+	In [66]: type(a)
+	Out[66]: list
+
+	In [67]: if type(a) == type([]): 用来比对类型是否一致。
+	   ....:     print "ok"
+	   ....:     
+	ok
+
+	第十部分演示内容：使用isinstance函数完成对对象类型的判断，返回值为布尔值
+	
+
+	In [65]: a = [1,2,3]
+
+	In [66]: type(a)
+	Out[66]: list
+
+	In [69]: isinstance(a,list)
+	Out[69]: True
+
+	In [70]: isinstance(a,str)
+	Out[70]: False
+
+	In [1]: class A(object):
+	   ...:     pass
+	   ...: 
+
+	In [2]: a = A() 进行实例化
+
+	In [3]: isinstance(a,A)	判断a是不是A的对象
+	Out[3]: True
+
+
+	
+
+	第十一部分演示内容：使用cmp函数完成数值或字符串比较：
+	当两值相等，返回0；当前值小于后值，返回－1；当前值大于后值，返回1.
+
+	
+	In [4]: help(cmp)
+
+
+	In [5]: cmp(1,1)
+	Out[5]: 0
+
+	In [6]: cmp(1,3)
+	Out[6]: -1
+
+	In [7]: cmp(4,3)
+	Out[7]: 1
+
+	In [8]: cmp('hello','hello')
+	Out[8]: 0
+
+	In [9]: cmp('zell','hello'）按字符比较，不是按长度比较。
+	Out[9]: 1
+
+	第十二部分演示内容：range   xrange
+
+
+	第十三部分演示内容：使用int函数对数值进行转换
+	
+	In [10]: help(int)
+
+
+	In [11]: int(12)
+	Out[11]: 12
+
+	In [12]: int(12.2)
+	Out[12]: 12
+
+
+	In [14]: int('12')	可以把字符串转换为整形，但是字符串必须是纯数字。
+	Out[14]: 12
+
+	In [13]: int('12.8')
+	---------------------------------------------------------------------------
+	ValueError                                Traceback (most recent call last)
+	<ipython-input-13-545d64d7ab2f> in <module>()
+	----> 1 int('12.8')
+
+	ValueError: invalid literal for int() with base 10: '12.8'
+
+
+	第十四部分演示内容：使用long()函数将字符串转换为长整形
+
+	In [15]: long(12)
+	Out[15]: 12L
+
+	In [16]: long(12.3)
+	Out[16]: 12L
+
+	In [17]: long('a')
+	---------------------------------------------------------------------------
+	ValueError                                Traceback (most recent call last)
+	<ipython-input-17-945570e9851b> in <module>()
+	----> 1 long('a')
+
+	ValueError: invalid literal for long() with base 10: 'a'
+
+	第十五部分演示内容：float()函数
+	
+	In [19]: float(123)
+	Out[19]: 123.0
+
+	In [20]: float('123')
+	Out[20]: 123.0
+
+	第十六部分演示内容：complex函数，把数值转换为复数。
+	
+	In [23]: complex('12')
+	Out[23]: (12+0j)
+
+	In [24]: complex(12)
+	Out[24]: (12+0j)
+
+
+	第十七部分演示内容：str()函数
+	
+	In [25]: str(123)
+	Out[25]: '123'
+
+	In [26]: str([1,2])
+	Out[26]: '[1, 2]'
+
+	In [27]: str((1,2,'a'))
+	Out[27]: "(1, 2, 'a')"
+
+	In [28]: str({'name':'tom'})
+	Out[28]: "{'name': 'tom'}"
+
+	第十八部分演示内容：list()
+	
+
+	In [29]: list()
+	Out[29]: []
+
+	In [30]: list('abc')
+	Out[30]: ['a', 'b', 'c']
+
+	In [31]: list('123')
+	Out[31]: ['1', '2', '3']
+
+	In [32]: list(123)
+	---------------------------------------------------------------------------
+	TypeError                                 Traceback (most recent call last)
+	<ipython-input-32-abd6fc0281e6> in <module>()
+	----> 1 list(123)
+
+	TypeError: 'int' object is not iterable
+
+	第十九部分演示内容：tuple（）
+	
+	In [33]: tuple()
+	Out[33]: ()
+
+	In [34]: tuple('123')
+	Out[34]: ('1', '2', '3')
+
+	In [35]: tuple([123,5,8])
+	Out[35]: (123, 5, 8)
+
+	In [36]: tuple((1,'a',2))
+	Out[36]: (1, 'a', 2)
+
+	In [37]: tuple({'name':'tom','age':21})
+	Out[37]: ('age', 'name')
+
+	第二十部分演示内容：hex()
+	
+	In [38]: hex(10)把字符串转换为十六进制数
+	Out[38]: '0xa'
+
+	In [39]: hex(15)
+	Out[39]: '0xf'
+
+	In [40]: hex('123')不能把字符串转换为十六进制数
+	---------------------------------------------------------------------------
+	TypeError                                 Traceback (most recent call last)
+	<ipython-input-40-d5084e050552> in <module>()
+	----> 1 hex('123')
+
+	TypeError: hex() argument can't be converted to hex
+
+	In [41]: int(0xa)	把十六进制数转换为十进制数
+	Out[41]: 10
+
+	In [42]: int('0xa')	不能为字符串
+	---------------------------------------------------------------------------
+	ValueError                                Traceback (most recent call last)
+	<ipython-input-42-f39cb7e42137> in <module>()
+	----> 1 int('0xa')
+
+	ValueError: invalid literal for int() with base 10: '0xa'
+
+	In [43]: eval('0xa')	此函数可以转字符串，把字符串当成有效的表达式进行求值。
+	Out[43]: 10
+	
+	
+	In [46]: eval("['a','b','c']")
+	Out[46]: ['a', 'b', 'c']
+
+	In [47]: type(eval("['a','b','c']"))
+	Out[47]: list
+
+	第二十一部分演示内容：chr（）返回0－255任意一个数值所对应的ascii
+	
+	In [50]: chr(1)
+	Out[50]: '\x01'
+
+	In [51]: chr(65)
+	Out[51]: 'A'
+
+	In [52]: chr(97)
+	Out[52]: 'a'
+
+	In [53]: chr(100)
+	Out[53]: 'd'
+
+	In [54]: chr(255)
+	Out[54]: '\xff'
+
+	In [55]: chr(120)
+	Out[55]: 'x'
+
+	第二十二部分演示内容：ord()返回ascii所对应的值
+
+	In [58]: ord('a')
+	Out[58]: 97
+
+	In [59]: ord('A')
+	Out[59]: 65
+
+
+	以下部分为字符串处理的函数
+
+	第二十三部分演示内容：capitalize(),使用此函数可以把字符串首字母大写。
+	In [60]: s = 'hello'
+
+	In [61]: s.capitalize()
+	Out[61]: 'Hello'
+	严格意义上讲其不算是函数，而应该叫方法，可以使用以下方法验证：
+	In [62]: help(capitalize)
+	---------------------------------------------------------------------------
+	NameError                                 Traceback (most recent call last)
+	<ipython-input-62-52f64d3317c4> in <module>()
+	----> 1 help(capitalize)
+
+	NameError: name 'capitalize' is not defined
+
+	但是在字符串方法中可以看到其为函数：
+	In [63]: help(s.capitalize)
+
+	Help on built-in function capitalize:
+
+	capitalize(...)
+	    S.capitalize() -> string
+	    
+	    Return a copy of the string S with only its first character
+	    capitalized.
+	(END)
+
+
+	第二十四部分演示内容：replace(),把指定的字符串字的字符进行替换，且可以指定能够替换几个
+	
+	In [65]: s = 'hello,h'
+
+	In [66]: s.replace('h','H')
+	Out[66]: 'Hello,H'
+
+	In [67]: s.replace('h','H',1)
+	Out[67]: 'Hello,h'
+
+	In [68]: s.replace('h','H',2)
+	Out[68]: 'Hello,H'
+
+
+	第二十五部分演示内容：split(),把字符串内容按默认分隔符方式进行分隔，并以列表形式显示，也可以指定切割分隔符。
+	In [69]: s = 'hello a\tb'
+
+	In [70]: s
+	Out[70]: 'hello a\tb'
+
+	In [71]: s.split()
+	Out[71]: ['hello', 'a', 'b']
+
+	In [72]: s = 'hello a\tb\nc'
+
+	In [73]: s.split()
+	Out[73]: ['hello', 'a', 'b', 'c']
+
+	In [74]: s.split('\t')
+	Out[74]: ['hello a', 'b\nc']
+
+	In [75]: s.split('\n')
+	Out[75]: ['hello a\tb', 'c']
+
+	In [76]: ip = '192.168.1.1'
+
+	In [77]: ip.split('.')
+	Out[77]: ['192', '168', '1', '1']
+
+	In [78]: ip.split('.',1)
+	Out[78]: ['192', '168.1.1']
+
+
+	
+
+
+	第二十六部分演示内容：join()，使用此函数进行多字符串连接
+	
+	In [79]: help(str.join)
+
+
+	In [80]: s = 'abc'
+
+	In [81]: s.join('12')
+	Out[81]: '1abc2'
+
+	In [82]: s.join('1234')
+	Out[82]: '1abc2abc3abc4'
+
+	In [83]: ''.join([str(i) for i in range(10)]) ''为空字符串
+	Out[83]: '0123456789'
+
+	In [85]: int(''.join([str(i) for i in range(10)])) 把字符串转换为数值
+	Out[85]: 123456789
+
+	
+	第二十七部分演示内容：string模块
+
+	In [86]: import string	导入string模块
+
+	In [87]: string.	此处按tab键
+	string.Formatter        string.expandtabs       string.replace
+	string.Template         string.find             string.rfind
+	string.ascii_letters    string.hexdigits        string.rindex
+	string.ascii_lowercase  string.index            string.rjust
+	string.ascii_uppercase  string.index_error      string.rsplit
+	string.atof             string.join             string.rstrip
+	string.atof_error       string.joinfields       string.split
+	string.atoi             string.letters          string.splitfields
+	string.atoi_error       string.ljust            string.strip
+	string.atol             string.lower            string.swapcase
+	string.atol_error       string.lowercase        string.translate
+	string.capitalize       string.lstrip           string.upper
+	string.capwords         string.maketrans        string.uppercase
+	string.center           string.octdigits        string.whitespace
+	string.count            string.printable        string.zfill
+	string.digits           string.punctuation   
+
+	In [87]: string.lowercase
+	Out[87]: 'abcdefghijklmnopqrstuvwxyz'  打印所有小写的字母
+
+	In [88]: string.uppercase
+	Out[88]: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'	打印所有大写的字母
+
+	In [89]: string.digits
+	Out[89]: '0123456789'	打印0－9数字
+
+
+	
+
+	以下为序列处理函数
+
+	第二十八部分演示内容：
+
+	len()
+	max()
+	min()
+
+	第二十九部分演示内容：filter() 使用函数里面定义的方法，对后面的序列进行处理，如果定义的方法为None，则直接返回原内容。
+
+	In [90]: help(filter)
+
+
+	In [91]: filter(None,'abc')
+	Out[91]: 'abc'
+
+	In [92]: filter(none,'abc')	None首字母必须大写
+	---------------------------------------------------------------------------
+	NameError                                 Traceback (most recent call last)
+	<ipython-input-92-8ab9c17cbbf6> in <module>()
+	----> 1 filter(none,'abc')
+
+	NameError: name 'none' is not defined
+
+	In [93]: filter(None,range(10))
+	Out[93]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+	
+	In [94]: def f(x):	定义一个函数
+	   ....:     if x % 2 == 0:
+	   ....:         return True
+	   ....:     
+
+	In [95]: filter(f,range(10))	使用函数对后面的range进行处理
+	Out[95]: [0, 2, 4, 6, 8]
+
+	使用匿名函数处理以上内容：
+	
+	In [124]: filter(lambda x: x % 2 == 0,range(10))
+	Out[124]: [0, 2, 4, 6, 8]
+
+
+
+
+
+
+	第三十部分演示内容：zip（）使用此函数可以实现多个列表元组内容交叉，以元组形式合并成为一个列表(2个列表内容完全一样即可，不一样会取最小值，把多余剔除，不显示。)
+	
+	In [96]: l1 = [1,2,3]
+
+	In [97]: l2 = ['a','b','c']
+
+	In [98]: zip(l1,l2)
+	Out[98]: [(1, 'a'), (2, 'b'), (3, 'c')]
+
+
+
+	In [103]: l1 = [1,2,3]
+
+	In [104]: l2 = ['a','b','c']
+
+	In [108]: l3 = ['I','II','III']
+
+	In [109]: zip(l1,l2,l3)	可以接收多个列表
+	Out[109]: [(1, 'a', 'I'), (2, 'b', 'II'), (3, 'c', 'III')]
+
+
+
+
+	以下使用dict及zip完成字典创建：
+	In [103]: l1 = [1,2,3]
+
+	In [104]: l2 = ['a','b','c']
+
+	In [105]: dict(zip(l1,l2))
+	Out[105]: {1: 'a', 2: 'b', 3: 'c'}
+
+	In [106]: dict(zip(l2,l1))
+	Out[106]: {'a': 1, 'b': 2, 'c': 3}
+
+	第三十一部分演示内容：map（）使用此函数可以实现多个列表元组内容交叉，以元组形式合并成为一个列表(列表内容可以不一样，会在不匹配位置补上None)
+
+	In [110]: l1 = [1,2,3]
+
+	In [111]: l2 = ['a','b','c']
+
+	In [112]: l3 = ['I','II']
+
+	In [114]: map(None,l1,l2,l3)
+	Out[114]: [(1, 'a', 'I'), (2, 'b', 'II'), (3, 'c', None)]
+
+
+	In [115]: def f(x):	定义一个X平方的函数
+	   .....:     return x ** 2
+	   .....: 
+
+	In [116]: l1 = [1,2,3]
+
+	In [117]: map(f,l1)	使用map处理，把l1中的每一个值进行平方
+	Out[117]: [1, 4, 9]
+
+
+	以下为实现列表中对应元素乘积，得到一个新的列表
+	In [118]: l1 = [1,2,3]
+
+	In [119]: l2 = [4,5,6]	
+
+	In [120]: def f(x,y):
+	   .....:     return x * y
+	   .....: 
+
+	In [121]: map(f,l1,l2)
+	Out[121]: [4, 10, 18]
+
+	使用匿名函数完成计算：
+	
+	In [125]: map(lambda x,y:x * y,range(1,10),range(1,10))
+	Out[125]: [1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+
+
+	第三十二部分演示内容：reduce（）使用此函数可以实现递归叠加。
+	
+
+	In [122]: def f(x,y):
+	   .....:     return x + y
+	   .....: 
+
+	In [123]: reduce(f,range(1,101))
+	Out[123]: 5050
+
+	使用匿名函数完成计算：
+	In [126]: reduce(lambda x,y:x + y,range(1,101))
+	Out[126]: 5050
+
+	第三十三部分演示内容：列表表达式
+	
+	In [127]: range(10)
+	Out[127]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+	In [128]: [i for i in range(10)]
+	Out[128]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+	In [129]: [i * 2 for i in range(10)]
+	Out[129]: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+	In [130]: [i * 2+5 for i in range(10)]
+	Out[130]: [5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+
+	In [131]: [i * 2+10 for i in range(10)]
+	Out[131]: [10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
+
+	In [132]: [i * 2+10 for i in range(10) if i % 3 == 0]	先取i值除3，如果结果余0，则把i值乘2加10.(只有0，3，6，9除3余0)
+	Out[132]: [10, 16, 22, 28]
+
+
+
+
+
+
+	
+
+
+
+
+
+									模块
+模块：
+	是从逻辑上组织python代码的形式，当代码量变量相当大的时候，最好把代码分成一些有组织的代码段，前提是保证他们的彼此交互，这些代码片段相互间有一定的联系，可能是一个包含数据成员和方法的类，也可能是一组相关彼此独立的操作函数。
+	一个python脚本中可能单独运行，也可以导入到另一个脚本中运行，当脚本被导入运行时，我们将其称为模块（module）
+	所有的.py文件都可以作为一个模块导入
+	模块名与脚本的文件名相同
+		例如：
+		我们编写了一个名为hello.py的脚本，则可以在另一个脚本中用import hello语句来导入它。
+
+包：
+	包为模块的集合，因为python的模块可以按目录组织为包
+		创建一个包的步骤：
+		1、创建一个名字为包名的目录
+		2、在该目录下创建一个__init__.py文件
+		3、根据需要，在该目录下存放脚本文件或已编译的扩展及子包
+		4、import pack.m1,pack.m2,pack.m3
+
+	模块文件保存的位置：
+	
+	In [133]: import sys	导入sys模块
+
+	In [134]: sys.此处按tab键，可以查看到此模块下的方法和属性
+	sys.api_version            sys.last_traceback
+	sys.argv                   sys.last_type
+	sys.builtin_module_names   sys.last_value
+	sys.byteorder              sys.long_info
+	sys.call_tracing           sys.maxint
+	sys.callstats              sys.maxsize
+	sys.copyright              sys.maxunicode
+	sys.displayhook            sys.meta_path
+	sys.dont_write_bytecode    sys.modules
+	sys.exc_clear              sys.path
+	sys.exc_info               sys.path_hooks
+	sys.exc_traceback          sys.path_importer_cache
+	sys.exc_type               sys.platform
+	sys.exc_value              sys.prefix
+	sys.excepthook             sys.ps1
+	sys.exec_prefix            sys.ps2
+	sys.executable             sys.ps3
+	sys.exit                   sys.py3kwarning
+	sys.exitfunc               sys.pydebug
+	sys.flags                  sys.setcheckinterval
+	sys.float_info             sys.setdlopenflags
+	sys.float_repr_style       sys.setprofile
+	sys.getcheckinterval       sys.setrecursionlimit
+	sys.getdefaultencoding     sys.settrace
+	sys.getdlopenflags         sys.stderr
+	sys.getfilesystemencoding  sys.stdin
+	sys.getprofile             sys.stdout
+	sys.getrecursionlimit      sys.subversion
+	sys.getrefcount            sys.version
+	sys.getsizeof              sys.version_info
+	sys.gettrace               sys.warnoptions
+	sys.hexversion             
+
+	In [134]: sys.path 使用此方法对模块位置进行检索，返回的是一个列表（与shell中的PATH变量一样）。
+	Out[134]: 
+	['',
+	 '/usr/bin',
+	 '/usr/lib64/python27.zip',
+	 '/usr/lib64/python2.7',
+	 '/usr/lib64/python2.7/plat-linux2',
+	 '/usr/lib64/python2.7/lib-tk',
+	 '/usr/lib64/python2.7/lib-old',
+	 '/usr/lib64/python2.7/lib-dynload',
+	 '/usr/lib64/python2.7/site-packages',
+	 '/usr/lib64/python2.7/site-packages/gtk-2.0',
+	 '/usr/lib/python2.7/site-packages',
+	 '/usr/lib/python2.7/site-packages/IPython/extensions',
+	 '/root/.ipython']
+
+	使用以下shell命令，查找模块文件位置
+	rpm -ql python-libs
+
+	默认模块保存在/usr/lib64/python2.7目录当中
+
+	也可以自定义python模块查找目录：
+
+	方法一：
+	[root@localhost ~]# mkdir /root/library
+
+
+	In [1]: import sys
+
+	In [2]: sys.path.append('/root/library')
+
+	In [3]: sys.path
+	Out[3]: 
+	['',
+	 '/usr/bin',
+	 '/usr/lib64/python27.zip',
+	 '/usr/lib64/python2.7',
+	 '/usr/lib64/python2.7/plat-linux2',
+	 '/usr/lib64/python2.7/lib-tk',
+	 '/usr/lib64/python2.7/lib-old',
+	 '/usr/lib64/python2.7/lib-dynload',
+	 '/usr/lib64/python2.7/site-packages',
+	 '/usr/lib64/python2.7/site-packages/gtk-2.0',
+	 '/usr/lib/python2.7/site-packages',
+	 '/usr/lib/python2.7/site-packages/IPython/extensions',
+	 '/root/.ipython',
+	 '/root/library']
+
+	方法二：
+	[root@localhost ~]# mkdir /root/library
+	
+	[root@localhost ~]# vim /root/.bashrc
+
+	最下面添加内容：
+		export PYTHONPATH=/root/library	如果有多个目录，可以使用:进行分隔
+
+	
+	[root@localhost ~]# . /root/.bashrc
+
+
+	
+	In [1]: import sys
+
+	In [2]: sys.path
+	Out[2]: 
+	['',
+	 '/usr/bin',
+	 '/root/library',
+	 '/usr/lib64/python27.zip',
+	 '/usr/lib64/python2.7',
+	 '/usr/lib64/python2.7/plat-linux2',
+	 '/usr/lib64/python2.7/lib-tk',
+	 '/usr/lib64/python2.7/lib-old',
+	 '/usr/lib64/python2.7/lib-dynload',
+	 '/usr/lib64/python2.7/site-packages',
+	 '/usr/lib64/python2.7/site-packages/gtk-2.0',
+	 '/usr/lib/python2.7/site-packages',
+	 '/usr/lib/python2.7/site-packages/IPython/extensions',
+	 '/root/.ipython']
+
+
+
+	模块文件编写及导入
+
+	统计指定文件里面的行数、单词数、字符数
+	1、编写一个mod1.py
+
+		#!/usr/bin/python
+
+		def wordCount(s):	定义一个函数
+		    chars = len(s)	统计多少个字符
+		    words = len(s.split())	以空格做分隔，统计有多少个单词
+		    lines = s.count('\n')	统计有多少个\n，即可统计出有多少行
+		    print lines,words,chars
+
+		s = open('/etc/passwd').read()	定义s的数据，open为打开文件，read为读取文件内容
+
+		wordCount(s)
+
+错误的写法：
+	#!/usr/bin/python
+
+def wordCount(s):
+    chars = len(s)
+    words = len(s.split())
+    lines = len(s.split('\n'))
+    print lines,words,chars
+
+s = open('/etc/passwd').read()
+
+wordCount(s)
+
+
+错误原因：
+	In [3]: with open('/etc/hosts') as fd:
+   ...:     s = fd.read()
+   ...:     
+
+In [4]: s
+Out[4]: '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4\n::1         localhost localhost.localdomain localhost6 localhost6.localdomain6\n'
+						
+In [5]: 
+In [5]: s.split('\n')
+Out[5]: 
+['127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4',
+ '::1         localhost localhost.localdomain localhost6 localhost6.localdomain6',
+ '']	用以上方法，此处会多一个空行。
+
+
+
+
+
+		
+	
+	2、导入
+
+	编写另一个mod2.py文件
+		
+		#!/usr/bin/python
+
+		import wc	不能添加.py
+
+
+	3、运行mod2.py文件
+		python mod2.py
+
+
+
+	模块函数调用
+
+	mod1.py
+			#!/usr/bin/python
+
+			def wordCount(s):
+			    chars = len(s)
+			    words = len(s.split())
+			    lines = s.count('\n')
+			    print lines,words,chars
+
+			s = open('/etc/passwd').read()
+
+			wordCount(s)
+
+
+	mod2.py
+			#!/usr/bin/python
+
+			import mod1	导入mod1模块
+
+			s = """hello world	定义s变量
+			python"""
+
+			mod1.wordCount(s)		使用mod1模块中的wordCount函数对本文件中的s进行行、单词、字符数进行统计
+
+	结果：
+		不仅能统计出本文件中的s行、单词、字符数，还能统计出mod1.py脚本中指定文件的行、单词、字符数等。
+
+	针对以上的结果，可以对mod1.py进行修改，修改后内容如下：
+	
+	mod1.py
+				#!/usr/bin/python
+
+				def wordCount(s):
+				    chars = len(s)
+				    words = len(s.split())
+				    lines = s.count('\n')
+				    print lines,words,chars
+
+				if __name__ == '__main__':此处：__name__是python中的内置变量，当此变量值为__main__时，则执行此脚本时执行上面的函数及下面的调试命令，									当此脚本文件被其他脚本文件调用时，此不再执行下面的调试命令。
+
+					s = open('/etc/passwd').read()
+
+					wordCount(s)
+
+	mod2.py内容不变
+
+
+
+包的应用：
+	1、如果想把一个保存有python脚本文件的目录做为包使用，首先应该在包里面创建一个名为：__init__.py的文件
+		touch __init__.py
+
+	2、应用
+		In [4]: from dirname import mod1	从包里导入一个mod1模块
+
+		In [4]: wc.wordCount('abc')
+
+		 或者
+
+		In [4]: import dirname.mod1
+		In [4]: dirname.wc.wordCount('hello world\n')
+
+		或者
+
+		In [4]: from dirname.mod1 import wordCount
+		In [4]: wordCount('aaa')
+
+		或者
+
+		In [4]: from dirname.mod1 import wordCount as wc  as给导入的模块启一个名字
+		In [4]: wc('aaa')
+
+		In [4]: wordCount('aaa')
+
+
+		练习题一：
+
+		使用shutil模块完成对文件或目录的操作：
+
+		In [1]: import shutil	导入模块，此模块为shell实用工具
+
+		In [2]: shutil.	此处按tab，查看此模块包含的方法
+		shutil.Error                      shutil.fnmatch
+		shutil.ExecError                  shutil.get_archive_formats
+		shutil.SpecialFileError           shutil.getgrnam
+		shutil.WindowsError               shutil.getpwnam
+		shutil.abspath                    shutil.ignore_patterns
+		shutil.collections                shutil.make_archive
+		shutil.copy                       shutil.move
+		shutil.copy2                      shutil.os
+		shutil.copyfile                   shutil.register_archive_format
+		shutil.copyfileobj                shutil.rmtree
+		shutil.copymode                   shutil.stat
+		shutil.copystat                   shutil.sys
+		shutil.copytree                   shutil.unregister_archive_format
+		shutil.errno    
+
+		In [2]: help(shutil)查看shutil使用方法
+
+		In [3]: shutil.copy("/bin/ls","/home")	把/bin/ls文件拷贝到/home下，连同权限一起拷贝。
+
+		In [7]: shutil.copy("/bin/ls","/home/abcde")	拷贝的同时进行重命名，连同权限一起拷贝
+
+
+		In [6]: shutil.copyfile("/bin/ls","/home/abcd")	拷贝文件，并同时命名，不保留权限
+		
+
+		In [5]: shutil.copy("/root/library","/home/") 不能拷贝目录
+
+		In [15]: shutil.copytree("/root/pyabc","/home/pyabc") 拷贝目录到指定目录，一定要指到目标目录下。
+
+		In [18]: shutil.move("/root/abc.txt","/home/") 剪切一个文件或目录到指定目录下。
+
+		In [21]: shutil.rmtree("/home/pyabc")	删除一个目录
+
+
+		练习题二：
+		1、编写一个可以随机生成8位密码的程序
+		2、使用random的choice函数随机取出字符
+		3、用于密码的字符通过string模块获得
+		4、改进程序，用户可以自己决定生成多少位的密码
+
+		解决思路：
+			1、使用什么字符生成随机密码：英文大小写、数字、特殊符号等
+			2、使用的模块
+			3、生成8位密码需要几次循环，需要把字符拼接起来吗？
+
+		第一部分演示内容：导入string模块
+
+		In [24]: import string
+
+		In [25]: string.lowercase
+		Out[25]: 'abcdefghijklmnopqrstuvwxyz'
+
+		In [26]: string.uppercase
+		Out[26]: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+		In [27]: string.letters
+		Out[27]: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+		In [28]: string.digits
+		Out[28]: '0123456789'
+
+
+		第二部分演示内容：string模块特殊属性
+
+		In [29]: string.__file__				2个下划线开头的是特殊属性，此属性用于查找模块文件的位置
+		Out[29]: '/usr/lib64/python2.7/string.pyc'  py：程序源文件  pyc：程序编译后文件 pyo：程序编译后并优化过的文件
+
+		
+		第三部分演示内容：查看string模块源程序文件
+		 [root@localhost home]# vim /usr/lib64/python2.7/string.py
+
+		第四部分演示内容：实现随机生成8位密码
+		#!/usr/bin/env python
+		# coding: utf8
+
+		# 导入string及random模块
+		import string
+
+		#导入random模块, 用于做出随机选择
+		import random
+
+		# 定义all_chs变量，由string.letters + string.digits组成
+		all_chs = string.letters + string.digits
+
+		# 定义pwd用于接收随机密码
+		pwd = ''
+
+		# 循环8次，每次循环的（随机选择）结果加到前面的pwd变量中
+		for i in range(8):
+		    pwd += random.choice(all_chs)
+
+		print pwd
+
+
+		第五部分演示内容：实现用户输入随机生成N位密码，使用函数实现
+
+		#!/usr/bin/env python
+		# coding: utf8
+
+		# 导入string模块
+		import string
+
+		# 导入random模块
+
+		import random
+
+		# 把all_chs变量放到函数外面，顶头写，其为一个全局变量
+		all_chs = string.letters + string.digits
+
+		# 定义一个gen_pass函数，默认形参等于10
+		def gen_pass(num=10):
+
+		# 定义一个pwd空变量，用于接收随机生成的密码
+		    pwd = ''
+		# 定义一个for循环
+		    for i in range(num):
+			pwd += random.choice(all_chs)
+
+		# return返回成生的密码
+		    return  pwd
+
+		# 定义一个特殊属性，当__name__值为__main__ 时，执行下面的语句;当其它程序把此文件做为一个模块导入时，则会显示此模块名称，下面语句不执行。
+		if __name__ == "__main__":
+		    print gen_pass()
+		    print gen_pass(6)
+
+
+		第六部分演示内容：
+
+		1、把以上代码写在程序文件mod4_random_password_fun.py文件中
+
+		2、在ipython中导入mod4_random_password_fun模块
+
+		In [36]: import mod4_random_password_fun
+
+		3、使用模块
+		
+		In [37]: mod4_random_password_fun.__name__	验证模块可用性
+		Out[37]: 'mod4_random_password_fun'			返回模块名称时，表明可以直接使用
+
+		In [38]: mod4_random_password_fun.gen_pass()	使用模块中函数生成默认位数密码
+		Out[38]: 'Ri7jyCWOxe'
+
+		
+		In [39]: mod4_random_password_fun.gen_pass(5)	使用模块中函数生成5位数密码
+		Out[39]: 'pzxbD'
+
+		In [40]: mod4_random_password_fun.gen_pass(15)	使用模块中函数生成15位数密码
+		Out[40]: 'b6DnQvvXQyzdCR8'
+
+		
+		In [41]: mod4_random_password_fun.all_chs		使用模块中定义的变量
+		Out[41]: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+
+
+
+
+										python面向对象
+python编程中一切谐对象：
+	字符串对象
+	元组对象
+	列表对象
+	字典对象
+	
+	每种对象都有自己的方法和属性。
+
+	想看每种对象的方法和属性可以使用以下方式：
+	例如：
+		In [43]: 1.
+		1.bit_length   1.denominator  1.numerator    
+		1.conjugate    1.imag         1.real         
+
+		In [43]: str.
+		str.capitalize  str.isalnum     str.lstrip      str.splitlines
+		str.center      str.isalpha     str.partition   str.startswith
+		str.count       str.isdigit     str.replace     str.strip
+		str.decode      str.islower     str.rfind       str.swapcase
+		str.encode      str.isspace     str.rindex      str.title
+		str.endswith    str.istitle     str.rjust       str.translate
+		str.expandtabs  str.isupper     str.rpartition  str.upper
+		str.find        str.join        str.rsplit      str.zfill
+		str.format      str.ljust       str.rstrip      
+		str.index       str.lower       str.split   	
+
+		In [43]: list.
+		list.append   list.extend   list.insert   list.remove   list.sort
+		list.count    list.index    list.pop      list.reverse 
+
+		In [43]: tuple.
+		tuple.count  tuple.index 
+
+
+		In [43]: dict.
+		dict.clear       dict.items       dict.pop         dict.viewitems
+		dict.copy        dict.iteritems   dict.popitem     dict.viewkeys
+		dict.fromkeys    dict.iterkeys    dict.setdefault  dict.viewvalues
+		dict.get         dict.itervalues  dict.update      
+		dict.has_key     dict.keys        dict.values  
+
+
+面向过程与面向对象区别：
+
+	面向过程：以指令为中心，分析实现某一功能的步骤，然后去按步骤把数据填充到执行过程中，进行结果获取；或把步骤写成一个功能模块被调用。
+
+		例如：函数式编程及C语言等
+
+	面向对象：以数据为中心，把数据和数据方法放在一起，做为一个整体，这个整体就叫做对象。
+
+		例如：c++，java,python等
+
+	如果用面向对象的方法把以前的程序进行重写，步骤为：先定义一个类，在类里面定义一些属性（属性可以理解为以前学过的变量），在定义一些方法（方法可以理解为之前学会的函数，在函数当中就可以使用定义的属性了，就不需要在方法里面重新定义。）。
+	由于属性和方法都在一个类里，我们称之为对象。
+
+
+类与对象：是面向对象的两个重要概念
+	类：是对事物的抽象，把具有某一相同特征的分为一类。比如：人类、球类  
+					人类是有别与其他动物的一种分类，人类有自己的五官这是属性（静态），人类可以活动（吃、喝、行等）这是方法（动态）。
+		
+	对象：是类的一个实例，比如足球、篮球
+					小张去给我倒杯水，小张是人类的一个实例，必须实例化一个对象，才能去做倒水的动作（方法）。
+
+	实例说明：球类可以对球的特征和行为进行抽象，然后可以实例化一个真实的实体出来。
+
+
+为什么面向对象？
+	把复杂的问题简单化，且维护起来较为容易。
+	面向对象的主要思想是：
+	封装
+	继承
+	多态
+
+面向对象的封装：封装其实就是类的定义
+	类定义：
+		类把需要的变量和函数组合成一起，这种包含称为“封装”
+		例如：
+			In [45]: class A(object):	定义一个类
+			   ....:     pass
+			   ....: 
+
+	类的结构：
+		class类名：   说明：类名与变量或函数命名类似，都是以英文字母大小写、下划线、数字等组合，但不能以数字开头，函数一般第2个单词首字母大写，类一般每一个单词首字母大写。
+
+		成员变量－属性
+		成员函数－方法
+
+	例如一：
+	
+		#!/usr/bin/env python
+		# coding: utf8
+
+		# 定义一个People类，包含的属性有name,age,color
+		class People(object):
+		    name = 'tom'
+		    age = 21
+		    color = 'yellow'
+
+		# 把People类进行实例化，此处通过tom对类进行了实例化，tom即为对象。
+		tom = People()
+
+		print tom.name
+		print tom.age
+		print tom.color
+
+	例如二：
+
+		#!/usr/bin/env python
+		# coding: utf8
+
+		# 定义一个People类，包含的属性有name,age,color
+		class People(object):
+		# 以下为静态属性
+		    name = 'tom'
+		    age = 21
+		    color = 'yellow'
+		# 以下为动态方法,在这个函数中形参位置一定有一个self参数，表明这是类自身函数，一般为默认，也可以添加多个形参。
+		    def think(self):
+			print "I am a thinker"
+
+
+		# 把People类进行实例化，此处通过tom对类进行了实例化，tom即为对象。
+		tom = People()
+
+		# 以下为调用属性，不要在属性后加小括号
+		print tom.name
+		print tom.age
+		print tom.color
+
+		# 调用以上定义的方法，一定要在函数后加（）
+		tom.think()
+
+
+	例如三：
+		#!/usr/bin/env python
+		# coding: utf8
+
+		# 定义一个People类，包含的属性有name,age,color
+		class People(object):
+		# 以下为静态属性
+		    name = 'tom'	类的属性
+		    age = 21
+		    color = 'yellow'
+		# 以下为动态方法,在这个函数中形参位置一定有一个self参数，表明这是类自身函数，一般为默认，也可以添加多个形参。
+		    def think(self):	类的方法
+		# 在这个函数中也可以使用类中定义的属性，但一定要使用self
+			self.color = 'black'
+		
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+
+		# 把People类进行实例化，此处通过tom对类进行了实例化，tom即为对象。
+		tom = People()
+
+		# 以下为调用属性，不要在属性后加小括号
+		print tom.name
+		print tom.age
+		print tom.color 对象的属性
+
+		# 调用以上定义的方法，一定要在函数后加（）
+		tom.think()	对象的方法
+
+
+对象的创建：
+	创建对象的过程称之为实列化；当一个对象被创建后，包含三个方面的特性：对象句柄、属性和方法。上面的例子中，tom即为句柄。
+	句柄用于区分不同的对象
+	对象的属性和方法与类中的成员变量和成员函数对应
+	obj = MyClass() 此为创建类的一个实例（对象），通过对象来调用方法和属性。
+
+类的属性：
+	类的属性按使用范围分为公有属性和私有属性，类的属性范围取决于属性的名称
+	公有属性：在类中和类外都能调用的属性,
+	例如一：上例中:name,age,color。
+
+	例如二：在类外部通过类名＋属性名访问公有属性
+
+		#!/usr/bin/env python
+		# coding: utf8
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+
+		tom = People()
+
+		# 过使用对象属性调用类公有属性
+		print tom.name
+
+		print tom.color
+
+
+		tom.think()
+
+		
+		# 打印30个＃做分隔符使用
+		print '#' * 30
+
+
+		# 过使用类名也可以调用公有属性
+		print People.name
+
+
+
+	私有属性：不能在类外及被类以外的函数调用，以“__”双下划线开始的成员变量就是私有属性，可以通过instance（实例对象）._classname（类）__attribute（属性）方式访问
+	例如一：
+		#!/usr/bin/env python
+		# coding: utf8
+
+		class People(object):
+		# 以下为静态属性,__age属于私有属性
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+		# 在类内部进行调用，调用后，访问类中的方法一样可以访问在到私有属性。
+			print self.__age	
+
+
+
+		tom = People()
+
+
+		print tom.name
+
+		print tom.color
+
+
+		tom.think()
+
+		# 私有属性不能在外部调用，以下是错误的
+		# print tom.__age
+
+	例如二：
+		#!/usr/bin/env python
+		# coding: utf8
+
+
+		class People(object):
+		# 以下为静态属性,__age属于私有属性
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+		# 在类内部进行调用
+		       # print self.__age
+
+
+
+		tom = People()
+
+
+		print tom.name
+
+		print tom.color
+
+
+		tom.think()
+
+		# 可以在外部调用的方法,但在程序中不建议这么调用
+		print tom._People__age
+
+	
+	
+
+	内置属性：由系统在定义类的时候默认添加的，由前后双下划线构成，__dict__,__module__
+	
+	例如一：
+		#!/usr/bin/env python
+		# coding: utf8
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+
+		tom = People()
+
+
+		print tom.name
+
+		print tom.color
+
+
+		tom.think()
+
+		# 在此处调用内置属性
+		print tom.__dict__
+
+	例如二（class9.py）：
+
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+
+		tom = People()
+
+
+		print tom.name
+
+
+
+		print tom.color
+
+
+		tom.think()
+
+		# 通过使用类名进行内部属性调用
+		print People.__dict__
+
+
+
+
+
+
+
+类的属性调用后修改方法：
+		例如：
+			#!/usr/bin/env python
+			# coding: utf8
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+
+
+
+			tom = People()
+
+
+			print tom.name
+
+			# 把类属性调用后，修改为其他值
+			tom.color = '白种人'
+
+			print tom.color
+
+
+			tom.think()
+
+类的方法：
+	方法的定义和函数一样，但是需要self作为第一个参数
+	类的方法分为：
+	公有方法：在类中和类外部都调用的方法
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+		# 定义一个公有test类方法，并在类中调用自身的think方法，内部调用
+		    def test(self):
+			self.think()
+
+		# 定义一个对象
+		tom = People()
+
+		# 通过对象调用People类中的test，外部调用
+		tom.test()
+
+
+
+
+	私有方法：不能被类的外部调用，在方法前面加上"__"双下划线就是私有方法
+	例如：
+
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 定义一个公有test类方法，并在类中调用自身的私有__talk类的方法，内部调用
+		    def test(self):
+			self.__talk()
+
+		# 定义一个对象
+		tom = People()
+
+		# 通过对象调用People类中的test， 在外部调用test公有方法，即可以调用私有__talk方法。
+		tom.test()
+	
+self参数
+	用于区分函数和类的方法（必须有一个self），self参数表示执行对象本身。
+
+
+	类方法
+		被classmethod（）函数处理过的函数，通常被类所调用，也能被对象所调用（是继承的关系）,此方法也被称为动态方法：在类中没有被调用的类方法不会被加载到内存当中。
+
+		例如：
+
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+
+			# 定义一个公有test类方法
+			    def test(self):
+				print 'Testing......'
+
+			# 定义一个类方法，在外部通过类名称进行调用,使用cm接收classmethod函数内容
+			    cm = classmethod(test)
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.cm()
+		
+		动态类方法的例子：
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+
+			# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+			    def test(self):
+				print self.color
+
+			# 定义一个类方法，在外部通过类名称进行调用
+			    cm = classmethod(test)
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.cm()
+
+
+
+	静态方法
+		相当于“全局函数”，可以被类直接调用，可以被所有实例比对象共享，通过staticmethod()，静态方法没有“self”参数。
+
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+
+			# 定义一个公有test类方法,此处没有类self参数,因此在调用时会把类所有的属性及方法都加载到内存里，被调用时访问速度比动态方法快。
+			    def test():
+				print "this is test fun"
+
+			# 定义一个类静态方法，在外部通过类名称进行调用
+			    sm = staticmethod(test)
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.sm()	
+		
+
+		使用静态方法访问其他成员属性
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+
+			# 定义一个公有test类方法,此处没有类self参数,因此访问其他类成员属性时，可以使用类名称.属性的形式进行访问
+			    def test():
+				print People.color
+
+			# 定义一个类静态方法，在外部通过类名称进行调用
+			    sm = staticmethod(test)
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.sm()
+
+
+
+	装饰器：
+	动态方法可以使用@classmethod装饰器，此装饰器只会影响到下面的方法：
+	例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+
+			# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+			    @classmethod
+
+			# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+			    def test(self):
+				print "this is class method"
+
+
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.test()
+
+	静态方法可以使用@staticmethod装饰器，此方法会影响到其下面的类方法：
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			class People(object):
+
+			    name = 'tom'
+			    __age = 21
+			    color = 'yellow'
+
+			# think是公有方法
+			    def think(self):
+
+				self.color = 'black'
+
+				print "I am a %s"  % self.color
+
+				print "I am a thinker"
+
+				print self.__age
+			# 定义一个私有__talk方法
+			    def __talk(self):
+				print "I am talking whit tom"
+			# 使用静态装饰器完成对test类方法设定
+			    @staticmethod
+			# 定义一个公有test类方法,此处没有类self参数,因此在调用时会把类所有的属性及方法都加载到内存里，被调用时访问速度比动态方法快。
+			    def test():
+				print "this is static method"
+
+
+			# 定义一个对象
+			# tom = People()
+
+			# 通过类名调用类方法
+			People.test()
+
+python内部类
+	所谓内部类，就是在类的内部定义的类，主要目的是为了更好的抽象现实世界
+	举例说明：
+		汽车是个类，汽车的底盘，轮胎也可以抽象为类，将其定义到汽车类中，则形成内部类，更好的描述汽车类，因为底盘、轮胎是汽车的一部分。
+
+	内部类的实例化方法：
+		方法1：直接使用外部调用内部类
+			object_name=outclass_name.inclass_name()
+		方法2：先对外部进行实例化，然后再实例化内部类
+			out_name=outclass_name()
+			in_name=out_name.inclass_name()
+			in_name.method()
+
+
+	第一部分演示内容：
+	例如：
+		In [1]: import os	导入os模块
+
+		In [2]: os.path.  假如os是一个父类，path就是一个子类，子类下面会有一些属性或方法。
+
+		In [2]: os.path.ge
+		os.path.genericpath  os.path.getctime     os.path.getsize
+		os.path.getatime     os.path.getmtime     
+
+	第二部分演示内容：方法1
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类
+		    class Chinese(object):
+			    print "I am chinese"
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+
+
+
+		# 定义一个对象,,使用方法1对内部类时行实例化
+		tom = People.Chinese()
+
+	第三部分演示内容：方法1
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类,name为子类属性
+		    class Chinese(object):
+			    print "I am chinese"
+			    name = 'hanghailong'
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+
+
+
+		# 定义一个对象,,使用方法1对内部类时行实例化
+		tom = People.Chinese()
+		# 访问子类的一个属性，在上面通过对象声明完成后，就可以使用对象名.属性的形式访问子类中的属性。
+		print tom.name
+
+	第四部分演示内容：方法2
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类,name为子类属性
+		    class Chinese(object):
+			    print "I am chinese"
+			    name = 'hanghailong'
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+
+
+
+		# 定义一个ren对象,先实例化People
+		ren = People()
+
+		# 定义一个tom对象，通过使用对象ren读取People类中的子类Chinese进行实例化
+		tom = ren.Chinese
+		# 访问子类的一个属性，在上面通过对象声明完成后，就可以使用对象名.属性的形式访问子类中的属性。
+		print tom.name
+
+	第五部分演示内容：通过类的名称访问其子类内部属性（全局）
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类,name为子类属性
+		    class Chinese(object):
+			    print "I am chinese"
+			    name = 'hanghailong'
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+
+
+		# 通过People类名称直接访问Chinese子类当中的name属性
+		print People.Chinese.name
+
+
+	第六部分演示内容：与上例类似的写法，print People.Chinese().name，此种是通过对象的方法访问
+
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类,name为子类属性
+		    class Chinese(object):
+			    print "I am chinese"
+			    name = 'hanghailong'
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+
+
+		# 通过对象的方式访问name属性
+		print People.Chinese().name
+
+类的内置方法
+	也称为魔术方法
+	__str__(self)
+	构造函数与析构函数
+	构造函数：用于初始化类的内部状态，python提供的构造函数是__init__();__init__()方法是可选的，如果不提供，python会给出一个默认的__init__()方法
+	析构函数：用于释放对象占用的资源，python提供的析构函数是__del__();__del__()也是可选的，如果不提供，则python会在后台提供默认析构函数。
+
+	第一部分演示内容：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+		# 在People类中创建一个chinese的子类，也称做内部类,name为子类属性
+		    class Chinese(object):
+
+			    name = 'hanghailong'
+
+
+
+
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+		# 定义一个私有__talk方法
+		    def __talk(self):
+			print "I am talking whit tom"
+
+		# 装饰器@classmethod，用来指定其下方的test方法属性动态方法
+		    @classmethod
+
+		# 定义一个公有test类方法,调用类属性，当类属性写在类方法中被调用时，才会被加载到内存里面。
+		    def test(self):
+			print "this is class method"
+		
+		
+
+		# 定义一个ren对象
+		ren = People()
+		# 打印ren对象，返回的结果是ren对象在内存中的地址
+		print ren
+
+	第二部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		
+		# think是公有方法
+		    def think(self):
+
+			self.color = 'black'
+
+			print "I am a %s"  % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象
+		ren = People()
+		# 打印ren对象，返回的结果是ren对象在内存中的地址
+		print ren
+
+
+构造函数：用于初始化类的内部状态，python提供的构造函数是__init__();__init__()方法是可选的，如果不提供，python会给出一个默认的__init__()方法
+
+	第一部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值。自动执行
+		    def __init__(self):
+			self.color = "blackee"
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象
+		ren = People()
+		# 打印ren对象，返回的结果是blackee
+		print ren.color
+
+	第二部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值。自动执行
+		    def __init__(self):
+			self.color = "blackee"
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象
+		#ren = People()
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+
+
+	第三部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			self.color = c
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象,没有传入参数，默认使用c参数。
+		ren = People()
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+
+	第四部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			self.color = c
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象,传入参数green，被c参数接收。
+		ren = People("green")
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+
+	第五部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			self.color = c
+			# 初始化方类不仅可以放属性，还可以放公有方法，对象调用后，也会自动执行，显示公有方法中的内容
+			self.think()
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象,传入参数green，被c参数接收。
+		ren = People("green")
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+
+	第六部分演示内容：  验证__init__方法什么时候执行？
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			# 验证__init__方法什么时候执行
+			print "Init..."
+			self.color = c
+			# 初始化方类不仅可以放属性，还可以放公有方法，对象调用后，也会自动执行，显示公有方法中的内容
+			self.think()
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+
+		# 定义一个ren对象,传入参数green，被c参数接收。
+		ren = People("green")
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+
+析构函数：用于释放对象占用的资源，python提供的析构函数是__del__();__del__()也是可选的，如果不提供，则python会在后台提供默认析构函数。
+	第一部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			# 验证__init__方法什么时候执行
+			print "Init..."
+			self.color = c
+			# 初始化方类不仅可以放属性，还可以放公有方法，对象调用后，也会自动执行，显示公有方法中的内容
+			self.think()
+			# 打开一个文件，可以使用__del__函数进行内存释放，关闭。
+			self.fd = open("/etc/hosts")
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+		    def __del__(self):
+			# 验证__del__什么时候执行的？
+			print "Del..."
+			# 把__init__方法里面打开的文件关闭
+			self.fd.close()
+
+		# 定义一个ren对象,传入参数green，被c参数接收。
+		ren = People("green")
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+		# 表示程序结束，__del__是在程序结束之后执行的？
+		print "main end"
+
+
+python垃圾回收机制
+	python采用垃圾回收机制来清理不再使用的对象：python提供gc模块释放不再使用的对象。python采用“引用计数”的算法方式来处理回收，即：当某个对象在其作用域内不再被其他对象引用的时候，python就自动清除对象；gc模块的collect()可以一次性收集所有待处理的对象（gc.collect）
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+		# 导入gc模块
+		import gc
+
+		class People(object):
+
+		    name = 'tom'
+		    __age = 21
+		    color = 'yellow'
+
+
+		# 定义__str__(self)内置方法，指定调用类时返回的内容，而不是其在内存中的地址。
+		    def __str__(self):
+			    return "This is People Class"
+
+		# 定义一个初始化的类方法，可以在使用对象调用时，使用其定义的属性，如果使用类名称访问，初始化方法定义类属性不生效，依旧显示在类中定义的属性值
+		    def __init__(self,c="white"):
+			# 验证__init__方法什么时候执行
+			print "Init..."
+			self.color = c
+			# 初始化方类不仅可以放属性，还可以放公有方法，对象调用后，也会自动执行，显示公有方法中的内容
+			self.think()
+			# 打开一个文件，可以使用__del__函数进行内存释放，关闭。
+			self.fd = open("/etc/hosts")
+
+		# think是公有方法
+		    def think(self):
+			self.color = 'black'
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+			print self.__age
+
+		    def __del__(self):
+			# 验证__del__什么时候执行的？
+			print "Del..."
+			# 把__init__方法里面打开的文件关闭
+			self.fd.close()
+		
+		# gc.collect计数为0表示没有需要回收的
+		print gc.collect()
+
+		# 定义一个ren对象,传入参数green，被c参数接收。
+		ren = People("green")
+		print ren.color
+		# 通过类名称People进行访问，返回的结果是yellow
+		print People.color
+		# 表示程序结束，__del__是在程序结束之后执行的？
+		print "main end"
+
+
+		# gc.collect计数为0表示没有需要回收的
+		print gc.collect()
+
+类的继承：
+	继承是面向对象的重要特性之一
+	继承关系：继承是相对两个类而言的父子关系，子类继承子父类的所有公有属性和方法
+	继承实现了代码重用
+	
+	使用继承：
+		继承可以重用已经已经存在的数据和行为，减少代码的重复编写。python在类名后使用一对括号来表示继承关系，括号中的类即为父类
+		class Myclass(ParentClass)
+		如果父类定义了__init__方法，子类必须显式调用父类的__init__方法：
+		ParentClass.__init__(self,[args...])
+		如果子类需要扩展父类的行为，可以添加__init__方法的参数。
+
+	第一部分演示内容：
+
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			# 定义一个父类People
+			class People(object):
+
+			# 定义一个类属性
+			    color = 'yellow'
+
+
+			# 定义一个类方法，think是公有方法
+			    def think(self):
+
+				print "I am a %s" % self.color
+
+				print "I am a thinker"
+
+
+			# 子类继承父类的方法
+			class Chinese(People):
+			    pass
+			# 使用子类定义一个对象，并使用此对象引用父类的属性
+			cn = Chinese()
+			print cn.color
+
+	第二部分演示内容：
+		例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		# 定义一个父类People
+		class People(object):
+
+		# 定义一个类属性
+		    color = 'yellow'
+
+
+		# 定义一个类方法，think是公有方法
+		    def think(self):
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+
+		# 子类继承父类的方法
+		class Chinese(People):
+		    pass
+
+		cn = Chinese()
+		print cn.color
+		# 对象可以直接调用父类里在的方法
+		cn.think()
+	
+	第三部分演示内容：
+		例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		# 定义一个父类People
+		class People(object):
+
+		# 定义一个类属性
+		    color = 'yellow'
+
+		# 定义一个构造函数，查看子类能否继承？dwall表示居住位置
+		    def __init__(self):
+			self.dwall = 'Earth'
+
+
+		# 定义一个类方法，think是公有方法
+		    def think(self):
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+
+		# 子类继承父类的方法
+		class Chinese(People):
+		    pass
+
+		cn = Chinese()
+		print cn.color
+		# 在此处调用构造函数
+		print cn.dwall
+
+		# 对象可以直接调用父类里在的方法
+		cn.think()
+
+	第四部分演示内容：如果父类定义了__init__方法，子类必须显式调用父类的__init__方法：
+		ParentClass.__init__(self,[args...])
+
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		# 定义一个父类People
+		class People(object):
+
+		# 定义一个类属性
+		    color = 'yellow'
+
+		# 定义一个构造函数，查看子类能否继承？dwall表示居住位置,c为构造函数中的一个形参，如果子类不使用显式调用，则会报错。
+		    def __init__(self,c):
+			print 'Init...' # 验证子类是否调用？
+			self.dwall = 'Earth'
+
+
+		# 定义一个类方法，think是公有方法
+		    def think(self):
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+
+		# 子类继承父类的方法
+		class Chinese(People):
+		    def __init__(self):
+			People.__init__(self,'red') # 在子类中要显式调用，并给c赋值
+		    pass
+
+		cn = Chinese()
+
+	第五部分演示内容：使用super函数调用父类中的构造函数
+		例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		# 定义一个父类People
+		class People(object): # 此处可以使用传统方法定义类，格式为：class People:或class People():,但是在使用super函数进行子类调用父类构造函数时，
+				        # 必须使用新格式方法定义
+
+		# 定义一个类属性
+		    color = 'yellow'
+
+		# 定义一个构造函数，查看子类能否继承？dwall表示居住位置,c为构造函数中的一个形参，如果子类不使用显式调用，则会报错。
+		    def __init__(self,c):
+			print 'Init...' # 验证子类是否调用？
+			self.dwall = 'Earth'
+
+
+		# 定义一个类方法，think是公有方法
+		    def think(self):
+
+			print "I am a %s" % self.color
+
+			print "I am a thinker"
+
+
+		# 子类继承父类的方法
+		class Chinese(People):
+		    def __init__(self):
+			super(Chinese,self).__init__('red') # 使用super函数在子类中要显式调用父类构造函数，并给c赋值
+		    pass
+
+		cn = Chinese()
+
+	第六部分演示内容：在子类当中可以直接定义属性及方法
+		例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			# 定义一个父类People
+			class People(object): # 此处可以使用传统方法定义类，格式为：class People:或class People():,但是在使用super函数进行子类调用父类构造函数时，
+						# 必须使用新格式方法定义
+
+			# 定义一个类属性
+			    color = 'yellow'
+
+			# 定义一个构造函数，查看子类能否继承？dwall表示居住位置,c为构造函数中的一个形参，如果子类不使用显式调用，则会报错。
+			    def __init__(self,c):
+				print 'Init...' # 验证子类是否调用？
+				self.dwall = 'Earth'
+
+
+			# 定义一个类方法，think是公有方法
+			    def think(self):
+
+				print "I am a %s" % self.color
+
+				print "I am a thinker"
+
+
+			# 子类继承父类的方法
+			class Chinese(People):
+			    def __init__(self):
+				super(Chinese,self).__init__('red') # 使用super函数在子类中要显式调用父类构造函数，并给c赋值
+
+			  
+			# 子类中定义其方法
+			    def talk(self):
+				print 'I like talking'
+
+			cn = Chinese()
+
+			# 直接进行调用
+			cn.talk()
+
+
+	第七部分演示内容：在子类调用父类过程中，也可以直接修改子类继承过来的父类的方法
+		例如：
+		#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			# 定义一个父类People
+			class People(object): # 此处可以使用传统方法定义类，格式为：class People:或class People():,但是在使用super函数进行子类调用父类构造函数时，
+						# 必须使用新格式方法定义
+
+			# 定义一个类属性
+			    color = 'yellow'
+
+			# 定义一个构造函数，查看子类能否继承？dwall表示居住位置,c为构造函数中的一个形参，如果子类不使用显式调用，则会报错。
+			    def __init__(self,c):
+				print 'Init...' # 验证子类是否调用？
+				self.dwall = 'Earth'
+
+
+			# 定义一个类方法，think是公有方法
+			    def think(self):
+
+				print "I am a %s" % self.color
+
+				print "I am a thinker"
+
+
+			# 子类继承父类的方法
+			class Chinese(People):
+			    def __init__(self):
+				super(Chinese,self).__init__('red') # 使用super函数在子类中要显式调用父类构造函数，并给c赋值
+
+
+			# 子类中修改父类定义的方法
+			    def think(self):
+				print 'I like talking'
+
+			cn = Chinese()
+
+			# 直接进行调用
+			cn.think()
+
+类的多重继承：
+	python支持多重继承，即一个类可以继承多个父类：
+	语法：
+	class class_name(Parent_c1,Parent_c2,...)
+	注意：
+	当父类中出现多个自定义的__init__方法时，多重继承只执行第一个类的__init__方法，其他不执行。
+	
+	第一部分演示内容：
+	例如：
+		#!/usr/bin/env python
+		# -*- encoding: utf8 -*-
+
+
+		# 定义一个父类People
+		class People(object):
+
+		# 定义一个类属性
+		    color = 'yellow'
+
+		    def __init__(self):
+
+			self.dwall = 'Earth'
+			self.color = 'yellow'
+
+		# 定义一个类方法，think是公有方法
+		    def think(self):
+
+			print "I am a %s" % self.color
+
+			print "My home is %s" % self.dwall
+
+		# 再定义一个类
+		class Martian(object):
+		    color = 'red'
+
+		    def __init__(self):
+			self.dwell = 'Martian'
+
+		# 子类多重继承父类的方法,与存放位置有关
+		class Chinese(Martian,People):
+		    def __init__(self):
+			People.__init__(self)
+
+
+
+		cn = Chinese()
+
+		# 直接进行调用
+		cn.think()
+
+	第二部分演示内容：
+	例如：
+			#!/usr/bin/env python
+			# -*- encoding: utf8 -*-
+
+
+			# 定义一个父类People
+			class People(object):
+
+			# 定义一个类属性
+			    color = 'yellow'
+
+			    def __init__(self):
+
+				self.dwall = 'Earth'
+				self.color = 'yellow'
+
+			# 定义一个类方法，think是公有方法
+			    def think(self):
+
+				print "I am a %s" % self.color
+
+				print "My home is %s" % self.dwall
+
+			# 再定义一个类
+			class Martian(object):
+			    color = 'red'
+
+			    def __init__(self):
+				self.dwell = 'Martian'
+		
+			# 又定义了一个方法，此方法可以被直接调用
+			    
+			    def talk(self):
+				print "I like talking"
+
+			# 子类多重继承父类的方法,与存放位置有关
+			class Chinese(Martian,People):
+			    def __init__(self):
+				People.__init__(self)
+
+
+
+			cn = Chinese()
+
+			# 直接进行调用
+			cn.think()
+			cn.talk()
+
+类属性总结
+	例如：
+			#!/usr/bin/python
+			# coding: utf8
+
+			class MyClass(object):
+			    var1 = '类属性，类的公有属性 var1'
+			    __var2 = '类的私有属性 __var2'
+
+			    def func1(self):
+				self.var3 = '对象的公有属性 var3'
+				self.__var4 = '对象的私变量有属__var4'
+				var5 = '函数的局部'
+
+
+			# 在类内部通过方法进行类属性调用，此处第二部分演示内容
+			    def func2(self):
+				print self.var1
+				print self.__var2
+				# 此为第三部分演示内容
+				print self.var3
+
+
+
+
+
+
+			# 定义一个对象实例
+			mc = MyClass()
+
+			# 类的属性可以直接通过对象访问
+			print mc.var1
+
+			# 类的私有属性通过以下格式访问
+			print mc._MyClass__var2
+
+			#对象的公有属性可以通过先定义方法，再进行调用。
+			mc.func1()
+			print mc.var3
+
+			# 通过类进行公有属性访问
+			print MyClass.var1
+
+			# 通过类验证是否可以访问类的私有属性(不能访问)
+			#print MyClass.__var2
+
+			# 通过类验证是否可以访问对象的公有属性(不能访问)
+			# print MyClass.var3
+
+			# 通过类访问对象的公有属性（验证？不能访问）
+			#nc = MyClass()
+			#nc.fun1()
+			#print MyClass.var3
+
+
+
+			# 为第二部分演示内容,可以访问
+			bc = MyClass()
+			bc.func2()
+
+			# 第三部分演示内容
+			cc = MyClass()
+			cc.func1()
+			cc.func2()
+
+
+
+
+
+
+
+
+	
+
+
+类方法总结
+	例如：
+			#!/usr/bin/python
+			# coding: utf8
+
+			class MyClass(object):
+			    name = 'Test'
+
+			# 第五部分内容,定义一个构造函数，在类进行实例化时被调用
+			    def __init__(self):
+				self.func1()
+				self.__func2()
+				self.classFun()
+				self.staticFun()
+
+			    def func1(self):
+				print self.name,
+				print "我是公有方法"
+
+				# 第二部分演示内容
+				self.__func2() # 此处在第五部分演示时，请注释掉。
+
+			    def __func2(self):
+				print self.name,
+				print "我是私有方法"
+
+			# 第三部分演示内容，仅下面，类方法是可以通过类进行调用的，但需要使用装饰器说明其可以被类调用
+			    @classmethod #此为第三部分演示添加
+			    def classFun(self):
+				print self.name,
+				print "我是类方法"
+			# 第四部分演示内容，仅下面，静态方法也是通过类进行调用，但也需要使用装饰器说明
+			    @staticmethod
+
+			    def staticFun():
+				print MyClass.name,
+				print "我是静态方法"
+
+			#  第一部分演示内容
+			# 实例化
+			#mc = MyClass()
+			#通过对象调用公有方法
+			#mc.func1()
+
+			#第二部分演示内容(不可以调用成功，因为私有方法只能在内部调用，可以在func1中调用，从而间接使用__func2)
+			# 实例化
+			#mc = MyClass()
+			#通过对象调用私有方法
+			#mc.__func2()
+
+			# 只能通过调用fun1间接调用
+			#mc.func1()
+
+			# 第三部分演示内容
+
+			# 实例化
+			#mc = MyClass()
+			#使用类进行调用类方法
+			#MyClass.classFun()
+
+
+			# 第四部分演示内容
+
+			# 实例化
+			#mc = MyClass()
+			#使用类进行调用类方法
+			#MyClass.staticFun()
+
+			# 第五部分演示内容
+
+			# 实例化
+			mc = MyClass()
+
+
+
+
+	练习：使用python实现memcached服务管理程序
+
+
+
+	第一部分演示内容：查看memcached安装情况
+	
+	安装memcached
+	[root@localhost Packages]# rpm -ivh memcached-1.4.15-9.el7.x86_64.rpm 
+	
+	查看是否安装memcached
+	[root@localhost Packages]# rpm -qa | grep memcached
+	memcached-1.4.15-9.el7.x86_64
+
+	查看memcached服务状态(是否开机自启动？)
+	[root@localhost Packages]# systemctl list-unit-files | grep memcached
+	memcached.service                           disabled
+	
+	启动memcached服务
+	[root@localhost Packages]# systemctl start memcached
+
+	查看memcached服务状态
+	[root@localhost Packages]# systemctl status memcached
+	● memcached.service - Memcached
+	   Loaded: loaded (/usr/lib/systemd/system/memcached.service; disabled; vendor preset: disabled)
+	   Active: active (running) since 三 2016-06-20 20:19:39 CST; 15s ago
+	 Main PID: 38772 (memcached)
+	   CGroup: /system.slice/memcached.service
+		   └─38772 /usr/bin/memcached -u memcached -p 11211 -m 64 -c 1024 ＃此处为重点，使用python重点模仿此位置文件：-u 指定服务启动的用户名，-p 指定启动端口，-m指定缓存大小（单位为M），-c指定连接数。此处选择内容保存在/etc/sysconfig/memcached
+
+	查看memcached服务后台进程状态
+	[root@localhost Packages]# ps -ef | grep memcached
+	memcach+ 101395      1  0 20:31 ?        00:00:00 /usr/bin/memcached -u memcached -p 11211 -m 64 -c 1024
+
+	手动启动memcached服务
+	[root@localhost Packages]# /usr/bin/memcached -u memcached -p 11211 -m 64 -c 1024   注：尽量放在后台运行
+
+
+	扩展阅读：
+
+	CentOS 7继承了RHEL 7的新的特性，例如强大的systemctl，而systemctl的使用也使得以往系统服务的/etc/init.d的启动脚本的方式就此改变，也大幅提高了系统服务的运行效率。但服务的配置和以往也发生了极大的不同，说实在的，变的简单而易用了许多。
+
+下面我们以利用forever来实现Node.js项目自启动为例，初探CentOS 7的systemctl。
+
+前提：Node.js环境已配置成功，forever包安装成功，有一个能跑的Node.js程序。
+
+CentOS 7的服务systemctl脚本存放在：/usr/lib/systemd/，有系统（system）和用户（user）之分，像需要开机不登陆就能运行的程序，还是存在系统服务里吧，即：/usr/lib/systemd/system目录下
+
+每一个服务以.service结尾，一般会分为3部分：[Unit]、[Service]和[Install]，我写的这个服务用于开机运行Node.js项目，具体内容如下：
+
+[Unit]
+Description=xiyoulibapi
+After=network.target remote-fs.target nss-lookup.target
+ 
+[Service]
+Type=forking
+PIDFile=/node.js/pid
+ExecStart=/usr/local/bin/forever start /node.js/xiyoulib/bin/www
+ExecReload=/usr/local/bin/forever restart /node.js/xiyoulib/bin/www
+ExecStop=/usr/local/bin/forever stop /node.js/xiyoulib/bin/www
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target
+
+[Unit]部分主要是对这个服务的说明，内容包括Description和After，Description用于描述服务，After用于描述服务类别
+
+[Service]部分是服务的关键，是服务的一些具体运行参数的设置，这里Type=forking是后台运行的形式，PIDFile为存放PID的文件路径，ExecStart为服务的具体运行命令，ExecReload为重启命令，ExecStop为停止命令，PrivateTmp=True表示给服务分配独立的临时空间，注意：[Service]部分的启动、重启、停止命令全部要求使用绝对路径，使用相对路径则会报错！
+
+[Install]部分是服务安装的相关设置，可设置为多用户的
+
+服务脚本按照上面编写完成后，以754的权限保存在/usr/lib/systemd/system目录下，这时就可以利用systemctl进行配置了
+
+首先，使用systemctl start [服务名（也是文件名）]可测试服务是否可以成功运行，如果不能运行则可以使用systemctl status [服务名（也是文件名）]查看错误信息和其他服务信息，然后根据报错进行修改，直到可以start，如果不放心还可以测试restart和stop命令。
+
+接着，只要使用systemctl enable xxxxx就可以将所编写的服务添加至开机启动即可。
+
+
+这样看来，虽然systemctl比较陌生，但是其实比init.d那种方式简单不少，而且使用简单，systemctl能简化的操作还有很多，现在也有不少的资料，看来RHEL/CentOS比其他的Linux发行版还是比较先进的，此次更新也终于舍弃了Linux 2.6内核，无论是速度还是稳定性都提升不少。
+
+	
+	查看systemctl帮助
+	[root@localhost system]# man systemctl
+
+	以上部分内容在centos6及以下版本与centos7不同，请注意比较。
+
+
+
+	第二部分演示内容：
+			#!/usr/bin/env python
+			# coding:utf8
+
+			# 先进行程序主框架搭建，以下部分按服务开启、停止、重启等状态进行主框架设计
+
+			# 因程序需要，导入sys模块，演示时，最后写这个导入。
+			import sys
+
+			# 定义一个类Process(object)
+			class Process(object):
+			    # 使用3个单引号或3个双引号进行注释
+			    '''memcached script'''
+			    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+			    def __init__(self,name,program,args,workdir):
+				#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+				self.name = name
+				self.program = program
+				self.args = args
+				self.workdir = workdir
+
+				# 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+    			   def _init(self):
+
+
+			    # 构建类的方法，用于实例化
+			    # 定义一个start方法，用于启动服务
+			    def start(self):
+
+
+			    #定义一个stop方法，用于停止服务，杀死进程即可
+			    def stop(self):
+
+
+			    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+			    def restart(self):
+				self.stop()
+
+				self.start()
+
+			    # 定义一个status方法，用查看服务状态
+			    def status(self):
+
+
+			# 定义一个main函数，用于判断用户是否输入参数
+			def main():
+			    # 使用异常进行判断
+			    try:
+				cmd = sys.args[1]
+			    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+			    except IndexError,e:
+				print "Option error"
+				# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+				sys.exit()
+
+
+
+	第三部分演示内容：进一步完善第二部分演示内容
+	
+	
+			#!/usr/bin/env python
+			# coding:utf8
+
+			# 属于第三部分演示内容，对第二部分内容进行完善
+
+			# 因程序需要，导入sys模块
+			import sys
+
+			# 定义一个类Process(object)
+			class Process(object):
+			    # 使用3个单引号或3个双引号进行注释
+			    '''memcached script'''
+			    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+			    def __init__(self,name,program,args,workdir):
+				#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+				self.name = name
+				self.program = program
+				self.args = args
+				self.workdir = workdir
+
+			    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+			    def _init(self):
+
+
+			    # 构建类的方法，用于实例化
+			    # 定义一个start方法，用于启动服务
+			    def start(self):
+
+
+			    #定义一个stop方法，用于停止服务，杀死进程即可
+			    def stop(self):
+
+
+			    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+			    def restart(self):
+				self.stop()
+
+				self.start()
+
+			    # 定义一个status方法，用查看服务状态
+			    def status(self):
+
+			    # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+			    def help(self):
+
+
+			# 定义一个main函数，用于判断用户是否输入参数
+			def main():
+			    # 第三部分演示内容，进行类实例化
+			    # 在实例化之前定义4个变量
+			    name = 'memcached'
+			    prog = '/usr/bin/memcached'
+			    args = '-u memcached -p 11211 -c 1024 -m 64'
+			    wd = '/var/tmp/memcached'
+
+			    #实例化
+			    pm = Process(
+					name = name,
+					program = prog,
+					args = args,
+					workdir =wd
+			    )
+			    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+			    # 使用异常进行判断
+			    try:
+				cmd = sys.args[1]
+			    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+			    except IndexError,e:
+				print "Option error"
+				# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+				sys.exit()
+
+
+			    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+			    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+				pm.start()
+			    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+				pm.stop()
+			    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+				pm.restart()
+			    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+				pm.status()
+			    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+				pm.help()
+
+
+			# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+			if __name__ == '__main__':
+			    main
+
+
+	第四部分演示内容：
+		#!/usr/bin/env python
+		# coding:utf8
+
+		# 属于第四部分演示内容，对第三部分内容进行完善
+
+		# 因程序需要，导入sys模块
+		import sys
+
+		# 第四部分：导入os模块
+		import os
+
+		# 第四部分：导入Popen及PIPE
+		from subprocess import Popen,PIPE
+
+
+		# 定义一个类Process(object)
+		class Process(object):
+		    # 使用3个单引号或3个双引号进行注释
+		    '''memcached script'''
+		    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+		    def __init__(self,name,program,args,workdir):
+			#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+			self.name = name
+			self.program = program
+			self.args = args
+			self.workdir = workdir
+
+		    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+		    def _init(self):
+			'''第四部分内容：create 实例化过程中定义的wd变量所对应的目录/var/tmp/memcached'''
+			#判断指定目录存不存在，使用os模块，如果不存在，则创建。
+			if not os.path.exists(self.workdir):
+
+			    os.mkdir(self.workdir) #创建目录
+
+			    os.chdir(self.workdir) #切换目录
+
+		    #第四部分：初始化定义pidFile
+		    def _pidFile(self):
+
+			'''第四部分：创建pidFile文件，/var/tmp/memcached/memcached.pid'''
+			return os.path.join(self.workdir,"%s.pid" % self.name)
+
+
+		    # 第四部分：定义一个写Pid的方法，把start方法中得到的Pid写入到一个文件中
+		    def _wirterPid(self):
+			# 判断是否获取pid?
+			if self.pid:
+			    #获取后写入_pidFile方法中定义的文件中
+			    with open(self._pidFile(),'w') as fd:
+				#以字符串格式写入，self.pid默认为数字。
+				fd.write(str(self.pid))
+
+
+
+		    # 构建类的方法，用于实例化
+		    # 定义一个start方法，用于启动服务
+		    def start(self): # 第四部分：shell:memcached -u memcached -p 11211 -m 64 -c 1024
+			# 第四部分：定义命令格式
+			cmd = self.program + ' ' + self.args
+
+			#第四部分：把cmd执行结果做为标准输出写到管道中，PIPE即管道，在shell中执行。
+			p = Popen(cmd,stdout=PIPE,shell=True)
+
+			# 可以把以上命令在ipython执行,并查看结果
+			# In [1]: from subprocess import Popen,PIPE
+			# In [2]: p = Popen('memcached -u nobody -p 11211 -c 1024 -m 64',shell=True)
+			# In [3]: p.pid
+			#Out[3]: 30256
+
+
+
+			# 第四部分：获取以上执行结果的pid，并写到一个文件中，上面定义的_pidFile方法
+			#p.pid #第四部分第一次这样定义，但为了能写入到文件中，应以下列方式定义此对象
+			self.pid = p.pid
+			#以上把pid定义为一个类的属性，可以直接在上面的_witerPid方法中使用了。
+
+			#因为要写文件，因此要调用以下方法
+			self._writerPid()
+
+			#启动成功能用户提示：
+			print "%s start Sucessful" % self.name
+
+
+
+
+		    #定义一个stop方法，用于停止服务，杀死进程即可
+		    def stop(self):
+			pass #因为没有写程序在此方法中，可以使用pass占位，防止运行时出错
+
+
+		    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+		    def restart(self):
+			self.stop()
+
+			self.start()
+
+		    # 定义一个status方法，用查看服务状态
+		    def status(self):
+			pass
+
+		     # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+		    def help(self):
+			pass
+
+		# 定义一个main函数，用于判断用户是否输入参数
+		def main():
+		    # 第三部分演示内容，进行类实例化
+		    # 在实例化之前定义4个变量
+		    name = 'memcached'
+		    prog = '/usr/bin/memcached'
+		    args = '-u memcached -p 11211 -c 1024 -m 64' #centos6系统中查看/etc/init.d/memcached文件
+		    wd = '/var/tmp/memcached' #第四部分：需要在初始化方法中进行此目录创建
+
+		    #实例化
+		    pm = Process(
+				name = name,
+				program = prog,
+				args = args,
+				workdir =wd
+		    )
+		    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+		    # 使用异常进行判断
+		    try:
+			cmd = sys.args[1]
+		    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+		    except IndexError,e:
+			print "Option error"
+			# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+			sys.exit()
+
+
+		    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+		    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+			pm.start()
+		    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+			pm.stop()
+		    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+			pm.restart()
+		    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+			pm.status()
+		    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+			pm.help()
+
+
+		# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+		if __name__ == '__main__':
+		    main
+
+
+
+
+
+
+
+
+
+
+	第五部分演示内容：
+	[root@localhost hello]# python class45_memcached3.py start
+	[root@localhost hello]# ps -ef | grep memcached
+
+	注：以上程序在执行时，是可以执行的，但如果/var/tmp/memcached目录不存在，会报错，主要因为定义了_init()方法没有在start方法中调用，调用即可，如第六部分演示内容：
+
+
+	第六部分演示内容：
+		#!/usr/bin/env python
+		# coding:utf8
+
+		#添加了第六部分演示内容。
+
+		# 因程序需要，导入sys模块
+		import sys
+
+		# 第四部分：导入os模块
+		import os
+
+		# 第四部分：导入Popen及PIPE
+		from subprocess import Popen,PIPE
+
+
+		# 定义一个类Process(object)
+		class Process(object):
+		    # 使用3个单引号或3个双引号进行注释
+		    '''memcached script'''
+		    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+		    def __init__(self,name,program,args,workdir):
+			#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+			self.name = name
+			self.program = program
+			self.args = args
+			self.workdir = workdir
+
+		    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+		    def _init(self):
+			'''第四部分内容：create 实例化过程中定义的wd变量所对应的目录/var/tmp/memcached'''
+			#判断指定目录存不存在，使用os模块，如果不存在，则创建。
+			if not os.path.exists(self.workdir):
+
+			    os.mkdir(self.workdir) #创建目录
+
+			    os.chdir(self.workdir) #切换目录
+
+		    #第四部分：初始化定义pidFile
+		    def _pidFile(self):
+
+			'''第四部分：创建pidFile文件，/var/tmp/memcached/memcached.pid'''
+			return os.path.join(self.workdir,"%s.pid" % self.name)
+
+
+		    # 第四部分：定义一个写Pid的方法，把start方法中得到的Pid写入到一个文件中
+		    def _wirterPid(self):
+			# 判断是否获取pid?
+			if self.pid:
+			    #获取后写入_pidFile方法中定义的文件中
+			    with open(self._pidFile(),'w') as fd:
+				#以字符串格式写入，self.pid默认为数字。
+				fd.write(str(self.pid))
+
+
+
+		    # 构建类的方法，用于实例化
+		    # 定义一个start方法，用于启动服务
+		    def start(self): # 第四部分：shell:memcached -u memcached -p 11211 -m 64 -c 1024
+		
+			# 第六部分演示内容，如果/var/tmp/memcached目录不存在，一定要在此调用_init（）方法
+			self._init()
+		
+		
+			# 第四部分：定义命令格式
+			cmd = self.program + ' ' + self.args
+
+			#第四部分：把cmd执行结果做为标准输出写到管道中，PIPE即管道，在shell中执行。
+			p = Popen(cmd,stdout=PIPE,shell=True)
+
+			# 可以把以上命令在ipython执行,并查看结果
+			# In [1]: from subprocess import Popen,PIPE
+			# In [2]: p = Popen('memcached -u nobody -p 11211 -c 1024 -m 64',shell=True)
+			# In [3]: p.pid
+			#Out[3]: 30256
+
+
+
+			# 第四部分：获取以上执行结果的pid，并写到一个文件中，上面定义的_pidFile方法
+			#p.pid #第四部分第一次这样定义，但为了能写入到文件中，应以下列方式定义此对象
+			self.pid = p.pid
+			#以上把pid定义为一个类的属性，可以直接在上面的_witerPid方法中使用了。
+
+			#因为要写文件，因此要调用以下方法
+			self._writerPid()
+
+			#启动成功能用户提示：
+			print "%s start Sucessful" % self.name
+
+
+
+
+		    #定义一个stop方法，用于停止服务，杀死进程即可
+		    def stop(self):
+			pass #因为没有写程序在此方法中，可以使用pass占位，防止运行时出错
+
+
+		    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+		    def restart(self):
+			self.stop()
+
+			self.start()
+
+		    # 定义一个status方法，用查看服务状态
+		    def status(self):
+			pass
+
+		     # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+		    def help(self):
+			pass
+
+		# 定义一个main函数，用于判断用户是否输入参数
+		def main():
+		    # 第三部分演示内容，进行类实例化
+		    # 在实例化之前定义4个变量
+		    name = 'memcached'
+		    prog = '/usr/bin/memcached'
+		    args = '-u memcached -p 11211 -c 1024 -m 64' #centos6系统中查看/etc/init.d/memcached文件
+		    wd = '/var/tmp/memcached' #第四部分：需要在初始化方法中进行此目录创建
+
+		    #实例化
+		    pm = Process(
+				name = name,
+				program = prog,
+				args = args,
+				workdir =wd
+		    )
+		    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+		    # 使用异常进行判断
+		    try:
+			cmd = sys.args[1]
+		    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+		    except IndexError,e:
+			print "Option error"
+			# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+			sys.exit()
+
+
+		    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+		    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+			pm.start()
+		    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+			pm.stop()
+		    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+			pm.restart()
+		    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+			pm.status()
+		    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+			pm.help()
+
+
+		# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+		if __name__ == '__main__':
+		    main
+
+
+
+	第七部分演示内容：获取memcached pid
+		In [1]: from subprocess import Popen,PIPE 导入模块
+
+		In [2]: p = Popen(['pidof','memcached'],stdout=PIPE) 执行pidof memcached命令，保存到PIPE中
+
+		In [3]: p.stdout.read() 返回一个pid,是字符串。
+		Out[3]: ''
+
+	第八部分演示内容：停止memcached
+
+		#!/usr/bin/env python
+		# coding:utf8
+
+		#添加了第八部分演示内容。
+
+		# 因程序需要，导入sys模块
+		import sys
+
+		# 第四部分：导入os模块
+		import os
+
+		# 第四部分：导入Popen及PIPE
+		from subprocess import Popen,PIPE
+
+
+		# 定义一个类Process(object)
+		class Process(object):
+		    # 使用3个单引号或3个双引号进行注释
+		    '''memcached script'''
+		    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+		    def __init__(self,name,program,args,workdir):
+			#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+			self.name = name
+			self.program = program
+			self.args = args
+			self.workdir = workdir
+
+		    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+		    def _init(self):
+			'''第四部分内容：create 实例化过程中定义的wd变量所对应的目录/var/tmp/memcached'''
+			#判断指定目录存不存在，使用os模块，如果不存在，则创建。
+			if not os.path.exists(self.workdir):
+
+			    os.mkdir(self.workdir) #创建目录
+
+			    os.chdir(self.workdir) #切换目录
+
+		    #第四部分：初始化定义pidFile
+		    def _pidFile(self):
+
+			'''第四部分：创建pidFile文件，/var/tmp/memcached/memcached.pid'''
+			return os.path.join(self.workdir,"%s.pid" % self.name)
+
+
+		    # 第四部分：定义一个写Pid的方法，把start方法中得到的Pid写入到一个文件中
+		    def _wirterPid(self):
+			# 判断是否获取pid?
+			if self.pid:
+			    #获取后写入_pidFile方法中定义的文件中
+			    with open(self._pidFile(),'w') as fd:
+				#以字符串格式写入，self.pid默认为数字。
+				fd.write(str(self.pid))
+
+
+
+		    # 构建类的方法，用于实例化
+		    # 定义一个start方法，用于启动服务
+		    def start(self): # 第四部分：shell:memcached -u memcached -p 11211 -m 64 -c 1024
+
+			# 第六部分演示内容，如果/var/tmp/memcached目录不存在，一定要在此调用_init（）方法
+			self._init()
+
+
+			# 第四部分：定义命令格式
+			cmd = self.program + ' ' + self.args
+
+			#第四部分：把cmd执行结果做为标准输出写到管道中，PIPE即管道，在shell中执行。
+			p = Popen(cmd,stdout=PIPE,shell=True)
+
+			# 可以把以上命令在ipython执行,并查看结果
+			# In [1]: from subprocess import Popen,PIPE
+			# In [2]: p = Popen('memcached -u nobody -p 11211 -c 1024 -m 64',shell=True)
+			# In [3]: p.pid
+			#Out[3]: 30256
+
+
+
+			# 第四部分：获取以上执行结果的pid，并写到一个文件中，上面定义的_pidFile方法
+			#p.pid #第四部分第一次这样定义，但为了能写入到文件中，应以下列方式定义此对象
+			self.pid = p.pid
+			#以上把pid定义为一个类的属性，可以直接在上面的_witerPid方法中使用了。
+
+			#因为要写文件，因此要调用以下方法
+			self._writerPid()
+
+			#启动成功能用户提示：
+			print "%s start Sucessful" % self.name
+
+
+
+		    # 第八部分演示内容
+		    # 创建一个获取Pid的方法
+		    def _getPid(self):
+			# 定义一个变量，执行pidof memcached命令，保存至PIPE中
+			p = Popen(['pidof','memcached'],stdout=PIPE)
+			# 定义一个局部变量接收p输出结果，并使用strip()把换行符去掉
+			pid = p.stdout.read().strip()
+
+			# 返回 pid
+			return pid
+
+
+
+
+		    #定义一个stop方法，用于停止服务，杀死进程即可
+		    def stop(self):
+	
+			# 调用_getPid方法，获取pid
+			pid = self._getPid()
+	
+			# 进行决断，如果获取到了pid，则进行结束
+			if pid:
+			    # 使用os模块中的kill方法，把pid结束，因为在pidof中获取的pid是字符串，要把其转换为int类型，sig为信号，可以是15或9
+			    os.kill(int(pid),sig)
+
+			    # 结束进程的同时删除保存pid文件
+			    if os.path.exists(self._pidFile()):
+			
+				# 移除pid文件
+				os.remove(self._pidFile())
+			
+				#提醒用户服务停止
+				print "%s is stopped" % self.name
+
+
+
+
+
+
+		    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+		    def restart(self):
+			self.stop()
+
+			self.start()
+
+		    # 定义一个status方法，用查看服务状态
+		    def status(self):
+			pass
+
+		     # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+		    def help(self):
+			pass
+
+		# 定义一个main函数，用于判断用户是否输入参数
+		def main():
+		    # 第三部分演示内容，进行类实例化
+		    # 在实例化之前定义4个变量
+		    name = 'memcached'
+		    prog = '/usr/bin/memcached'
+		    args = '-u memcached -p 11211 -c 1024 -m 64' #centos6系统中查看/etc/init.d/memcached文件
+		    wd = '/var/tmp/memcached' #第四部分：需要在初始化方法中进行此目录创建
+
+		    #实例化
+		    pm = Process(
+				name = name,
+				program = prog,
+				args = args,
+				workdir =wd
+		    )
+		    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+		    # 使用异常进行判断
+		    try:
+			cmd = sys.args[1]
+		    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+		    except IndexError,e:
+			print "Option error"
+			# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+			sys.exit()
+
+
+		    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+		    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+			pm.start()
+		    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+			pm.stop()
+		    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+			pm.restart()
+		    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+			pm.status()
+		    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+			pm.help()
+
+
+		# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+		if __name__ == '__main__':
+		    main
+
+
+	第九部分演示内容：查看memcached运行状态及帮助方法
+		#!/usr/bin/env python
+		# coding:utf8
+
+		#添加了第九部分演示内容。
+
+		# 因程序需要，导入sys模块
+		import sys
+
+		# 第四部分：导入os模块
+		import os
+
+		# 第四部分：导入Popen及PIPE
+		from subprocess import Popen,PIPE
+
+
+		# 定义一个类Process(object)
+		class Process(object):
+		    # 使用3个单引号或3个双引号进行注释
+		    '''memcached script'''
+		    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+		    def __init__(self,name,program,args,workdir):
+			#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+			self.name = name
+			self.program = program
+			self.args = args
+			self.workdir = workdir
+
+		    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+		    def _init(self):
+			'''第四部分内容：create 实例化过程中定义的wd变量所对应的目录/var/tmp/memcached'''
+			#判断指定目录存不存在，使用os模块，如果不存在，则创建。
+			if not os.path.exists(self.workdir):
+
+			    os.mkdir(self.workdir) #创建目录
+
+			    os.chdir(self.workdir) #切换目录
+
+		    #第四部分：初始化定义pidFile
+		    def _pidFile(self):
+
+			'''第四部分：创建pidFile文件，/var/tmp/memcached/memcached.pid'''
+			return os.path.join(self.workdir,"%s.pid" % self.name)
+
+
+		    # 第四部分：定义一个写Pid的方法，把start方法中得到的Pid写入到一个文件中
+		    def _wirterPid(self):
+			# 判断是否获取pid?
+			if self.pid:
+			    #获取后写入_pidFile方法中定义的文件中
+			    with open(self._pidFile(),'w') as fd:
+				#以字符串格式写入，self.pid默认为数字。
+				fd.write(str(self.pid))
+
+
+
+		    # 构建类的方法，用于实例化
+		    # 定义一个start方法，用于启动服务
+		    def start(self): # 第四部分：shell:memcached -u memcached -p 11211 -m 64 -c 1024
+
+			# 第六部分演示内容，如果/var/tmp/memcached目录不存在，一定要在此调用_init（）方法
+			self._init()
+
+
+			# 第四部分：定义命令格式
+			cmd = self.program + ' ' + self.args
+
+			#第四部分：把cmd执行结果做为标准输出写到管道中，PIPE即管道，在shell中执行。
+			p = Popen(cmd,stdout=PIPE,shell=True)
+
+			# 可以把以上命令在ipython执行,并查看结果
+			# In [1]: from subprocess import Popen,PIPE
+			# In [2]: p = Popen('memcached -u nobody -p 11211 -c 1024 -m 64',shell=True)
+			# In [3]: p.pid
+			#Out[3]: 30256
+
+
+
+			# 第四部分：获取以上执行结果的pid，并写到一个文件中，上面定义的_pidFile方法
+			#p.pid #第四部分第一次这样定义，但为了能写入到文件中，应以下列方式定义此对象
+			self.pid = p.pid
+			#以上把pid定义为一个类的属性，可以直接在上面的_witerPid方法中使用了。
+
+			#因为要写文件，因此要调用以下方法
+			self._writerPid()
+
+			#启动成功能用户提示：
+			print "%s start Sucessful" % self.name
+
+
+
+		    # 第八部分演示内容
+		    # 创建一个获取Pid的方法
+		    def _getPid(self):
+			# 定义一个变量，执行pidof memcached命令，保存至PIPE中
+			p = Popen(['pidof','memcached'],stdout=PIPE)
+			# 定义一个局部变量接收p输出结果，并使用strip()把换行符去掉
+			pid = p.stdout.read().strip()
+
+			# 返回 pid
+			return pid
+
+
+
+
+		    #定义一个stop方法，用于停止服务，杀死进程即可
+		    def stop(self):
+
+			# 调用_getPid方法，获取pid
+			pid = self._getPid()
+
+			# 进行决断，如果获取到了pid，则进行结束
+			if pid:
+			    # 使用os模块中的kill方法，把pid结束，因为在pidof中获取的pid是字符串，要把其转换为int类型，sig为信号，可以是15或9
+			    os.kill(int(pid),sig)
+			    #例如 os.kill(int(pid),15)
+
+			    # 结束进程的同时删除保存pid文件
+			    if os.path.exists(self._pidFile()):
+
+				# 移除pid文件
+				os.remove(self._pidFile())
+
+				#提醒用户服务停止
+				print "%s is stopped" % self.name
+
+
+
+
+
+
+		    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+		    def restart(self):
+			self.stop()
+
+			self.start()
+
+
+		    # 第九部分演示内容
+
+		    # 定义一个status方法，用查看服务状态
+		    def status(self):
+
+			# 判决pid是否存在？
+			pid = self._getPid()
+			if pid:
+			    print "%s is already running" % self.name
+			else:
+			    print "%s is not running" % self.name
+
+		    # 第九部分内容
+		     # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+		    def help(self):
+			print "Usage: %s {start | stop | status | restart}" % __file__
+			#__file__为内部变量，表示程序本身，当用户输入错误时提醒
+			# shell:python memcached.py abc，这样使用时，会提示用户使用方法。
+		
+
+		# 定义一个main函数，用于判断用户是否输入参数
+		def main():
+		    # 第三部分演示内容，进行类实例化
+		    # 在实例化之前定义4个变量
+		    name = 'memcached'
+		    prog = '/usr/bin/memcached'
+		    args = '-u memcached -p 11211 -c 1024 -m 64' #centos6系统中查看/etc/init.d/memcached文件
+		    wd = '/var/tmp/memcached' #第四部分：需要在初始化方法中进行此目录创建
+
+		    #实例化
+		    pm = Process(
+				name = name,
+				program = prog,
+				args = args,
+				workdir =wd
+		    )
+		    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+		    # 使用异常进行判断
+		    try:
+			cmd = sys.args[1]
+		    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+		    except IndexError,e:
+			print "Option error"
+			# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+			sys.exit()
+
+
+		    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+		    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+			pm.start()
+		    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+			pm.stop()
+		    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+			pm.restart()
+		    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+			pm.status()
+		    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+			pm.help()
+
+
+		# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+		if __name__ == '__main__':
+		    main
+
+
+
+	第十部分演示内容：按以上程序开启memcached服务，当再次开启memcached服务时，系统会提醒用户端口被占用，不执行本次启动操作，但是会把此次产生pid写入到上次启动时的pid文件中，这是一个bug，需要对以上程序进行完善。
+		#!/usr/bin/env python
+		# coding:utf8
+
+		#添加了第十部分演示内容。
+
+		# 因程序需要，导入sys模块
+		import sys
+
+		# 第四部分：导入os模块
+		import os
+
+		# 第四部分：导入Popen及PIPE
+		from subprocess import Popen,PIPE
+
+
+		# 定义一个类Process(object)
+		class Process(object):
+		    # 使用3个单引号或3个双引号进行注释
+		    '''memcached script'''
+		    # 在类中定义一个构造函数，一定指定一个self参数,在对类进行实例化时要传入name（服务名称）,program（程序执行文件的路经）,args（传入-p,-u,-c等参数）,workdir（pid工作目录）参数
+		    def __init__(self,name,program,args,workdir):
+			#分别定义一个变量对参数的赋值进行接收,使用self定义变量，表示定义的变量为类的属性
+			self.name = name
+			self.program = program
+			self.args = args
+			self.workdir = workdir
+
+		    # 用于对服务文件进行检测，如果文件不存在，则进行创建，属于一个普通类方法
+		    def _init(self):
+			'''第四部分内容：create 实例化过程中定义的wd变量所对应的目录/var/tmp/memcached'''
+			#判断指定目录存不存在，使用os模块，如果不存在，则创建。
+			if not os.path.exists(self.workdir):
+
+			    os.mkdir(self.workdir) #创建目录
+
+			    os.chdir(self.workdir) #切换目录
+
+		    #第四部分：初始化定义pidFile
+		    def _pidFile(self):
+
+			'''第四部分：创建pidFile文件，/var/tmp/memcached/memcached.pid'''
+			return os.path.join(self.workdir,"%s.pid" % self.name)
+
+
+		    # 第四部分：定义一个写Pid的方法，把start方法中得到的Pid写入到一个文件中
+		    def _wirterPid(self):
+			# 判断是否获取pid?
+			if self.pid:
+			    #获取后写入_pidFile方法中定义的文件中
+			    with open(self._pidFile(),'w') as fd:
+				#以字符串格式写入，self.pid默认为数字。
+				fd.write(str(self.pid))
+
+
+
+		    # 构建类的方法，用于实例化
+		    # 定义一个start方法，用于启动服务
+		    def start(self): # 第四部分：shell:memcached -u memcached -p 11211 -m 64 -c 1024
+
+			# 第十部分演示内容：修复bug
+			pid = self._getPid()
+			if pid:
+			    print "%s is running..." % self.name
+			    sys.exit()
+
+
+			# 第六部分演示内容，如果/var/tmp/memcached目录不存在，一定要在此调用_init（）方法
+			self._init()
+
+
+			# 第四部分：定义命令格式
+			cmd = self.program + ' ' + self.args
+
+			#第四部分：把cmd执行结果做为标准输出写到管道中，PIPE即管道，在shell中执行。
+			p = Popen(cmd,stdout=PIPE,shell=True)
+
+			# 可以把以上命令在ipython执行,并查看结果
+			# In [1]: from subprocess import Popen,PIPE
+			# In [2]: p = Popen('memcached -u nobody -p 11211 -c 1024 -m 64',shell=True)
+			# In [3]: p.pid
+			#Out[3]: 30256
+
+
+
+			# 第四部分：获取以上执行结果的pid，并写到一个文件中，上面定义的_pidFile方法
+			#p.pid #第四部分第一次这样定义，但为了能写入到文件中，应以下列方式定义此对象
+			self.pid = p.pid
+			#以上把pid定义为一个类的属性，可以直接在上面的_witerPid方法中使用了。
+
+			#因为要写文件，因此要调用以下方法
+			self._writerPid()
+
+			#启动成功能用户提示：
+			print "%s start Sucessful" % self.name
+
+
+
+		    # 第八部分演示内容
+		    # 创建一个获取Pid的方法
+		    def _getPid(self):
+			# 定义一个变量，执行pidof memcached命令，保存至PIPE中
+			p = Popen(['pidof','memcached'],stdout=PIPE)
+			# 定义一个局部变量接收p输出结果，并使用strip()把换行符去掉
+			pid = p.stdout.read().strip()
+
+			# 返回 pid
+			return pid
+
+
+
+
+		    #定义一个stop方法，用于停止服务，杀死进程即可
+		    def stop(self):
+
+			# 调用_getPid方法，获取pid
+			pid = self._getPid()
+
+			# 进行决断，如果获取到了pid，则进行结束
+			if pid:
+			    # 使用os模块中的kill方法，把pid结束，因为在pidof中获取的pid是字符串，要把其转换为int类型，sig为信号，可以是15或9
+			    os.kill(int(pid),sig)
+			    #例如 os.kill(int(pid),15)
+
+			    # 结束进程的同时删除保存pid文件
+			    if os.path.exists(self._pidFile()):
+
+				# 移除pid文件
+				os.remove(self._pidFile())
+
+				#提醒用户服务停止
+				print "%s is stopped" % self.name
+
+
+
+
+
+
+		    # 定义一个restart方法，用于重启服务，重启服务实质就是先停止再启动服务
+		    def restart(self):
+			self.stop()
+
+			self.start()
+
+
+		    # 第九部分演示内容
+
+		    # 定义一个status方法，用查看服务状态
+		    def status(self):
+
+			# 判决pid是否存在？
+			pid = self._getPid()
+			if pid:
+			    print "%s is already running" % self.name
+			else:
+			    print "%s is not running" % self.name
+
+		    # 第九部分内容
+		     # 定义一个帮助方法，用于引导用户的输入（第三部分演示内容，写完实例化对象后再写此方法）
+		    def help(self):
+			print "Usage: %s {start | stop | status | restart}" % __file__
+			#__file__为内部变量，表示程序本身，当用户输入错误时提醒
+			# shell:python memcached.py abc，这样使用时，会提示用户使用方法。
+
+
+		# 定义一个main函数，用于判断用户是否输入参数
+		def main():
+		    # 第三部分演示内容，进行类实例化
+		    # 在实例化之前定义4个变量
+		    name = 'memcached'
+		    prog = '/usr/bin/memcached'
+		    args = '-u memcached -p 11211 -c 1024 -m 64' #centos6系统中查看/etc/init.d/memcached文件
+		    wd = '/var/tmp/memcached' #第四部分：需要在初始化方法中进行此目录创建
+
+		    #实例化
+		    pm = Process(
+				name = name,
+				program = prog,
+				args = args,
+				workdir =wd
+		    )
+		    # 当然上面的传参也可以不使用这种方法，直接把以上4个变量，按对应的位置顺序写上即可。
+
+
+		    # 使用异常进行判断
+		    try:
+			cmd = sys.args[1]
+		    # 当没有输入参数时，会导致IndexError错误，此时打印出print后面的内容
+		    except IndexError,e:
+			print "Option error"
+			# 当出现异常时，程序会自动退出，此处会使用到sys模块，需要在上面导入，方法：import sys
+			sys.exit()
+
+
+		    # 实例化后，对在类当中定义的方法进行调用(第三部分演示内容)
+		    if cmd == 'start': #当cmd为start时，实例化的对象调用start类方法
+			pm.start()
+		    elif cmd == 'stop':#当cmd为stop时，实例化的对象调用stop类方法
+			pm.stop()
+		    elif cmd == 'restart':#当cmd为restart时，实例化的对象调用restart类方法
+			pm.restart()
+		    elif cmd == 'status':#当cmd为status时，实例化的对象调用status类方法
+			pm.status()
+		    else:               #当cmd为不为以上4个参数时，实例化的对象定义一个帮助，调用help类方法
+			pm.help()
+
+
+		# 第三部分演示内容：当此文件单独执行时，可以直接执行，当此文件被调用时，会显示此文件的名称。
+		if __name__ == '__main__':
+		    main
+
+
+
+
+
+
+
+
+
+
+								python自动化运维中级
+
+									pass
+								
+
+
+
+								python自动化运维高级
+
+							
+									pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

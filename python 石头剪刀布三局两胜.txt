@@ -1,0 +1,22 @@
+# -*- coding:UTF-8 -*-
+import random
+cwin = 0                #定义一个人类初值
+pwin = 0                #定义一个电脑初值
+while cwin < 2 and pwin < 2:                           #大循环至任意一个玩家赢了两次之后结束
+    game1 = int(input("请输入剪子1 石头0 布2"))        #键入人类玩家选择的值
+    game = random.randint(0,2)                        #电脑随机生成0到2之间的三位数
+    print ("%s"%game)                                 #输出电脑的选择
+    while game >= 3:                                 #判定循环至3次以上因为会出现平局的可能
+      print ("%s"%game)                              #判定循环内输出电脑的选择
+    if (game == 0 and game1 == 2) or (game == 2 and game1 == 1) or (game ==1  and game1 == 0):
+        pwin += 1           #如果人类赢了就加一值
+    elif (game == 0 and game1 == 0) or (game == 1 and game1 == 1) or (game == 2 and game1 == 2):
+        pass                #pass跳过，平局无操作
+    elif (game == 2 and game1 == 0) or (game == 1 and game1 == 2) or (game == 0 and game1 == 1):
+        cwin += 1           #如果电脑赢了就加一值
+    else:
+        pass                #没有另外选择跳过
+if pwin == 2:              #判定如果人类的值先到2则输出人类胜利并且结束循环
+     print ("你赢了")
+else:                      #判定如果机器的值先到2则输出人类胜利并且结束循环
+     print ("你输了")

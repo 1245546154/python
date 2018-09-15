@@ -1,0 +1,212 @@
+
+#linux如何启动
+1.加电开机
+
+2.linux主机进行开机自检
+
+3.寻找引导分区和disk分区
+
+4.将引导文件加载到的内核
+
+5.内核对所有文件进行初始化
+
+6.初始化结束之后，显示登录界面（JDL或者KDE登录界面）
+
+7.用户输入用户名和密码之后输出桌面
+
+--------------------------------------------------------------------------------------------
+
+python 
+django
+flash
+
+python 支持线程大数据模块
+python的哲学：明确，哲学，优雅，严谨！
+
+两大版本
+python2.0
+python3.0
+
+--------------------------------------------------------------------------------------------
+
+自动化运维中的交互式越来越少。
+
+缩进  4个空格
+
+ipython 相当于是一种外壳 调用系统的python 系统自带python的解释器为Cpython 用C语言开发的解释器。
+
+2020年将不再对python2 进行维护。
+
+需要安装 epel 源来安装（python2-pip）python2版本的pip包 2和3不兼容代码运行不起来  不能卸载python，否则yum不能使用（yum-metadata-parser）
+
+pip用来管理python的包
+
+安装python-libs  调用python库文件
+
+pip list 显示系统中已安装的模块
+pip当前版本为version18.0  建议升级 如果不升级会导致读取旧的文件，会出现报错的情况，能升级就升级。
+
+php install --upgrade pip (升级)
+
+例：pip install json  安装json模块 （系统自带可以不用安装）
+
+
+报错1：invalid syntax  语法错误
+
+os.chown("/home/tom/123.txt",1000,1000)  更改一个文件的所属和所组  
+
+import os 
+os.chown("/home/tom/123.txt,0,0")  将权限给予管理员用户 
+   
+新建的一个文件的权限是644
+新建的一个目录的权限是755
+
+python XXXX.py  类似于  sh XXXX.sh
+
+相对路径和绝对路径都可以用来执行程序 
+source 默认会把程序代码认为是shell语句 
+
+推荐：集成类开发工具 pycharm    所有命令先在puthon上测试和验证完成之后  在使用pycharm  
+
+jre64 java运行环境
+
+优先部署自己熟悉的环境 
+
+Nginx 平滑升级  由C开发的软件
+
+.d 文件片段 
+pyenv环境隔离用，安装virtualenv虚拟化环境，进行python的多版本部署 
+
+chsh -l  查看解释器 
+
+
+
+
+--------------------------------------------------------------------------------------------
+python 简单 优雅 明确
+
+python 开发高效，由于解释器是由C语言编写的，所以可以调用C语言写的程序和命令
+
+可移植性：python可以在windows和linux平台上运行，容易出现的问题时，windows和linux里面的目录结构和权限问题不同。如果用windows版本python开发一个程序，windows很难实现，所以要用linux来开发，
+
+可扩展性：如果一段代码运行的更快或者希望某些算法不公开，可以用C来写然后用python调用 。
+
+丰富的库：python不可能吧所有的库都学会，比如容器的管理需要什么模块，监控需要什么模块，自动化部署需要什么模块，学习一些自己能够从常用的。
+
+规范性：python代码规范性，如果不规范，大部分报错都是不规范报错。pycam会全程自动检测代码的准确性（在代码后面会标记出正确与错误，对应颜色为红色和灰色）
+
+python缺点：执行效率慢，8
+
+--------------------------------------------------------------------------------------------
+
+云计算运维、科学计算、服务器软件、游戏、
+
+shell Cpython 解释型
+pypy GO 编译型（动态解释型）边解释边执行
+
+执行效率快慢取决于 选择哪种解释器。
+
+expect和awk 都属于不同的语言
+
+python开发效率高，执行效率慢
+
+结构化数据，非结构化数据，半结构化数据
+
+and  逻辑与
+or   逻辑或
+not  逻辑非
+
+
+--------------------------------------------------------------------------------------------
+
+#python多版本开发环境部署
+
+charm  直接打开之前的项目
+ethtool ens33 检测网卡速率 
+
+
+需要环境依赖包
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+
+yum install epel-release -y  #安装epel源
+yum -y install python-pip    #安装python安装工具
+php install --upgrade pip    #升级pip版本否则安装包错
+
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv       #下载pyenv
+
+
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> /etcprofile       #创建对应目录的环境变量
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> /etcprofile
+source /etc/profile 
+
+tail -4 /etc/profile
+
+pyenv install 2.7.15  #下载到2.7版本
+pyenv install 3.6.6   #下载到3.6版本
+
+pyenv versions   #显示版本 
+
+cd /root/.pyenv/versions   
+
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+
+echo 'eval "$(pyenv init -)"' >> /etc/profile             #必加语句 
+echo 'eval "$(pyenv virtualenv-init-)"' >> /etc/profile  #必加语句
+source /etc/profile 
+
+pyenv commands
+prenv virtualenv 2.7.15 env1715  #创建虚拟机
+pyenv virtualenv 3.6.6 env366
+
+
+
+source /etc/profile      #刷新配置
+
+pyenv activate env2715   #进入2715安装ipython 
+
+pyenv activate env366    #进入366安装ipython 
+
+pip install ipython      #安装ipython（自带pip） 
+
+pyenv deactivate         #退出
+
+Xshell上传 pycharm-professional-2018.2.3.tar.gz 到/root/pycharm
+
+tar -xf pycharm-professional-2018.2.3.tar.gz 
+
+./pycharm.sh  #直接运行出界面
+
+选择下面那个
+选择 左面
+选择右面don't send
+选择试用  
+
+new subject   -----    /usr/local/python2715  #创建项目目录
+new subject   -----    /usr/local/python366  #创建项目目录
+
+------------------------------------------------------------
+pyenv local 3.6.6      #执行python普通文件
+python3 xxxxxx.py
+
+------------------------------------------------------------
+#在ipython里面
+import py_compile                 
+py_compile.compile("/绝对路径/文件名.py")   # 对指定文件进行编译
+
+cat xxxx.pyc             #编译之后，会在对应的路径下新生成一个.pyc后缀的文件    # .pyc 编译过的python文件  
+chmod +x xxxx.pyc
+python xxxx.pyc
+
+------------------------------------------------------------
+python3 -O -m py_compile 文件名.py    #用python3对指定文件进行优化 #.pyo 做了优化的编译文件
+python -O -m py_compile 文件名.py     #用python2对指定文件进行优化
+
+ls      #编译之后，会在对应的路径下新生成一个 _pycache_ 的目录
+cd _pycache_
+cat xxxxxx.pyc  
+
+------------------------------------------------------------
+三重单引号和双引号 都可以实现换行操作。
+
+
